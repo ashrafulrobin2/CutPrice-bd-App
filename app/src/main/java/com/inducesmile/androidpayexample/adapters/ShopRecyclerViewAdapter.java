@@ -11,7 +11,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.inducesmile.androidpayexample.ProductActivity;
 import com.inducesmile.androidpayexample.R;
-import com.inducesmile.androidpayexample.entities.ProductObject;
+import com.inducesmile.androidpayexample.model.products_model.Datum;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -21,9 +22,9 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
 
     private Context context;
 
-    private List<ProductObject> allProducts;
+    private List<Datum> allProducts;
 
-    public ShopRecyclerViewAdapter(Context context, List<ProductObject> allProducts) {
+    public ShopRecyclerViewAdapter(Context context, List<Datum> allProducts) {
         this.context = context;
         this.allProducts = allProducts;
     }
@@ -37,12 +38,13 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
 
     @Override
     public void onBindViewHolder(ShopRecyclerViewHolder holder, int position) {
-        final ProductObject singleProduct = allProducts.get(position);
+        final Datum singleProduct = allProducts.get(position);
+        String path = "http://cutpricebd.com/oms/product_image/thumbs/";
 
+        Picasso.get().load(path + singleProduct.getImg1()).into(holder.produceImage);
         holder.productName.setText(singleProduct.getProductName());
-        holder.produceImage.setImageResource(singleProduct.getProductImage());
-
         holder.produceImage.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 Intent productIntent = new Intent(context, ProductActivity.class);

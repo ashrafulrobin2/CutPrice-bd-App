@@ -18,8 +18,9 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.inducesmile.androidpayexample.entities.ProductObject;
 import com.inducesmile.androidpayexample.helpers.MySharedPreference;
+import com.inducesmile.androidpayexample.model.products_model.Datum;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,28 +49,31 @@ public class ProductActivity extends AppCompatActivity {
 
         sharedPreference = new MySharedPreference(ProductActivity.this);
 
-        productImage = (ImageView)findViewById(R.id.full_product_image);
-        productSize = (TextView)findViewById(R.id.product_size);
-        productColor = (TextView)findViewById(R.id.product_color);
-        productPrice = (TextView)findViewById(R.id.product_price);
-        productDescription = (TextView)findViewById(R.id.product_description);
+        productImage = findViewById(R.id.full_product_image);
+        productSize = findViewById(R.id.product_size);
+        productColor = findViewById(R.id.product_color);
+        productPrice = findViewById(R.id.product_price);
+        productDescription = findViewById(R.id.product_description);
 
         GsonBuilder builder = new GsonBuilder();
         gson = builder.create();
 
         String productInStringFormat = getIntent().getExtras().getString("PRODUCT");
-        final ProductObject singleProduct = gson.fromJson(productInStringFormat, ProductObject.class);
-        if(singleProduct != null){
-            setTitle(singleProduct.getProductName());
+        final Datum datum = gson.fromJson(productInStringFormat, Datum.class);
 
-            productImage.setImageResource(singleProduct.getProductImage());
-            productSize.setText("Size: " + String.valueOf(singleProduct.getProductSize()));
-            productColor.setText("Color: " + singleProduct.getProductColor());
-            productPrice.setText("Price: " + String.valueOf(new Double(singleProduct.getProductPrice()).intValue()) + " $");
-            productDescription.setText(Html.fromHtml("<strong>Product Description</strong><br/>" + singleProduct.getProductDescription()));
+        if (datum != null) {
+            setTitle(datum.getProductName());
+            String path = "http://cutpricebd.com/oms/product_image/thumbs/";
+            Picasso.get().load(path + datum.getImg1()).into(productImage);
+
+            //   productImage.setImageResource(singleProduct.getProductImage());
+            productSize.setText("Size: " + datum.getItemCode());
+            productColor.setText("Color: " + datum.getColor());
+            productPrice.setText("Price: " + datum.getProductPurchasePrice() + " bdt");
+            productDescription.setText(Html.fromHtml("<strong>Product Description</strong><br/>" + datum.getProductDescription()));
         }
 
-        Button addToCartButton = (Button)findViewById(R.id.add_to_cart);
+        Button addToCartButton = findViewById(R.id.add_to_cart);
         assert addToCartButton != null;
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,17 +81,17 @@ public class ProductActivity extends AppCompatActivity {
                 //increase product count
                 String productsFromCart = sharedPreference.retrieveProductFromCart();
                 if(productsFromCart.equals("")){
-                    List<ProductObject> cartProductList = new ArrayList<ProductObject>();
-                    cartProductList.add(singleProduct);
+                    List<Datum> cartProductList = new ArrayList<Datum>();
+                    cartProductList.add(datum);
                     String cartValue = gson.toJson(cartProductList);
                     sharedPreference.addProductToTheCart(cartValue);
                     cartProductNumber = cartProductList.size();
                 }else{
                     String productsInCart = sharedPreference.retrieveProductFromCart();
-                    ProductObject[] storedProducts = gson.fromJson(productsInCart, ProductObject[].class);
+                    Datum[] storedProducts = gson.fromJson(productsInCart, Datum[].class);
 
-                    List<ProductObject> allNewProduct = convertObjectArrayToListObject(storedProducts);
-                    allNewProduct.add(singleProduct);
+                    List<Datum> allNewProduct = convertObjectArrayToListObject(storedProducts);
+                    allNewProduct.add(datum);
                     String addAndStoreNewProduct = gson.toJson(allNewProduct);
                     sharedPreference.addProductToTheCart(addAndStoreNewProduct);
                     cartProductNumber = allNewProduct.size();
@@ -98,8 +102,8 @@ public class ProductActivity extends AppCompatActivity {
         });
     }
 
-    private List<ProductObject> convertObjectArrayToListObject(ProductObject[] allProducts){
-        List<ProductObject> mProduct = new ArrayList<ProductObject>();
+    private List<Datum> convertObjectArrayToListObject(Datum[] allProducts) {
+        List<Datum> mProduct = new ArrayList<Datum>();
         Collections.addAll(mProduct, allProducts);
         return mProduct;
     }
@@ -134,7 +138,7 @@ public class ProductActivity extends AppCompatActivity {
             View counterTextPanel = view.findViewById(R.id.counterValuePanel);
             counterTextPanel.setVisibility(View.GONE);
         } else {
-            TextView textView = (TextView) view.findViewById(R.id.count);
+            TextView textView = view.findViewById(R.id.count);
             textView.setText("" + count);
         }
 

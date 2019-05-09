@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.inducesmile.androidpayexample.R;
 import com.inducesmile.androidpayexample.entities.ProductObject;
@@ -37,12 +36,12 @@ public class CheckRecyclerViewAdapter extends RecyclerView.Adapter<CheckRecycler
         //get product quantity
         holder.quantity.setText("1");
         holder.productName.setText(mProductObject.get(position).getProductName());
-        holder.productPrice.setText(String.valueOf(mProductObject.get(position).getProductPrice()) + " $");
+        holder.productPrice.setText(mProductObject.get(position).getProductPrice() + " $");
 
         holder.removeProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Do you want to remove product from cart", Toast.LENGTH_LONG).show();
+                // Toast.makeText(context, "Do you want to remove product from cart", Toast.LENGTH_LONG).show();
             }
         });
 
