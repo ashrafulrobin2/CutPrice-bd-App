@@ -1,4 +1,4 @@
-package com.inducesmile.androidpayexample.Fragment;
+package com.inducesmile.androidpayexample.fragment;
 
 
 import android.content.Intent;
@@ -15,18 +15,11 @@ import com.inducesmile.androidpayexample.ShoppingActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CartFragment extends Fragment implements OnBackPressed {
+public class HomeFragment extends Fragment implements OnBackPressed {
 
 
-    public CartFragment() {
+    public HomeFragment() {
         // Required empty public constructor
-    }
-
-    public static CartFragment newInstance(String param1, String param2) {
-        CartFragment fragment = new CartFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
 
@@ -34,7 +27,7 @@ public class CartFragment extends Fragment implements OnBackPressed {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cart, container, false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
     @Override

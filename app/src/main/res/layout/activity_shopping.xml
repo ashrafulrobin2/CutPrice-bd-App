@@ -8,13 +8,106 @@
     tools:context="com.inducesmile.androidpayexample.ShoppingActivity">
 
 
-    <FrameLayout
-        android:id="@+id/frame_container"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="55dp"
-        android:layout_height="match_parent"/>
+
+//TabLay Out//
+
+<android.support.design.widget.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+   <android.support.design.widget.TabLayout
+       android:id="@+id/tab_layout"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
+       app:tabMode="scrollable"
+       app:tabGravity="fill">
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabItem1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/tab1"
+
+            />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabItem2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/tab2" />
+
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabItem3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/tab3" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabItem4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/tab4" />
+
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabItem5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/tab5" />
+
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabItem6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab6" />
+
+       <android.support.design.widget.TabItem
+           android:id="@+id/tabItem7"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/tab7" />
+
+       <android.support.design.widget.TabItem
+           android:id="@+id/tabItem8"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/tab8" />
+
+       <android.support.design.widget.TabItem
+           android:id="@+id/tabItem9"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/tab9" />
+
+       <android.support.design.widget.TabItem
+           android:id="@+id/tabItem10"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/tab10" />
+
+       <android.support.design.widget.TabItem
+           android:id="@+id/tabItem11"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/tab11" />
+
+
+    </android.support.design.widget.TabLayout>
+
+
+</android.support.design.widget.AppBarLayout>
+
+
+    //TabLayout-code_End//
+
+
 
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="@dimen/_40sdp"
         android:id="@+id/product_list"
         android:layout_below="@+id/frame_layout"
         android:layout_centerHorizontal="true"
@@ -22,9 +115,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:scrollbars="none" />
+    <!--  app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
 
-
-      <!--  app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="55dp"
+        android:layout_height="match_parent"/>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

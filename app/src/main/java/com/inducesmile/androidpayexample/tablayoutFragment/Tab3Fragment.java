@@ -1,24 +1,21 @@
-package com.inducesmile.androidpayexample.Fragment;
+package com.inducesmile.androidpayexample.tablayoutFragment;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.inducesmile.androidpayexample.OnBackPressed;
 import com.inducesmile.androidpayexample.R;
-import com.inducesmile.androidpayexample.ShoppingActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CategoryFragment extends Fragment implements OnBackPressed {
+public class Tab3Fragment extends Fragment {
 
 
-    public CategoryFragment() {
+    public Tab3Fragment() {
         // Required empty public constructor
     }
 
@@ -27,11 +24,7 @@ public class CategoryFragment extends Fragment implements OnBackPressed {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category, container, false);
+        return inflater.inflate(R.layout.fragment_tab3, container, false);
     }
 
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(getActivity(), ShoppingActivity.class));
-    }
 }

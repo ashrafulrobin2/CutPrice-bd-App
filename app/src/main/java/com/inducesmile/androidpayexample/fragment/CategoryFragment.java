@@ -1,4 +1,4 @@
-package com.inducesmile.androidpayexample.Fragment;
+package com.inducesmile.androidpayexample.fragment;
 
 
 import android.content.Intent;
@@ -15,10 +15,10 @@ import com.inducesmile.androidpayexample.ShoppingActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class VideoFragment extends Fragment implements OnBackPressed {
+public class CategoryFragment extends Fragment implements OnBackPressed {
 
 
-    public VideoFragment() {
+    public CategoryFragment() {
         // Required empty public constructor
     }
 
@@ -27,7 +27,7 @@ public class VideoFragment extends Fragment implements OnBackPressed {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_video, container, false);
+        return inflater.inflate(R.layout.fragment_category, container, false);
     }
 
     @Override
