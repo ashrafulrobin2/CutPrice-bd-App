@@ -15,7 +15,6 @@ import com.inducesmile.androidpayexample.model.products_model.Products;
 import com.inducesmile.androidpayexample.web_api.IClientServer;
 import com.inducesmile.androidpayexample.web_api.RetrofitService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -77,25 +76,15 @@ public class ShoppingActivity extends AppCompatActivity {
 
 //Use a LinearLayoutManager with default vertical orientation//
 
-        GridLayoutManager mGrid = new GridLayoutManager(ShoppingActivity.this, 2);
+        GridLayoutManager mGrid = new GridLayoutManager(ShoppingActivity.this, 3);
         shoppingRecyclerView.setLayoutManager(mGrid);
         shoppingRecyclerView.setHasFixedSize(true);
-        shoppingRecyclerView.addItemDecoration(new SpacesItemDecoration(2, 12, false));
+        shoppingRecyclerView.addItemDecoration(new SpacesItemDecoration(3, 8, false));
 
 
 //Set the Adapter to the RecyclerView//
         shoppingRecyclerView.setAdapter(shopAdapter);
+        shopAdapter.notifyDataSetChanged();
     }
 
-
-    private List<Products> getAllProductsOnSale() {
-        List<Products> products = new ArrayList<Products>();
-        /*products.add(new ProductObject(1, "Sleek Black Top", R.drawable.productonesmall, "Beautiful sleek black top for casual outfit and evening walk", 20, 38, "Black"));
-        products.add(new ProductObject(1, "Flare Black Gown", R.drawable.producttwo, "Beautiful sleek black top for casual outfit and evening walk", 20, 38, "Black"));
-        products.add(new ProductObject(1, "Flare White Blouse", R.drawable.productthree, "Beautiful sleek black top for casual outfit and evening walk", 20, 38, "White"));
-        products.add(new ProductObject(1, "Blue Swed Gown", R.drawable.productfour, "Beautiful sleek black top for casual outfit and evening walk", 20, 38, "Dark Blue"));
-        products.add(new ProductObject(1, "Spotted Gown", R.drawable.productfive, "Beautiful sleek black top for casual outfit and evening walk", 20, 38, "Spotted Green"));
-        products.add(new ProductObject(1, "Flare Wax Gown", R.drawable.productsix, "Beautiful sleek black top for casual outfit and evening walk", 20, 38, "Multi-color"));*/
-        return products;
-    }
 }
