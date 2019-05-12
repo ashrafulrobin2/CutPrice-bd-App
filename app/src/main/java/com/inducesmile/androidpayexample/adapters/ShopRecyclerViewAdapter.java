@@ -19,7 +19,7 @@ import java.util.List;
 public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerViewHolder>{
 
     private static final String TAG = ShopRecyclerViewAdapter.class.getSimpleName();
-
+    boolean userClicked = false;
     private Context context;
 
     private List<Datum> allProducts;
@@ -40,9 +40,19 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
     public void onBindViewHolder(ShopRecyclerViewHolder holder, int position) {
         final Datum singleProduct = allProducts.get(position);
         String path = "http://cutpricebd.com/oms/product_image/thumbs/";
+        String product_id = singleProduct.getProductId();
 
-        Picasso.get().load(path + singleProduct.getImg1()).into(holder.produceImage);
+        if ((path + singleProduct.getImg1()).length() <= 54) {
+            Picasso.get().load(path + singleProduct.getImg1()).into(holder.produceImage);
+        } else {
+            Picasso.get().load(singleProduct.getImg1()).into(holder.produceImage);
+        }
+
+
         holder.productName.setText(singleProduct.getProductName());
+
+
+
         holder.produceImage.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -62,6 +72,14 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
 
     @Override
     public int getItemCount() {
-        return allProducts.size();
+        if (userClicked)
+            return allProducts.size();
+        else
+            return allProducts.size() > 10 ? 10 : allProducts.size();
+    }
+
+    public void setUserClicked(boolean userClicked) {
+        this.userClicked = userClicked;
+        notifyDataSetChanged();
     }
 }
