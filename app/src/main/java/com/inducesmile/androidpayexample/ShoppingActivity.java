@@ -169,8 +169,8 @@ public class ShoppingActivity extends AppCompatActivity {
         layoutParams.setBehavior(new BottomNavigationBehavior());
 
         // load the store fragment by default
-//        toolbar.setTitle("Shop");
-       loadFragment(new HomeFragment());
+    //toolbar.setTitle("Shop");
+      // loadFragment(new HomeFragment());
     }
 ///
 

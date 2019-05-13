@@ -58,13 +58,13 @@ public class ProductActivity extends AppCompatActivity {
         GsonBuilder builder = new GsonBuilder();
         gson = builder.create();
 
-        String productInStringFormat = getIntent().getExtras().getString("PRODUCT");
-        final Datum datum = gson.fromJson(productInStringFormat, Datum.class);
+      String productInStringFormat = getIntent().getExtras().getString("PRODUCT");
+    final Datum datum = gson.fromJson(productInStringFormat, Datum.class);
 
         if (datum != null) {
             setTitle(datum.getProductName());
             String path = "http://cutpricebd.com/oms/product_image/thumbs/";
-            Picasso.get().load(path + datum.getImg1()).into(productImage);
+           Picasso.get().load(path + datum.getImg1()).into(productImage);
 
             //   productImage.setImageResource(singleProduct.getProductImage());
             productSize.setText("Size: " + datum.getItemCode());
