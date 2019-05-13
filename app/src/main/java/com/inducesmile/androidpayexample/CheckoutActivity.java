@@ -16,6 +16,7 @@ import com.inducesmile.androidpayexample.adapters.CheckRecyclerViewAdapter;
 import com.inducesmile.androidpayexample.entities.ProductObject;
 import com.inducesmile.androidpayexample.helpers.MySharedPreference;
 import com.inducesmile.androidpayexample.helpers.SimpleDividerItemDecoration;
+import com.inducesmile.androidpayexample.model.products_model.Datum;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,8 +54,8 @@ public class CheckoutActivity extends AppCompatActivity {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
 
-        ProductObject[] addCartProducts = gson.fromJson(mShared.retrieveProductFromCart(), ProductObject[].class);
-        List<ProductObject> productList = convertObjectArrayToListObject(addCartProducts);
+        Datum[] addCartProducts = gson.fromJson(mShared.retrieveProductFromCart(), Datum[].class);
+        List<Datum> productList = convertObjectArrayToListObject(addCartProducts);
 
         CheckRecyclerViewAdapter mAdapter = new CheckRecyclerViewAdapter(CheckoutActivity.this, productList);
         checkRecyclerView.setAdapter(mAdapter);
@@ -85,16 +86,16 @@ public class CheckoutActivity extends AppCompatActivity {
         });
     }
 
-    private List<ProductObject> convertObjectArrayToListObject(ProductObject[] allProducts){
-        List<ProductObject> mProduct = new ArrayList<ProductObject>();
+    private List<Datum> convertObjectArrayToListObject(Datum[] allProducts){
+        List<Datum> mProduct = new ArrayList<Datum>();
         Collections.addAll(mProduct, allProducts);
         return mProduct;
     }
 
-    private int returnQuantityByProductName(String productName, List<ProductObject> mProducts){
+    private int returnQuantityByProductName(String productName, List<Datum> mProducts){
         int quantityCount = 0;
         for(int i = 0; i < mProducts.size(); i++){
-            ProductObject pObject = mProducts.get(i);
+            Datum pObject = mProducts.get(i);
             if(pObject.getProductName().trim().equals(productName.trim())){
                 quantityCount++;
             }
@@ -102,11 +103,14 @@ public class CheckoutActivity extends AppCompatActivity {
         return quantityCount;
     }
 
-    private double getTotalPrice(List<ProductObject> mProducts){
+    private double getTotalPrice(List<Datum> mProducts){
         double totalCost = 0;
         for(int i = 0; i < mProducts.size(); i++){
-            ProductObject pObject = mProducts.get(i);
-            totalCost = totalCost + pObject.getProductPrice();
+            Datum pObject = mProducts.get(i);
+
+            double price= Double.parseDouble(pObject.getProductSellingPrice());
+
+            totalCost = totalCost+price;
         }
         return totalCost;
     }

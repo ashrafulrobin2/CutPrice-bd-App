@@ -111,11 +111,11 @@
         <Button
             android:id="@+id/add_to_cart"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/colorPrimaryDark"
-            android:text="@string/add_to_cart"
+            android:text="@string/order_now"
             android:textColor="@color/icons"
-            android:textSize="15dp" />
+            android:textSize="20dp" />
 
     </LinearLayout>
 

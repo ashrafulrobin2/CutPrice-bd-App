@@ -6,10 +6,16 @@
     android:background="#9C27B0"
     tools:context=".tablayoutFragment.Tab2Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/simpleTextView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="#000"
+        android:padding="10dp"
+        android:text="Tab2"
+
+        android:textColor="#fff"
+        android:textSize="40sp" />
 
 </FrameLayout>

@@ -62,7 +62,7 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
                 GsonBuilder builder = new GsonBuilder();
                 Gson gson = builder.create();
 
-                String stringObjectRepresentation = gson.toJson(singleProduct);
+                              String stringObjectRepresentation = gson.toJson(singleProduct);
 
                 productIntent.putExtra("PRODUCT", stringObjectRepresentation);
                 context.startActivity(productIntent);
