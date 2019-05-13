@@ -21,7 +21,7 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
     private static final String TAG = ShopRecyclerViewAdapter.class.getSimpleName();
     boolean userClicked = false;
     private Context context;
-
+    int num = 1;
     private List<Datum> allProducts;
 
     public ShopRecyclerViewAdapter(Context context, List<Datum> allProducts) {
@@ -42,7 +42,7 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
         String path = "http://cutpricebd.com/oms/product_image/thumbs/";
         String product_id = singleProduct.getProductId();
 
-        if ((path + singleProduct.getImg1()).length() <= 54) {
+        if ((path + singleProduct.getImg1()).length() <= 60) {
             Picasso.get().load(path + singleProduct.getImg1()).into(holder.produceImage);
         } else {
             Picasso.get().load(singleProduct.getImg1()).into(holder.produceImage);
@@ -72,10 +72,15 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
 
     @Override
     public int getItemCount() {
-        if (userClicked)
+       /* if (userClicked)
             return allProducts.size();
         else
-            return allProducts.size() > 10 ? 10 : allProducts.size();
+            return allProducts.size() > 12 ? 12 : allProducts.size();*/
+        if (num * 10 > allProducts.size()) {
+            return allProducts.size();
+        } else {
+            return num * 10;
+        }
     }
 
     public void setUserClicked(boolean userClicked) {

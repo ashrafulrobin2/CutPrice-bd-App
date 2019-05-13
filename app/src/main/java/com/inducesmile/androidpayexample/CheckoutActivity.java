@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.inducesmile.androidpayexample.adapters.CheckRecyclerViewAdapter;
-import com.inducesmile.androidpayexample.entities.ProductObject;
 import com.inducesmile.androidpayexample.helpers.MySharedPreference;
 import com.inducesmile.androidpayexample.helpers.SimpleDividerItemDecoration;
 import com.inducesmile.androidpayexample.model.products_model.Datum;
@@ -40,9 +39,9 @@ public class CheckoutActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setTitle("Over Cart");
 
-        subTotal = (TextView )findViewById(R.id.sub_total);
+        subTotal = findViewById(R.id.sub_total);
 
-        checkRecyclerView = (RecyclerView)findViewById(R.id.checkout_list);
+        checkRecyclerView = findViewById(R.id.checkout_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CheckoutActivity.this);
         checkRecyclerView.setLayoutManager(linearLayoutManager);
         checkRecyclerView.setHasFixedSize(true);
@@ -61,10 +60,10 @@ public class CheckoutActivity extends AppCompatActivity {
         checkRecyclerView.setAdapter(mAdapter);
 
         mSubTotal = getTotalPrice(productList);
-        subTotal.setText("Subtotal excluding tax and shipping: " + String.valueOf(mSubTotal) + " $");
+        subTotal.setText("Subtotal excluding tax and shipping: " + mSubTotal + " $");
 
 
-        Button shoppingButton = (Button)findViewById(R.id.shopping);
+        Button shoppingButton = findViewById(R.id.shopping);
         assert shoppingButton != null;
         shoppingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +73,7 @@ public class CheckoutActivity extends AppCompatActivity {
             }
         });
 
-        Button checkButton = (Button)findViewById(R.id.checkout);
+        Button checkButton = findViewById(R.id.checkout);
         assert checkButton != null;
         checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,13 +85,13 @@ public class CheckoutActivity extends AppCompatActivity {
         });
     }
 
-    private List<Datum> convertObjectArrayToListObject(Datum[] allProducts){
+    private List<Datum> convertObjectArrayToListObject(Datum[] allProducts) {
         List<Datum> mProduct = new ArrayList<Datum>();
         Collections.addAll(mProduct, allProducts);
         return mProduct;
     }
 
-    private int returnQuantityByProductName(String productName, List<Datum> mProducts){
+    private int returnQuantityByProductName(String productName, List<Datum> mProducts) {
         int quantityCount = 0;
         for(int i = 0; i < mProducts.size(); i++){
             Datum pObject = mProducts.get(i);
@@ -103,14 +102,11 @@ public class CheckoutActivity extends AppCompatActivity {
         return quantityCount;
     }
 
-    private double getTotalPrice(List<Datum> mProducts){
+    private double getTotalPrice(List<Datum> mProducts) {
         double totalCost = 0;
         for(int i = 0; i < mProducts.size(); i++){
             Datum pObject = mProducts.get(i);
-
-            double price= Double.parseDouble(pObject.getProductSellingPrice());
-
-            totalCost = totalCost+price;
+            totalCost = totalCost + (Double.parseDouble(pObject.getProductOldPrice()));
         }
         return totalCost;
     }

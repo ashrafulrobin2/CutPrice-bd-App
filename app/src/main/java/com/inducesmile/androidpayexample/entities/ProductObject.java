@@ -17,6 +17,9 @@ public class ProductObject {
 
     private String productColor;
 
+    public ProductObject() {
+    }
+
     public ProductObject(int productId, String productName, int productImage, String productDescription, double productPrice, int productSize, String productColor) {
         this.productId = productId;
         this.productName = productName;
