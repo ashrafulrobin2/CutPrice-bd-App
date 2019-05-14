@@ -1,8 +1,11 @@
 package com.inducesmile.androidpayexample;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -15,7 +18,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,15 +33,17 @@ public class ProductActivity extends AppCompatActivity {
 
     private static final String TAG = ProductActivity.class.getSimpleName();
 
-    private TextView productSize, productColor, productPrice, productDescription;
+    private TextView productId, productDiscount, productPrice, productDescription;
 
     private ImageView productImage;
+    public static final String mypreference = "mypref";
 
     private Gson gson;
-
+    private Context context = ProductActivity.this;
     private int cartProductNumber = 0;
+    SharedPreferences sharedPreference;
 
-    private MySharedPreference sharedPreference;
+    private MySharedPreference sharedPreference1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +52,11 @@ public class ProductActivity extends AppCompatActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        sharedPreference = new MySharedPreference(ProductActivity.this);
+        sharedPreference1 = new MySharedPreference(ProductActivity.this);
 
         productImage = findViewById(R.id.full_product_image);
-        productSize = findViewById(R.id.product_size);
-        productColor = findViewById(R.id.product_color);
+        productId = findViewById(R.id.product_size);
+        productDiscount = findViewById(R.id.product_color);
         productPrice = findViewById(R.id.product_price);
         productDescription = findViewById(R.id.product_description);
 
@@ -67,21 +71,51 @@ public class ProductActivity extends AppCompatActivity {
             String path = "http://cutpricebd.com/oms/product_image/thumbs/";
            Picasso.get().load(path + datum.getImg1()).into(productImage);
 
+
+
+            if (datum.getProductOldPrice()==null){
+                productDiscount.setText(" "+  "0 TK");
+
+                productDiscount.setPaintFlags(productDiscount.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+            }else{
+                double oldPrice= Double.parseDouble(datum.getProductOldPrice());
+                double sellingPrice= Double.parseDouble(datum.getProductSellingPrice());
+                double discountPrice=oldPrice-sellingPrice;
+                productDiscount.setText(" " + discountPrice);
+
+                productDiscount.setPaintFlags(productDiscount.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+            }
+            String productId1=datum.getProductId();
+            String sellingPrice=datum.getProductSellingPrice();
+            sharedPreference = context.getSharedPreferences( mypreference, Context.MODE_PRIVATE );
+            SharedPreferences.Editor editor = sharedPreference.edit();
+            editor.putString( "productId", productId1 );
+            editor.putString( "sellingPrice", sellingPrice );
+            editor.apply();
+            editor.commit();
             //   productImage.setImageResource(singleProduct.getProductImage());
-            productSize.setText("Size: " + datum.getItemCode());
-            productColor.setText("Color: " + datum.getColor());
-            productPrice.setText("Price: " + datum.getProductPurchasePrice() + " bdt");
+            productId.setText("Product Id: " + productId1);
+            productPrice.setText("Price: " + sellingPrice+ " TK");
             productDescription.setText(Html.fromHtml("<strong>Product Description</strong><br/>" + datum.getProductDescription()));
         }
 
-        Button addToCartButton = findViewById(R.id.add_to_cart);
+        Button addToCartButton = findViewById(R.id.order_NowId);
         assert addToCartButton != null;
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                SharedPreferences sharedPreferences = getSharedPreferences( mypreference, MODE_PRIVATE );
+                String productId = sharedPreferences.getString( "productId", null );
+                String sellingPrice = sharedPreferences.getString( "sellingPrice", null );
+                Intent intent = new Intent( context, OrderNowActivity.class );
+                intent.putExtra( "productId", productId );
+                intent.putExtra( "sellingPrice", sellingPrice );
+                startActivity(intent);
                 //increase product count
-                String productsFromCart = sharedPreference.retrieveProductFromCart();
-                if(productsFromCart.equals("")){
+                //String productsFromCart = sharedPreference.retrieveProductFromCart();
+               /* if(productsFromCart.equals("")){
                     List<Datum> cartProductList = new ArrayList<Datum>();
                     cartProductList.add(datum);
                     String cartValue = gson.toJson(cartProductList);
@@ -99,6 +133,7 @@ public class ProductActivity extends AppCompatActivity {
                 }
                 sharedPreference.addProductCount(cartProductNumber);
                 invalidateCart();
+            }*/
             }
         });
     }
@@ -113,7 +148,7 @@ public class ProductActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem menuItem = menu.findItem(R.id.action_shop);
-        int mCount = sharedPreference.retrieveProductCount();
+        int mCount = sharedPreference1.retrieveProductCount();
         menuItem.setIcon(buildCounterDrawable(mCount, R.drawable.cart));
         return true;
     }

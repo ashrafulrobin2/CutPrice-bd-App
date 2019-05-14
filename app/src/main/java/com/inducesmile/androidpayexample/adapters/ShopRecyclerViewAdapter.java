@@ -14,6 +14,7 @@ import com.inducesmile.androidpayexample.R;
 import com.inducesmile.androidpayexample.model.products_model.Datum;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerViewHolder>{
@@ -76,15 +77,13 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
             return allProducts.size();
         else
             return allProducts.size() > 12 ? 12 : allProducts.size();*/
-        if (num * 10 > allProducts.size()) {
+       /* if (num * 10 > allProducts.size()) {
             return allProducts.size();
         } else {
             return num * 10;
-        }
+        }*/
+       return  allProducts.size();
     }
 
-    public void setUserClicked(boolean userClicked) {
-        this.userClicked = userClicked;
-        notifyDataSetChanged();
-    }
+
 }

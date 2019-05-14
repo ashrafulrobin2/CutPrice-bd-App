@@ -12,13 +12,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.support.v7.widget.SearchView;
 import android.widget.Toast;
 
 import com.inducesmile.androidpayexample.fragment.AccountFragment;
@@ -45,20 +48,21 @@ import com.inducesmile.androidpayexample.tablayoutFragment.Tab9Fragment;
 import com.inducesmile.androidpayexample.web_api.IClientServer;
 import com.inducesmile.androidpayexample.web_api.RetrofitService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ShoppingActivity extends AppCompatActivity {
+public class ShoppingActivity extends AppCompatActivity  {
 
     private static final String TAG = ShoppingActivity.class.getSimpleName();
 
 
     IClientServer iClientServer;
     ProgressDialog progressDialog;
-    public static int index=1;
+    public static int index = 1;
 
     private RecyclerView shoppingRecyclerView;
 
@@ -73,6 +77,9 @@ public class ShoppingActivity extends AppCompatActivity {
     TabItem tabItem1;
     TabItem tabItem2;
     TabItem tabItem3;
+    private ArrayList<Datum> data;
+
+    ShopRecyclerViewAdapter shopAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,59 +94,59 @@ public class ShoppingActivity extends AppCompatActivity {
         tabItem1 = findViewById(R.id.tabItem1);
         tabItem2 = findViewById(R.id.tabItem2);
         tabItem3 = findViewById(R.id.tabItem3);
-
+        data = new ArrayList<>();
 
         tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                if (tab.getPosition()==0){
+                if (tab.getPosition() == 0) {
                     index = 1;
                     Tab1Fragment fragment = new Tab1Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==1){
+                } else if (tab.getPosition() == 1) {
                     index = 2;
                     Tab2Fragment fragment = new Tab2Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==2){
+                } else if (tab.getPosition() == 2) {
                     index = 3;
                     Tab3Fragment fragment = new Tab3Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==3){
+                } else if (tab.getPosition() == 3) {
                     index = 4;
                     Tab4Fragment fragment = new Tab4Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==4){
+                } else if (tab.getPosition() == 4) {
                     index = 5;
                     Tab5Fragment fragment = new Tab5Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==5){
+                } else if (tab.getPosition() == 5) {
                     index = 6;
                     Tab6Fragment fragment = new Tab6Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==6){
+                } else if (tab.getPosition() == 6) {
                     index = 7;
                     Tab7Fragment fragment = new Tab7Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==7){
+                } else if (tab.getPosition() == 7) {
                     index = 8;
                     Tab8Fragment fragment = new Tab8Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==8){
+                } else if (tab.getPosition() == 8) {
                     index = 9;
                     Tab9Fragment fragment = new Tab9Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==9){
+                } else if (tab.getPosition() == 9) {
                     index = 10;
                     Tab10Fragment fragment = new Tab10Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==10){
+                } else if (tab.getPosition() == 10) {
                     index = 11;
                     Tab11Fragment fragment = new Tab11Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else {
-                    Toast.makeText(ShoppingActivity.this,"no Data available",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(ShoppingActivity.this, "no Data available", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -155,7 +162,7 @@ public class ShoppingActivity extends AppCompatActivity {
         });
 
 
-        coordinatorLayout=findViewById(R.id.frame_container);
+        coordinatorLayout = findViewById(R.id.frame_container);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         iClientServer = RetrofitService.getRetrofitInstance().create(IClientServer.class);
         getProductsFromApi();
@@ -170,8 +177,8 @@ public class ShoppingActivity extends AppCompatActivity {
         layoutParams.setBehavior(new BottomNavigationBehavior());
 
         // load the store fragment by default
-    //toolbar.setTitle("Shop");
-      // loadFragment(new HomeFragment());
+        //toolbar.setTitle("Shop");
+        // loadFragment(new HomeFragment());
     }
 ///
 
@@ -180,26 +187,26 @@ public class ShoppingActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment fragment=null;
+            Fragment fragment = null;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     toolbar.setTitle("Home");
                     fragment = new HomeFragment();
-               break;
+                    break;
                 case R.id.navigation_category:
                     toolbar.setTitle("Category");
                     fragment = new CategoryFragment();
 
-                   break;
+                    break;
                 case R.id.navigation_cart:
                     toolbar.setTitle("Cart");
                     fragment = new CartFragment();
-                  break;
+                    break;
 
                 case R.id.navigation_video:
                     toolbar.setTitle("Video");
                     fragment = new VideoFragment();
-                  break;
+                    break;
 
                 case R.id.navigation_account:
                     toolbar.setTitle("Account");
@@ -218,7 +225,7 @@ public class ShoppingActivity extends AppCompatActivity {
      */
     private boolean loadFragment(Fragment fragment) {
         // load fragment
-        if (fragment !=null){
+        if (fragment != null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.frame_container, fragment)
@@ -230,7 +237,8 @@ public class ShoppingActivity extends AppCompatActivity {
         return false;
 
     }
-    ////
+
+    ////  Get Data From Api
     public void getProductsFromApi() {
         String id = "Cutprice@987";
         final Call<Products> productsCall = iClientServer.getALlProducts(id);
@@ -241,6 +249,7 @@ public class ShoppingActivity extends AppCompatActivity {
                 Products products = response.body();
 
                 progressDialog.dismiss();
+
                 loadDataList(products.getData());
             }
 
@@ -260,7 +269,8 @@ public class ShoppingActivity extends AppCompatActivity {
         tellFragments();
         super.onBackPressed();
     }
-//
+
+    //
     private void tellFragments() {
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
         for (Fragment f : fragments) {
@@ -268,10 +278,10 @@ public class ShoppingActivity extends AppCompatActivity {
                 ((HomeFragment) f).onBackPressed();
             } else if (f != null && f instanceof CategoryFragment) {
                 ((CategoryFragment) f).onBackPressed();
-            }else if (f != null && f instanceof CartFragment) {
+            } else if (f != null && f instanceof CartFragment) {
                 ((CartFragment) f).onBackPressed();
             } else if (f != null && f instanceof VideoFragment) {
-                (( VideoFragment) f).onBackPressed();
+                ((VideoFragment) f).onBackPressed();
             } else if (f != null && f instanceof AccountFragment) {
                 ((AccountFragment) f).onBackPressed();
             }
@@ -286,7 +296,7 @@ public class ShoppingActivity extends AppCompatActivity {
 
         shoppingRecyclerView = findViewById(R.id.product_list);
 
-        ShopRecyclerViewAdapter shopAdapter = new ShopRecyclerViewAdapter(ShoppingActivity.this, usersList);
+        shopAdapter = new ShopRecyclerViewAdapter(ShoppingActivity.this, usersList);
 
 
 //Use a LinearLayoutManager with default vertical orientation//
@@ -302,9 +312,9 @@ public class ShoppingActivity extends AppCompatActivity {
         shopAdapter.notifyDataSetChanged();
     }
 
-public void tabInit(){
-    tabLayout = findViewById(R.id.tab_layout);
-}
+    public void tabInit() {
+        tabLayout = findViewById(R.id.tab_layout);
+    }
 
     public class PageAdapter extends FragmentPagerAdapter {
 
@@ -355,4 +365,9 @@ public void tabInit(){
             return numOfTabs;
         }
     }
+
+
+
+
+
 }
