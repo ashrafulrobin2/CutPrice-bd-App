@@ -18,6 +18,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.inducesmile.androidpayexample.fragment.AccountFragment;
@@ -30,9 +31,17 @@ import com.inducesmile.androidpayexample.helpers.BottomNavigationBehavior;
 import com.inducesmile.androidpayexample.helpers.SpacesItemDecoration;
 import com.inducesmile.androidpayexample.model.products_model.Datum;
 import com.inducesmile.androidpayexample.model.products_model.Products;
+import com.inducesmile.androidpayexample.tablayoutFragment.Tab10Fragment;
+import com.inducesmile.androidpayexample.tablayoutFragment.Tab11Fragment;
 import com.inducesmile.androidpayexample.tablayoutFragment.Tab1Fragment;
 import com.inducesmile.androidpayexample.tablayoutFragment.Tab2Fragment;
 import com.inducesmile.androidpayexample.tablayoutFragment.Tab3Fragment;
+import com.inducesmile.androidpayexample.tablayoutFragment.Tab4Fragment;
+import com.inducesmile.androidpayexample.tablayoutFragment.Tab5Fragment;
+import com.inducesmile.androidpayexample.tablayoutFragment.Tab6Fragment;
+import com.inducesmile.androidpayexample.tablayoutFragment.Tab7Fragment;
+import com.inducesmile.androidpayexample.tablayoutFragment.Tab8Fragment;
+import com.inducesmile.androidpayexample.tablayoutFragment.Tab9Fragment;
 import com.inducesmile.androidpayexample.web_api.IClientServer;
 import com.inducesmile.androidpayexample.web_api.RetrofitService;
 
@@ -54,7 +63,7 @@ public class ShoppingActivity extends AppCompatActivity {
     private RecyclerView shoppingRecyclerView;
 
     private ActionBar toolbar;
-    CoordinatorLayout coordinatorLayout;
+    FrameLayout coordinatorLayout;
 
 
     //TablayOut
@@ -93,49 +102,41 @@ public class ShoppingActivity extends AppCompatActivity {
                     index = 2;
                     Tab2Fragment fragment = new Tab2Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==1){
-                    index = 2;
-                    Tab2Fragment fragment = new Tab2Fragment();
+                }else if (tab.getPosition()==2){
+                    index = 3;
+                    Tab3Fragment fragment = new Tab3Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==1){
-                    index = 2;
-                    Tab2Fragment fragment = new Tab2Fragment();
+                }else if (tab.getPosition()==3){
+                    index = 4;
+                    Tab4Fragment fragment = new Tab4Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==1){
-                    index = 2;
-                    Tab2Fragment fragment = new Tab2Fragment();
+                }else if (tab.getPosition()==4){
+                    index = 5;
+                    Tab5Fragment fragment = new Tab5Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==1){
-                    index = 2;
-                    Tab2Fragment fragment = new Tab2Fragment();
+                }else if (tab.getPosition()==5){
+                    index = 6;
+                    Tab6Fragment fragment = new Tab6Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==1){
-                    index = 2;
-                    Tab2Fragment fragment = new Tab2Fragment();
+                }else if (tab.getPosition()==6){
+                    index = 7;
+                    Tab7Fragment fragment = new Tab7Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==1){
-                    index = 2;
-                    Tab2Fragment fragment = new Tab2Fragment();
+                }else if (tab.getPosition()==7){
+                    index = 8;
+                    Tab8Fragment fragment = new Tab8Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==1){
-                    index = 2;
-                    Tab2Fragment fragment = new Tab2Fragment();
+                }else if (tab.getPosition()==8){
+                    index = 9;
+                    Tab9Fragment fragment = new Tab9Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==1){
-                    index = 2;
-                    Tab2Fragment fragment = new Tab2Fragment();
+                }else if (tab.getPosition()==9){
+                    index = 10;
+                    Tab10Fragment fragment = new Tab10Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==1){
-                    index = 2;
-                    Tab2Fragment fragment = new Tab2Fragment();
-                    transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==1){
-                    index = 2;
-                    Tab2Fragment fragment = new Tab2Fragment();
-                    transaction.replace(R.id.frame_container, fragment).commit();
-                }else if (tab.getPosition()==1){
-                    index = 2;
-                    Tab2Fragment fragment = new Tab2Fragment();
+                }else if (tab.getPosition()==10){
+                    index = 11;
+                    Tab11Fragment fragment = new Tab11Fragment();
                     transaction.replace(R.id.frame_container, fragment).commit();
                 }else {
                     Toast.makeText(ShoppingActivity.this,"no Data available",Toast.LENGTH_LONG).show();
@@ -154,7 +155,7 @@ public class ShoppingActivity extends AppCompatActivity {
         });
 
 
-        coordinatorLayout=findViewById(R.id.container);
+        coordinatorLayout=findViewById(R.id.frame_container);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         iClientServer = RetrofitService.getRetrofitInstance().create(IClientServer.class);
         getProductsFromApi();
@@ -323,6 +324,27 @@ public void tabInit(){
                     return new Tab2Fragment();
                 case 2:
                     return new Tab3Fragment();
+
+                case 3:
+                    return new Tab4Fragment();
+
+                case 4:
+                    return new Tab5Fragment();
+
+                case 5:
+                    return new Tab6Fragment();
+
+                case 6:
+                    return new Tab7Fragment();
+
+                case 7:
+                    return new Tab8Fragment();
+
+                case 8:
+                    return new Tab9Fragment();
+
+                case 10:
+                    return new Tab11Fragment();
                 default:
                     return null;
             }

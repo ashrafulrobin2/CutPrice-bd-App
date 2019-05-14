@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tablayoutFragment.Tab1Fragment">
+    tools:context=".tablayoutFragment.Tab5Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/simpleTextView"
         android:layout_width="match_parent"
@@ -13,7 +12,8 @@
         android:layout_centerInParent="true"
         android:background="#000"
         android:padding="10dp"
-        android:text="Tab1"
+        android:text="Tab5"
+
         android:textColor="#fff"
         android:textSize="40sp" />
 
