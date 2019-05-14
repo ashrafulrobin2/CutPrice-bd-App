@@ -1,36 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/card_shape"
     android:gravity="center"
-    android:paddingLeft="16dp"
-    android:paddingTop="64dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="64dp"
-    tools:context="com.inducesmile.androidpayexample.SplashActivity">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
         android:gravity="center">
 
+
         <ImageView
-            android:id="@+id/logo"
+            android:id="@+id/iv_app_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/company_logo" />
-
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/company_logo" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:textStyle="italic"
-            android:textSize="13dp"
-            android:text="@string/android_pay"/>
+
+            style="@style/Animation.Design.BottomSheetDialog"
+            android:gravity="center"
+            android:text="Cut Price BD"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_app_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="@string/hello_blank_fragment"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
     </LinearLayout>
+
 
 </RelativeLayout>
