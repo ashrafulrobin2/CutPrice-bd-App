@@ -99,7 +99,7 @@ public class ProductActivity extends AppCompatActivity {
             productDescription.setText(Html.fromHtml("<strong>Product Description</strong><br/>" + datum.getProductDescription()));
         }
 
-        Button addToCartButton = findViewById(R.id.order_NowId);
+        Button addToCartButton = findViewById(R.id.order_Now_btn1);
         assert addToCartButton != null;
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override

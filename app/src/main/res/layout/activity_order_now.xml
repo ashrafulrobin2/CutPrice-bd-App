@@ -200,6 +200,8 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
+            //Button
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -212,7 +214,7 @@
                 android:elevation="10dp">
 
                 <Button
-                    android:id="@+id/orderNow_btnId"
+                    android:id="@+id/submit_btn1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_ui"
@@ -220,6 +222,8 @@
                     android:textAllCaps="false"
                     android:textColor="@color/colorWhite" />
             </RelativeLayout>
+            /////
+
         </RelativeLayout>
     </ScrollView>
 

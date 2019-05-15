@@ -62,7 +62,7 @@ public class OrderNowActivity extends AppCompatActivity {
         quantity = (EditText)findViewById(R.id.product_Quantity_editTextId) ;
         address =(EditText) findViewById(R.id.address_editTextId);
        note =(EditText) findViewById(R.id.note_editTextId);
-       orderNow =(Button)findViewById(R.id.orderNow_btnId);
+       orderNow =(Button)findViewById(R.id.submit_btn1);
 
        iClientServer= RetrofitService.getRetrofitInstance().create(IClientServer.class);
        orderNow.setOnClickListener(new View.OnClickListener() {
