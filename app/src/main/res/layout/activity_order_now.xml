@@ -20,7 +20,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:elevation="10dp"
-        android:text="ORDER NOW"
+        android:text="অর্ডার করুন"
         android:textColor="@color/colorWhite"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -74,9 +74,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="Full Name"
+                        android:text="পুরো নাম"
                         android:textColor="@color/colorPurple"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -92,9 +92,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="Email"
+                        android:text="ইমেইল এড্রেস"
                         android:textColor="@color/colorPurple"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -110,9 +110,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="Phone"
+                        android:text="ফোন নম্বর"
                         android:textColor="@color/colorPurple"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -129,9 +129,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="Product Quantity"
+                        android:text="প্রোডাক্টের পরিমাণ"
                         android:textColor="@color/colorPurple"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -149,9 +149,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="Password"
+                        android:text="পাসওয়ার্ড"
                         android:textColor="@color/colorPurple"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -167,9 +167,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="Address"
+                        android:text="ঠিকানা"
                         android:textColor="@color/colorPurple"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -185,9 +185,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="Note"
+                        android:text="নোট
+"
                         android:textColor="@color/colorPurple"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -218,7 +219,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_ui"
-                    android:text="Submit"
+                    android:text="জমা দিন"
                     android:textAllCaps="false"
                     android:textColor="@color/colorWhite" />
             </RelativeLayout>
