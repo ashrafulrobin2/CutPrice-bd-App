@@ -301,10 +301,10 @@ public class ShoppingActivity extends AppCompatActivity  {
 
 //Use a LinearLayoutManager with default vertical orientation//
 
-        GridLayoutManager mGrid = new GridLayoutManager(ShoppingActivity.this, 2);
+        GridLayoutManager mGrid = new GridLayoutManager(ShoppingActivity.this, 3);
         shoppingRecyclerView.setLayoutManager(mGrid);
         shoppingRecyclerView.setHasFixedSize(true);
-        shoppingRecyclerView.addItemDecoration(new SpacesItemDecoration(2, 12, false));
+        shoppingRecyclerView.addItemDecoration(new SpacesItemDecoration(3, 8, false));
 
 
 //Set the Adapter to the RecyclerView//

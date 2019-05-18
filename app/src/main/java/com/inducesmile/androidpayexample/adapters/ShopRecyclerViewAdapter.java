@@ -14,7 +14,6 @@ import com.inducesmile.androidpayexample.R;
 import com.inducesmile.androidpayexample.model.products_model.Datum;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerViewHolder>{
@@ -39,18 +38,24 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
 
     @Override
     public void onBindViewHolder(ShopRecyclerViewHolder holder, int position) {
-        final Datum singleProduct = allProducts.get(position);
         String path = "http://cutpricebd.com/oms/product_image/thumbs/";
+        final Datum singleProduct = allProducts.get(position);
         String product_id = singleProduct.getProductId();
+        if (getItemViewType(position) == 0 && allProducts.size() >= 10) {
+            if ((path + singleProduct.getImg1()).length() <= 60) {
+                Picasso.get().load(path + singleProduct.getImg1()).into(holder.produceImage);
+            } else {
+                Picasso.get().load(singleProduct.getImg1()).into(holder.produceImage);
+            }
 
-        if ((path + singleProduct.getImg1()).length() <= 60) {
-            Picasso.get().load(path + singleProduct.getImg1()).into(holder.produceImage);
-        } else {
-            Picasso.get().load(singleProduct.getImg1()).into(holder.produceImage);
+
+            holder.productName.setText(singleProduct.getProductName());
         }
+        int ii = getItemViewType(position);
+        final int index = holder.getAdapterPosition();
 
 
-        holder.productName.setText(singleProduct.getProductName());
+
 
 
 
@@ -77,12 +82,8 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
             return allProducts.size();
         else
             return allProducts.size() > 12 ? 12 : allProducts.size();*/
-       /* if (num * 10 > allProducts.size()) {
-            return allProducts.size();
-        } else {
-            return num * 10;
-        }*/
-       return  allProducts.size();
+
+        return (null != allProducts ? allProducts.size() : 10);
     }
 
 

@@ -33,16 +33,15 @@ public class ProductActivity extends AppCompatActivity {
 
     private static final String TAG = ProductActivity.class.getSimpleName();
 
-    private TextView productId, productDiscount, productPrice, productDescription;
-
-    private ImageView productImage;
     public static final String mypreference = "mypref";
 
-    private Gson gson;
-    private Context context = ProductActivity.this;
-    private int cartProductNumber = 0;
+    private ImageView productImage;
     SharedPreferences sharedPreference;
 
+    private Gson gson;
+    private TextView productId, productDiscount, productPrice, productDescription;
+    private int cartProductNumber = 0;
+    private Context context = ProductActivity.this;
     private MySharedPreference sharedPreference1;
 
     @Override
@@ -72,30 +71,29 @@ public class ProductActivity extends AppCompatActivity {
            Picasso.get().load(path + datum.getImg1()).into(productImage);
 
 
+            if (datum.getProductOldPrice() == null) {
+                productDiscount.setText(" " + "0 TK");
 
-            if (datum.getProductOldPrice()==null){
-                productDiscount.setText(" "+  "0 TK");
-
-                productDiscount.setPaintFlags(productDiscount.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
-            }else{
-                double oldPrice= Double.parseDouble(datum.getProductOldPrice());
-                double sellingPrice= Double.parseDouble(datum.getProductSellingPrice());
-                double discountPrice=oldPrice-sellingPrice;
+                productDiscount.setPaintFlags(productDiscount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            } else {
+                double oldPrice = Double.parseDouble(datum.getProductOldPrice());
+                double sellingPrice = Double.parseDouble(datum.getProductSellingPrice());
+                double discountPrice = oldPrice - sellingPrice;
                 productDiscount.setText(" " + discountPrice);
 
-                productDiscount.setPaintFlags(productDiscount.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+                productDiscount.setPaintFlags(productDiscount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             }
-            String productId1=datum.getProductId();
-            String sellingPrice=datum.getProductSellingPrice();
-            sharedPreference = context.getSharedPreferences( mypreference, Context.MODE_PRIVATE );
+            String productId1 = datum.getProductId();
+            String sellingPrice = datum.getProductSellingPrice();
+            sharedPreference = context.getSharedPreferences(mypreference, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreference.edit();
-            editor.putString( "productId", productId1 );
-            editor.putString( "sellingPrice", sellingPrice );
+            editor.putString("productId", productId1);
+            editor.putString("sellingPrice", sellingPrice);
             editor.apply();
             editor.commit();
             //   productImage.setImageResource(singleProduct.getProductImage());
             productId.setText("Product Id: " + productId1);
-            productPrice.setText("Price: " + sellingPrice+ " TK");
+            productPrice.setText("Price: " + sellingPrice + " TK");
             productDescription.setText(Html.fromHtml("<strong>Product Description</strong><br/>" + datum.getProductDescription()));
         }
 
@@ -106,35 +104,35 @@ public class ProductActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                SharedPreferences sharedPreferences = getSharedPreferences( mypreference, MODE_PRIVATE );
-                String productId = sharedPreferences.getString( "productId", null );
-                String sellingPrice = sharedPreferences.getString( "sellingPrice", null );
+               /* SharedPreferences sharedPreferences = getSharedPreferences( mypreference, MODE_PRIVATE );
+                String productId = sharedPreferences.getString( "productId", "" );
+                String sellingPrice = sharedPreferences.getString( "sellingPrice", "" );
                 Intent intent = new Intent( context, OrderNowActivity.class );
                 intent.putExtra( "productId", productId );
                 intent.putExtra( "sellingPrice", sellingPrice );
-                startActivity(intent);
+                startActivity(intent);*/
                 //increase product count
-                //String productsFromCart = sharedPreference.retrieveProductFromCart();
-               /* if(productsFromCart.equals("")){
+                String productsFromCart = sharedPreference1.retrieveProductFromCart();
+                if(productsFromCart.equals("")){
                     List<Datum> cartProductList = new ArrayList<Datum>();
                     cartProductList.add(datum);
                     String cartValue = gson.toJson(cartProductList);
-                    sharedPreference.addProductToTheCart(cartValue);
+                    sharedPreference1.addProductToTheCart(cartValue);
                     cartProductNumber = cartProductList.size();
                 }else{
-                    String productsInCart = sharedPreference.retrieveProductFromCart();
+                    String productsInCart = sharedPreference1.retrieveProductFromCart();
                     Datum[] storedProducts = gson.fromJson(productsInCart, Datum[].class);
 
                     List<Datum> allNewProduct = convertObjectArrayToListObject(storedProducts);
                     allNewProduct.add(datum);
                     String addAndStoreNewProduct = gson.toJson(allNewProduct);
-                    sharedPreference.addProductToTheCart(addAndStoreNewProduct);
+                    sharedPreference1.addProductToTheCart(addAndStoreNewProduct);
                     cartProductNumber = allNewProduct.size();
                 }
-                sharedPreference.addProductCount(cartProductNumber);
+                sharedPreference1.addProductCount(cartProductNumber);
                 invalidateCart();
-            }*/
             }
+
         });
     }
 

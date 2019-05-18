@@ -60,7 +60,7 @@ public class CheckoutActivity extends AppCompatActivity {
         checkRecyclerView.setAdapter(mAdapter);
 
         mSubTotal = getTotalPrice(productList);
-        subTotal.setText("Subtotal excluding tax and shipping: " + mSubTotal + " $");
+        subTotal.setText("Subtotal excluding tax and shipping: " + mSubTotal + " bdt");
 
 
         Button shoppingButton = findViewById(R.id.shopping);
@@ -106,7 +106,8 @@ public class CheckoutActivity extends AppCompatActivity {
         double totalCost = 0;
         for(int i = 0; i < mProducts.size(); i++){
             Datum pObject = mProducts.get(i);
-            totalCost = totalCost + (Double.parseDouble(pObject.getProductOldPrice()));
+            double productPrice = Double.parseDouble(pObject.getProductSellingPrice().trim());
+            totalCost = totalCost + productPrice;
         }
         return totalCost;
     }

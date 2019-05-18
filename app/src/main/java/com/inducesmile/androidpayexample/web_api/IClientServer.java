@@ -6,8 +6,6 @@ import com.inducesmile.androidpayexample.model.products_model.Products;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -15,11 +13,12 @@ import retrofit2.http.Query;
 public interface IClientServer {
     @GET("products/getAllProducts")
     Call<Products> getALlProducts(@Query("api_key") String id);
-/*
-    @POST("products/buy_now")
-    @FormUrlEncoded
-    Call<UserOrder> orderProduct(@Body ParamProductOrder paramProductOrder);
-    */
+
+    /*
+        @POST("products/buy_now")
+        @FormUrlEncoded
+        Call<UserOrder> orderProduct(@Body ParamProductOrder paramProductOrder);
+        */
     @POST("products/buy_now")
     Call<UserOrder> orderProduct(@Body ProductOrder productOrder);
 

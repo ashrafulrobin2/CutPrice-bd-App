@@ -43,4 +43,35 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="discount">Discount:</string>
+
+
+    //XML preference string
+    <string name="summary_faq">View frequently asked questions</string>
+    <string name="url_faq">https://www.androidhive.info/privacy-policy/</string>
+    <string name="privacy_policy">Delivery Method</string>
+    <string name="url_privacy">http://cutpricebd.com/old22-04-19/page/delivery_method</string>
+    <string name="title_terms">Courier &amp; Service Link</string>
+    <string name="url_terms">http://cutpricebd.com/old22-04-19/page/courier_services/</string>
+    <string name="title_version">Version</string>
+    <string name="choose_email_client">Choose email client</string>
+    <string name="title_gallery_storage">Default Storage</string>
+    <string name="title_new_notification_sound">New message notification</string>
+    <string name="title_vibrate">Vibrate</string>
+    <string name="summary_vibrate">Vibrate on new notification</string>
+    <string name="key_upload_over_wifi">key_upload_over_wifi</string>
+    <string name="key_gallery_name">key_gallery_name</string>
+    <string name="key_upload_quality">key_upload_quality</string>
+    <string name="notifications_new_message">notifications_new_message</string>
+    <string name="key_notifications_new_message_ringtone">key_notifications_new_message_ringtone</string>
+    <string name="key_vibrate">key_vibrate</string>
+    <string name="key_send_feedback">key_send_feedback</string>
+    <string name="app_version">1.0</string>
+    <string name="summary_support">Got any queries? We are happy to help!</string>
+    <string name="title_send_feedback">Send Feedback</string>
+    <string name="title_faq">FAQ</string>
+    <string name="pref_header_about">About</string>
+    <string name="summary_about">High Quality Garments with Low Price.. all are Export Quality garments direct from buying house.\nWebsite: http://cutpricebd.com/</string>
+
+    <string name="open">open</string>
+    <string name="close">close</string>
 </resources>
