@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 import com.inducesmile.androidpayexample.OnBackPressed;
 import com.inducesmile.androidpayexample.R;
 import com.inducesmile.androidpayexample.ShoppingActivity;
-import com.inducesmile.androidpayexample.adapters.YoutubeRecyclerViewAdapter;
 import com.inducesmile.androidpayexample.model.products_model.Datum;
 import com.inducesmile.androidpayexample.model.products_model.Products;
 import com.inducesmile.androidpayexample.web_api.IClientServer;
@@ -86,15 +84,15 @@ public class VideoFragment extends Fragment implements OnBackPressed {
 
 //Use a LinearLayoutManager with default vertical orientation//
 
-        YoutubeRecyclerViewAdapter shopAdapter = new YoutubeRecyclerViewAdapter(getContext(), usersList);
+     /*   YoutubeRecyclerViewAdapter shopAdapter = new YoutubeRecyclerViewAdapter(getContext(), usersList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(shopAdapter);
         shopAdapter.notifyDataSetChanged();
-      /*  GridLayoutManager mGrid = new GridLayoutManager(getActivity(), 3);
+      *//*  GridLayoutManager mGrid = new GridLayoutManager(getActivity(), 3);
         shoppingRecyclerView.setLayoutManager(mGrid);
         shoppingRecyclerView.setHasFixedSize(true);
-        shoppingRecyclerView.addItemDecoration(new SpacesItemDecoration(3, 12, false));*/
-
+        shoppingRecyclerView.addItemDecoration(new SpacesItemDecoration(3, 12, false));*//*
+         */
 
 //Set the Adapter to the RecyclerView//
 

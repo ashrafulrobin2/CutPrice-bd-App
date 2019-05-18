@@ -9,42 +9,25 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.support.v7.widget.SearchView;
 import android.widget.Toast;
 
+import com.inducesmile.androidpayexample.adapters.ShopRecyclerViewAdapter;
 import com.inducesmile.androidpayexample.fragment.AccountFragment;
 import com.inducesmile.androidpayexample.fragment.CartFragment;
 import com.inducesmile.androidpayexample.fragment.CategoryFragment;
 import com.inducesmile.androidpayexample.fragment.HomeFragment;
 import com.inducesmile.androidpayexample.fragment.VideoFragment;
-import com.inducesmile.androidpayexample.adapters.ShopRecyclerViewAdapter;
 import com.inducesmile.androidpayexample.helpers.BottomNavigationBehavior;
 import com.inducesmile.androidpayexample.helpers.SpacesItemDecoration;
 import com.inducesmile.androidpayexample.model.products_model.Datum;
 import com.inducesmile.androidpayexample.model.products_model.Products;
-import com.inducesmile.androidpayexample.tablayoutFragment.Tab10Fragment;
-import com.inducesmile.androidpayexample.tablayoutFragment.Tab11Fragment;
-import com.inducesmile.androidpayexample.tablayoutFragment.Tab1Fragment;
-import com.inducesmile.androidpayexample.tablayoutFragment.Tab2Fragment;
-import com.inducesmile.androidpayexample.tablayoutFragment.Tab3Fragment;
-import com.inducesmile.androidpayexample.tablayoutFragment.Tab4Fragment;
-import com.inducesmile.androidpayexample.tablayoutFragment.Tab5Fragment;
-import com.inducesmile.androidpayexample.tablayoutFragment.Tab6Fragment;
-import com.inducesmile.androidpayexample.tablayoutFragment.Tab7Fragment;
-import com.inducesmile.androidpayexample.tablayoutFragment.Tab8Fragment;
-import com.inducesmile.androidpayexample.tablayoutFragment.Tab9Fragment;
 import com.inducesmile.androidpayexample.web_api.IClientServer;
 import com.inducesmile.androidpayexample.web_api.RetrofitService;
 
@@ -73,7 +56,6 @@ public class ShoppingActivity extends AppCompatActivity  {
     //TablayOut
 
     TabLayout tabLayout;
-    PageAdapter pageAdapter;
     TabItem tabItem1;
     TabItem tabItem2;
     TabItem tabItem3;
@@ -90,13 +72,13 @@ public class ShoppingActivity extends AppCompatActivity  {
         progressDialog = new ProgressDialog(ShoppingActivity.this);
         progressDialog.setMessage("Loading..");
         progressDialog.show();
-        tabLayout = findViewById(R.id.tab_layout);
+    /*    tabLayout = findViewById(R.id.tab_layout);
         tabItem1 = findViewById(R.id.tabItem1);
         tabItem2 = findViewById(R.id.tabItem2);
-        tabItem3 = findViewById(R.id.tabItem3);
+        tabItem3 = findViewById(R.id.tabItem3);*/
         data = new ArrayList<>();
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
+       /* tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 FragmentManager manager = getSupportFragmentManager();
@@ -162,6 +144,7 @@ public class ShoppingActivity extends AppCompatActivity  {
         });
 
 
+*/
         coordinatorLayout = findViewById(R.id.frame_container);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         iClientServer = RetrofitService.getRetrofitInstance().create(IClientServer.class);
@@ -169,7 +152,7 @@ public class ShoppingActivity extends AppCompatActivity  {
         toolbar = getSupportActionBar();
         ////-0---
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // attaching bottom sheet behaviour - hide / show on scroll
@@ -312,11 +295,11 @@ public class ShoppingActivity extends AppCompatActivity  {
         shopAdapter.notifyDataSetChanged();
     }
 
-    public void tabInit() {
+   /* public void tabInit() {
         tabLayout = findViewById(R.id.tab_layout);
-    }
+    }*/
 
-    public class PageAdapter extends FragmentPagerAdapter {
+   /* public class PageAdapter extends FragmentPagerAdapter {
 
         private int numOfTabs;
 
@@ -365,7 +348,7 @@ public class ShoppingActivity extends AppCompatActivity  {
             return numOfTabs;
         }
     }
-
+*/
 
 
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.inducesmile.androidpayexample.adapters.CheckRecyclerViewAdapter;
+import com.inducesmile.androidpayexample.adapters.Constant;
 import com.inducesmile.androidpayexample.helpers.MySharedPreference;
 import com.inducesmile.androidpayexample.helpers.SimpleDividerItemDecoration;
 import com.inducesmile.androidpayexample.model.products_model.Datum;
@@ -25,12 +27,14 @@ public class CheckoutActivity extends AppCompatActivity {
 
     private static final String TAG = CheckoutActivity.class.getSimpleName();
 
+
     private RecyclerView checkRecyclerView;
 
     private TextView subTotal;
 
     private double mSubTotal = 0;
-
+    List<Datum> products;
+    CheckRecyclerViewAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +42,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setTitle("Over Cart");
-
+        products = new ArrayList<>();
         subTotal = findViewById(R.id.sub_total);
 
         checkRecyclerView = findViewById(R.id.checkout_list);
@@ -56,13 +60,13 @@ public class CheckoutActivity extends AppCompatActivity {
         Datum[] addCartProducts = gson.fromJson(mShared.retrieveProductFromCart(), Datum[].class);
         List<Datum> productList = convertObjectArrayToListObject(addCartProducts);
 
-        CheckRecyclerViewAdapter mAdapter = new CheckRecyclerViewAdapter(CheckoutActivity.this, productList);
+        mAdapter = new CheckRecyclerViewAdapter(CheckoutActivity.this, productList);
         checkRecyclerView.setAdapter(mAdapter);
 
         mSubTotal = getTotalPrice(productList);
         subTotal.setText("Subtotal excluding tax and shipping: " + mSubTotal + " bdt");
 
-
+        mAdapter.notifyDataSetChanged();
         Button shoppingButton = findViewById(R.id.shopping);
         assert shoppingButton != null;
         shoppingButton.setOnClickListener(new View.OnClickListener() {
@@ -93,22 +97,41 @@ public class CheckoutActivity extends AppCompatActivity {
 
     private int returnQuantityByProductName(String productName, List<Datum> mProducts) {
         int quantityCount = 0;
-        for(int i = 0; i < mProducts.size(); i++){
+        for (int i = 0; i < mProducts.size(); i++) {
             Datum pObject = mProducts.get(i);
-            if(pObject.getProductName().trim().equals(productName.trim())){
+            if (pObject.getProductName().trim().equals(productName.trim())) {
                 quantityCount++;
             }
         }
         return quantityCount;
     }
 
-    private double getTotalPrice(List<Datum> mProducts) {
+    public double getTotalPrice(List<Datum> mProducts) {
         double totalCost = 0;
-        for(int i = 0; i < mProducts.size(); i++){
+        for (int i = 0; i < mProducts.size(); i++) {
             Datum pObject = mProducts.get(i);
             double productPrice = Double.parseDouble(pObject.getProductSellingPrice().trim());
             totalCost = totalCost + productPrice;
         }
         return totalCost;
     }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getTitle().equals(Constant.DELETE))
+            deleteItem(item.getItemId());
+        return true;
+    }
+
+    public void deleteItem(int position) {
+        products.remove(position);
+
+        checkRecyclerView.clearFocus();
+        for (Datum data : products) {
+            getTotalPrice(products);
+        }
+        mAdapter.notifyDataSetChanged();
+
+    }
+
 }
