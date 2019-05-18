@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<color name="colorPrimary">#C04E58</color>
-<color name="colorPrimaryDark">#8D1F28</color>
+    <color name="colorPrimary">#2FB4FF</color>
+    <color name="colorPrimaryDark">#64983cff</color>
 <color name="colorPrimaryLight">#F2F5F2</color>
 <color name="colorAccent">#795548</color>
 <color name="colorPrimaryText">#212121</color>
 <color name="colorSecondaryText">#757575</color>
 <color name="icons">#ffffff</color>
 <color name="colorDivider">#BDBDBD</color>
-    <color name="bgBottomNavigation">#fe485a</color>
+    <color name="bgBottomNavigation">#642fb4ff</color>
+    <color name="colorPrimary2">#008577</color>
+    <color name="colorPrimaryDark2">#00574B</color>
+    <color name="colorAccent2">#D81B60</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorPurple">#983CFF</color>
+    <color name="colorPurpleT">#64983cff</color>
+    <color name="colorBlue">#2FB4FF</color>
+    <color name="colorBlueT">#642fb4ff</color>
+    <color name="dividerColor">#80CBC4</color>
+    <color name="list_item_title">#AAAAAA</color>
+    <color name="list_group_title">#808080</color>
 </resources>
 

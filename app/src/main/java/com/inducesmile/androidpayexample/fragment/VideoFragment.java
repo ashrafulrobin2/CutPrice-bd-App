@@ -10,22 +10,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.inducesmile.androidpayexample.OnBackPressed;
 import com.inducesmile.androidpayexample.R;
 import com.inducesmile.androidpayexample.ShoppingActivity;
 import com.inducesmile.androidpayexample.adapters.YoutubeRecyclerViewAdapter;
 import com.inducesmile.androidpayexample.model.products_model.Datum;
-import com.inducesmile.androidpayexample.model.products_model.Products;
 import com.inducesmile.androidpayexample.web_api.IClientServer;
 import com.inducesmile.androidpayexample.web_api.RetrofitService;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,28 +45,28 @@ public class VideoFragment extends Fragment implements OnBackPressed {
         recyclerView = view.findViewById(R.id.recyclerview);
 
         iClientServer = RetrofitService.getRetrofitInstance().create(IClientServer.class);
-        getProductsFromApi();
+        // getProductsFromApi();
         return view;
     }
 
-    public void getProductsFromApi() {
+   /* public void getProductsFromApi() {
         String id = "Cutprice@987";
-        final Call<Products> productsCall = iClientServer.getALlProducts(id);
+        final Call<ArrayList<Products>> productsCall = iClientServer.getALlProducts(id);
 
-        productsCall.enqueue(new Callback<Products>() {
+        productsCall.enqueue(new Callback<ArrayList<Products>>() {
             @Override
-            public void onResponse(Call<Products> call, Response<Products> response) {
-                Products products = response.body();
+            public void onResponse(Call<ArrayList<Products>> call, Response<ArrayList<Products>> response) {
+
                 progressDialog.dismiss();
-                loadDataList(products.getData());
+                //loadDataList(response.body());
             }
 
             @Override
-            public void onFailure(Call<Products> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Products>> call, Throwable t) {
                 Toast.makeText(getContext(), "Unable to load users " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 
     @Override
     public void onBackPressed() {
