@@ -15,23 +15,19 @@
         <activity android:name="com.eomsbd.cutprice.adapters.Test_Activity"/>
 
 
-        <meta-data
-            android:name="com.google.android.gms.wallet.api.enabled"
-            android:value="true" />
+
 
         <activity
             android:name="com.eomsbd.cutprice.adapters.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-
-
-
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name="com.eomsbd.cutprice.adapters.ShoppingActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.eomsbd.cutprice.adapters.ProductActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.eomsbd.cutprice.adapters.CheckoutActivity" />
