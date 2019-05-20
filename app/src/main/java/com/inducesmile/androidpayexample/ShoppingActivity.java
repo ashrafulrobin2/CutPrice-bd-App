@@ -152,12 +152,14 @@ public class ShoppingActivity extends AppCompatActivity  {
         toolbar = getSupportActionBar();
         ////-0---
 
-        BottomNavigationView navigation = findViewById(R.id.navigation);
+        //Bottom Navigation //
+
+        /*  BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // attaching bottom sheet behaviour - hide / show on scroll
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
-        layoutParams.setBehavior(new BottomNavigationBehavior());
+        layoutParams.setBehavior(new BottomNavigationBehavior());*/
 
         // load the store fragment by default
         //toolbar.setTitle("Shop");
@@ -165,7 +167,7 @@ public class ShoppingActivity extends AppCompatActivity  {
     }
 ///
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+  /*  private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -199,7 +201,7 @@ public class ShoppingActivity extends AppCompatActivity  {
 
             return loadFragment(fragment);
         }
-    };
+    };*/
 
     /**
      * loading fragment into FrameLayout
@@ -284,10 +286,10 @@ public class ShoppingActivity extends AppCompatActivity  {
 
 //Use a LinearLayoutManager with default vertical orientation//
 
-        GridLayoutManager mGrid = new GridLayoutManager(ShoppingActivity.this, 3);
+        GridLayoutManager mGrid = new GridLayoutManager(ShoppingActivity.this, 2);
         shoppingRecyclerView.setLayoutManager(mGrid);
         shoppingRecyclerView.setHasFixedSize(true);
-        shoppingRecyclerView.addItemDecoration(new SpacesItemDecoration(3, 8, false));
+        shoppingRecyclerView.addItemDecoration(new SpacesItemDecoration(2, 12, false));
 
 
 //Set the Adapter to the RecyclerView//

@@ -1,9 +1,13 @@
 package com.inducesmile.androidpayexample;
 
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
@@ -16,17 +20,21 @@ import com.inducesmile.androidpayexample.model.product_order_model.UserOrder;
 import com.inducesmile.androidpayexample.web_api.IClientServer;
 import com.inducesmile.androidpayexample.web_api.RetrofitService;
 
+import java.util.regex.Pattern;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderNowActivity extends AppCompatActivity {
+public class OrderNowActivity extends AppCompatActivity{
 
     IClientServer iClientServer;
     private RelativeLayout rlayout;
     private Animation animation;
     private EditText fullname, email, phone, quantity, password, address, note;
     private Button orderNow;
+
+    private AlertDialog.Builder alertDialogBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +74,7 @@ public class OrderNowActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (checkValidity()) {
                 } else {
+                    dialogBox();
                     getProductFromApi();
                 }
 
@@ -75,40 +84,56 @@ public class OrderNowActivity extends AppCompatActivity {
 
 
     }
-
+    public boolean isEmpty(EditText text){
+        CharSequence t=text.getText().toString();
+        return TextUtils.isEmpty( t );
+    }
+    private boolean isValidEmail(CharSequence email) {
+        if (!TextUtils.isEmpty(email)) {
+            return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        }
+        return false;
+    }
+    private boolean isValidPhoneNumber(CharSequence phoneNumber) {
+        if (!TextUtils.isEmpty(phoneNumber)) {
+            return Patterns.PHONE.matcher(phoneNumber).matches();
+        }
+        return false;
+    }
     public boolean checkValidity() {
         View focusView = null;
         boolean cancel = false;
-        String quanti = quantity.getText().toString();
-        String name = fullname.getText().toString();
-        String emaill = email.getText().toString();
-        String addres = address.getText().toString();
-        String number = phone.getText().toString();
-        String comment = note.getText().toString();
-        String pass = password.getText().toString();
-
-        if (TextUtils.isEmpty(name)) {
+        if (isEmpty(fullname)) {
             // focusView=userName;
             cancel = true;
             fullname.setError("Enter a valid name");
-        } else if (TextUtils.isEmpty(emaill)) {
+        }
+        if (isEmpty(email)) {
             // focusView = pass;
-
             cancel = true;
-            email.setError("Enter a valid occupation");
-        } else if (TextUtils.isEmpty(number)) {
+            email.setError("Enter a valid email address");
+        }
+        if (isEmpty(phone)) {
             // focusView = pass;
             cancel = true;
             phone.setError("Enter a valid Phone Number");
-        } else if (TextUtils.isEmpty(pass)) {
+        }
+        if (isEmpty(quantity)) {
+            // focusView = pass;
+            cancel = true;
+            quantity.setError("Enter a product Quantity");
+        }
+        if (isEmpty(password)) {
             // focusView = pass;
             cancel = true;
             password.setError("Enter a valid password");
-        } else if (TextUtils.isEmpty(addres)) {
+        }
+        if (isEmpty(address)) {
             // focusView = pass;
             cancel = true;
             address.setError("Enter a valid address");
-        } else if (TextUtils.isEmpty(comment)) {
+        }
+        if (isEmpty(note)) {
             // focusView = pass;
             cancel = true;
             note.setError("Enter a valid Note");
@@ -120,24 +145,26 @@ public class OrderNowActivity extends AppCompatActivity {
         String api_key = "Cutprice@987";
         String productId = getIntent().getExtras().getString("productId");
         String productSellingPrice = getIntent().getExtras().getString("sellingPrice");
-        String quanti = quantity.getText().toString();
+        double quanti = Double.parseDouble(quantity.getText().toString());
         String name = fullname.getText().toString();
         String emaill = email.getText().toString();
         String addres = address.getText().toString();
         String number = phone.getText().toString();
         String pass = password.getText().toString();
         String comment = note.getText().toString();
-        ProductOrder paramProductOrder = new ProductOrder();
+        String quanSell=String.valueOf(quanti*Double.parseDouble(productSellingPrice));
 
+        ProductOrder paramProductOrder = new ProductOrder();
         paramProductOrder.setApiKey(api_key);
         paramProductOrder.setProductId(productId);
-        paramProductOrder.setQuantity(quanti);
+        paramProductOrder.setQuantity(String.valueOf(quanti));
         paramProductOrder.setName(name);
         paramProductOrder.setEmail(emaill);
         paramProductOrder.setAddress(addres);
+        paramProductOrder.setPassword(pass);
         paramProductOrder.setMobile(number);
         paramProductOrder.setComment(comment);
-        paramProductOrder.setProductSellingPrice(productSellingPrice);
+        paramProductOrder.setProductSellingPrice(quanSell);
 
         Call<UserOrder> paramProductOrderCall = iClientServer.orderProduct(paramProductOrder);
         paramProductOrderCall.enqueue(new Callback<UserOrder>() {
@@ -159,6 +186,56 @@ public class OrderNowActivity extends AppCompatActivity {
             }
         });
     }
+
+
+  public void dialogBox(){
+      alertDialogBuilder = new AlertDialog.Builder(OrderNowActivity.this);
+
+      //For Setting Title
+
+      alertDialogBuilder.setTitle(R.string.title_text);
+
+      //for setting message
+      alertDialogBuilder.setMessage(R.string.message_text);
+      //fot setting Icon
+      alertDialogBuilder.setIcon(R.mipmap.success);
+
+      alertDialogBuilder.setPositiveButton(" হ্যাঁ", new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+
+              //exit
+              finish();
+          }
+      });
+
+      alertDialogBuilder.setNeutralButton(" হোম", new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+
+
+              Intent login = new Intent(OrderNowActivity.this ,ShoppingActivity.class);
+              login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+              startActivity(login);
+
+
+          }
+      });
+
+      alertDialogBuilder.setNegativeButton("না", new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+
+              dialog.cancel();
+          }
+      });
+
+      AlertDialog alertDialog = alertDialogBuilder.create();
+      alertDialog.show();
+  }
+
+
+
 
 }
 

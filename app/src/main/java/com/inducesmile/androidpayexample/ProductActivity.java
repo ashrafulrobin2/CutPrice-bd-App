@@ -104,15 +104,15 @@ public class ProductActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-               /* SharedPreferences sharedPreferences = getSharedPreferences( mypreference, MODE_PRIVATE );
+                SharedPreferences sharedPreferences = getSharedPreferences( mypreference, MODE_PRIVATE );
                 String productId = sharedPreferences.getString( "productId", "" );
                 String sellingPrice = sharedPreferences.getString( "sellingPrice", "" );
                 Intent intent = new Intent( context, OrderNowActivity.class );
                 intent.putExtra( "productId", productId );
                 intent.putExtra( "sellingPrice", sellingPrice );
-                startActivity(intent);*/
+                startActivity(intent);
                 //increase product count
-                String productsFromCart = sharedPreference1.retrieveProductFromCart();
+              /*  String productsFromCart = sharedPreference1.retrieveProductFromCart();
                 if(productsFromCart.equals("")){
                     List<Datum> cartProductList = new ArrayList<Datum>();
                     cartProductList.add(datum);
@@ -130,7 +130,7 @@ public class ProductActivity extends AppCompatActivity {
                     cartProductNumber = allNewProduct.size();
                 }
                 sharedPreference1.addProductCount(cartProductNumber);
-                invalidateCart();
+                invalidateCart();*/
             }
 
         });
@@ -141,7 +141,7 @@ public class ProductActivity extends AppCompatActivity {
         Collections.addAll(mProduct, allProducts);
         return mProduct;
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -149,7 +149,7 @@ public class ProductActivity extends AppCompatActivity {
         int mCount = sharedPreference1.retrieveProductCount();
         menuItem.setIcon(buildCounterDrawable(mCount, R.drawable.cart));
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

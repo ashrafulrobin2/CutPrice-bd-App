@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CutPriceBD
+    <string name="app_name">Cut Price BD
     </string>
     <string name="android_pay">Cut Price online  Shop</string>
     <string name="add_to_cart">ADD TO CART</string>
@@ -74,4 +74,15 @@
 
     <string name="open">open</string>
     <string name="close">close</string>
+
+    //For DialogBox
+    <string name="title_text">আপনার  অর্ডার নেয়া হয়েছে</string>
+    <string name="message_text">আপনি কি বের হতে চান ?</string>
+    <string name="yes"> হ্যাঁ</string>
+
+    <string name="No">না </string>
+
+    <string name="Home"> হোম</string>
+
+    
 </resources>

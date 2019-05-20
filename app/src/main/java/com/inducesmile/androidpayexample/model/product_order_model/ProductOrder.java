@@ -27,6 +27,9 @@ public class ProductOrder {
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("password")
+    @Expose
+    private String password;
     @SerializedName("email")
     @Expose
     private String email;
@@ -88,6 +91,14 @@ public class ProductOrder {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
