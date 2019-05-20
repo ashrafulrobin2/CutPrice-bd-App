@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#9C27B0"
-    tools:context=".tablayoutFragment.Tab2Fragment">
+    tools:context="com.eomsbd.cutprice.adapters.tablayoutFragment.Tab2Fragment">
 
     <TextView
         android:id="@+id/simpleTextView"
