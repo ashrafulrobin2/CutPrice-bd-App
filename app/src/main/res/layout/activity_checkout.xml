@@ -9,7 +9,7 @@
     android:paddingBottom="64dp"
     android:orientation="vertical"
     android:background="@color/colorPrimaryLight"
-    tools:context="com.inducesmile.androidpayexample.com.eomsbd.cutprice.adapters.CheckoutActivity">
+    tools:context="com.eomsbd.cutprice.com.cutprice.eomsbd.CheckoutActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

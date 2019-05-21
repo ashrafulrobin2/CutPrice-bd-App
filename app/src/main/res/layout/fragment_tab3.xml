@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#673AB7"
-    tools:context="com.eomsbd.cutprice.adapters.tablayoutFragment.Tab3Fragment">
+    tools:context="com.cutprice.eomsbd.tablayoutFragment.Tab3Fragment">
 
     <TextView
         android:id="@+id/simpleTextView"
