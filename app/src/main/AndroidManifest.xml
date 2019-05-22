@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cutprice.eomsbd">
+    package="com.eomsbd.cutprice">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,13 +11,10 @@
         android:roundIcon="@drawable/cutpricelogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Test_Activity"/>
-
-
-
+        <activity android:name="com.eomsbd.cutprice.Test_Activity"/>
 
         <activity
-            android:name=".SplashActivity"
+            android:name="com.eomsbd.cutprice.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -25,15 +22,15 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-        <activity android:name=".ShoppingActivity">
+        <activity android:name="com.eomsbd.cutprice.ShoppingActivity">
 
         </activity>
-        <activity android:name=".ProductActivity" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CheckoutActivity" />
-        <activity android:name=".PaymentsActivity" />
-        <activity android:name=".PayPalCheckoutActivity" />
+        <activity android:name="com.eomsbd.cutprice.ProductActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.eomsbd.cutprice.CheckoutActivity" />
+        <activity android:name="com.eomsbd.cutprice.PaymentsActivity" />
+        <activity android:name="com.eomsbd.cutprice.PayPalCheckoutActivity" />
 
-        <activity android:name=".OrderNowActivity" android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name="com.eomsbd.cutprice.OrderNowActivity" android:theme="@style/AppTheme.NoActionBar">
 
 
 
