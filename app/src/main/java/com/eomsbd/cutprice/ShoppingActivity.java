@@ -1,8 +1,12 @@
 package com.eomsbd.cutprice;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,8 +14,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.eomsbd.cutprice.adapters.ShopRecyclerViewAdapter;
@@ -20,6 +28,7 @@ import com.eomsbd.cutprice.fragment.CartFragment;
 import com.eomsbd.cutprice.fragment.CategoryFragment;
 import com.eomsbd.cutprice.fragment.HomeFragment;
 import com.eomsbd.cutprice.fragment.VideoFragment;
+import com.eomsbd.cutprice.helpers.BottomNavigationBehavior;
 import com.eomsbd.cutprice.helpers.SpacesItemDecoration;
 import com.eomsbd.cutprice.model.products_model.Datum;
 import com.eomsbd.cutprice.model.products_model.Products;
@@ -49,6 +58,7 @@ public class ShoppingActivity extends AppCompatActivity  {
     private ActionBar toolbar;
     FrameLayout coordinatorLayout;
 
+    LinearLayout linearLayout;
 
     //TablayOut
 
@@ -69,6 +79,8 @@ public class ShoppingActivity extends AppCompatActivity  {
         progressDialog = new ProgressDialog(ShoppingActivity.this);
         progressDialog.setMessage("Loading..");
         progressDialog.show();
+
+        linearLayout=findViewById(R.id.LinearLayout1);
     /*    tabLayout = findViewById(R.id.tab_layout);
         tabItem1 = findViewById(R.id.tabItem1);
         tabItem2 = findViewById(R.id.tabItem2);
@@ -151,12 +163,12 @@ public class ShoppingActivity extends AppCompatActivity  {
 
         //Bottom Navigation //
 
-        /*  BottomNavigationView navigation = findViewById(R.id.navigation);
+          BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // attaching bottom sheet behaviour - hide / show on scroll
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
-        layoutParams.setBehavior(new BottomNavigationBehavior());*/
+        layoutParams.setBehavior(new BottomNavigationBehavior());
 
         // load the store fragment by default
         //toolbar.setTitle("Shop");
@@ -164,7 +176,7 @@ public class ShoppingActivity extends AppCompatActivity  {
     }
 ///
 
-  /*  private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+   private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -174,31 +186,35 @@ public class ShoppingActivity extends AppCompatActivity  {
                 case R.id.navigation_home:
                     toolbar.setTitle("Home");
                     fragment = new HomeFragment();
+                    linearLayout.setVisibility(View.GONE);
                     break;
                 case R.id.navigation_category:
                     toolbar.setTitle("Category");
                     fragment = new CategoryFragment();
-
+                    linearLayout.setVisibility(View.GONE);
                     break;
                 case R.id.navigation_cart:
                     toolbar.setTitle("Cart");
                     fragment = new CartFragment();
+                    linearLayout.setVisibility(View.GONE);
                     break;
 
                 case R.id.navigation_video:
                     toolbar.setTitle("Video");
                     fragment = new VideoFragment();
+                   linearLayout.setVisibility(View.GONE);
                     break;
 
                 case R.id.navigation_account:
                     toolbar.setTitle("Account");
                     fragment = new AccountFragment();
+                    linearLayout.setVisibility(View.GONE);
                     break;
             }
 
             return loadFragment(fragment);
         }
-    };*/
+    };
 
     /**
      * loading fragment into FrameLayout
@@ -206,20 +222,19 @@ public class ShoppingActivity extends AppCompatActivity  {
      * @param fragment
      */
     private boolean loadFragment(Fragment fragment) {
-        // load fragment
+        /*FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();*/
         if (fragment != null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.frame_container, fragment)
                     .commit();
-            coordinatorLayout.setVisibility(View.GONE);
-
             return true;
         }
         return false;
-
     }
-
     ////  Get Data From Api
     public void getProductsFromApi() {
         String id = "Cutprice@987";
@@ -294,7 +309,27 @@ public class ShoppingActivity extends AppCompatActivity  {
         shopAdapter.notifyDataSetChanged();
     }
 
-   /* public void tabInit() {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.settings_menu, menu);
+        return true;    }
+
+
+        public boolean onOptionsItemSelected(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.action_settings:
+                    startActivity(new Intent(this, SettingsPrefActivity.class));
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        //respond to menu item selection
+
+    }
+
+
+    /* public void tabInit() {
         tabLayout = findViewById(R.id.tab_layout);
     }*/
 

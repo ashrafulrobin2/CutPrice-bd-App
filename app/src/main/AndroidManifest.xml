@@ -11,30 +11,28 @@
         android:roundIcon="@drawable/cutpricelogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.eomsbd.cutprice.Test_Activity"/>
-
+        <activity android:name=".Test_Activity" />
         <activity
-            android:name="com.eomsbd.cutprice.SplashActivity"
+            android:name=".SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name="com.eomsbd.cutprice.ShoppingActivity">
+        <activity android:name=".ShoppingActivity"></activity>
+        <activity
+            android:name=".ProductActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CheckoutActivity" />
+        <activity android:name=".PaymentsActivity" />
+        <activity android:name=".PayPalCheckoutActivity" />
+        <activity
+            android:name=".OrderNowActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        </activity>
-        <activity android:name="com.eomsbd.cutprice.ProductActivity" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.eomsbd.cutprice.CheckoutActivity" />
-        <activity android:name="com.eomsbd.cutprice.PaymentsActivity" />
-        <activity android:name="com.eomsbd.cutprice.PayPalCheckoutActivity" />
-
-        <activity android:name="com.eomsbd.cutprice.OrderNowActivity" android:theme="@style/AppTheme.NoActionBar">
-
-
-
-        </activity>
+        <activity android:name=".SettingsPrefActivity"></activity>
     </application>
 
 </manifest>
