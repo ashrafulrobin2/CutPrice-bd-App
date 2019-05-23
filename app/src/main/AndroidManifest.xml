@@ -12,11 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Test_Activity"/>
-
-
-
-
-        <activity
+<activity
             android:name=".SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
         <intent-filter>
@@ -25,7 +21,7 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-        <activity android:name=".ShoppingActivity">
+        <activity android:name=".ShoppingActivity" >
 
         </activity>
         <activity android:name=".ProductActivity" android:theme="@style/AppTheme.NoActionBar" />

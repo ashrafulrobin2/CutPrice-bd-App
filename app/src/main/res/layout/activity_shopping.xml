@@ -5,9 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/colayout"
-    tools:context="com.eomsbd.cutprice.com.cutprice.eomsbd.ShoppingActivity">
+    tools:context="com.cutprice.eomsbd.ShoppingActivity">
 
-
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </FrameLayout>
 
 //TabLay Out//
 
@@ -106,20 +115,11 @@
 
     //TabLayout-code_End//
 
+
     <LinearLayout
-        android:id="@+id/activity_controller"
+        android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </FrameLayout>
-    </LinearLayout>
-
+        android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/product_list"
@@ -132,14 +132,11 @@
         android:scrollbars="none" />
     <!--  app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
 
-    <FrameLayout
-        android:id="@+id/frame_container"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="55dp"
-        android:layout_height="match_parent"/>
+    </LinearLayout>
+
 
     //Bottom_Navigation
-   <!-- <android.support.design.widget.BottomNavigationView
+    <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -149,6 +146,6 @@
         android:foreground="?attr/selectableItemBackground"
         app:itemIconTint="@android:color/white"
         app:itemTextColor="@android:color/white"
-        app:menu="@menu/navigation" />-->
+        app:menu="@menu/navigation" />
 
 </android.support.design.widget.CoordinatorLayout>

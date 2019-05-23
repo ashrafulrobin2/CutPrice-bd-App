@@ -3,6 +3,9 @@ package com.cutprice.eomsbd;
 import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,22 +13,24 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.cutprice.eomsbd.adapters.ShopRecyclerViewAdapter;
 import com.cutprice.eomsbd.fragment.AccountFragment;
 import com.cutprice.eomsbd.fragment.CartFragment;
 import com.cutprice.eomsbd.fragment.CategoryFragment;
-import com.cutprice.eomsbd.fragment.HomeFragment;
+import com.cutprice.eomsbd.fragment.FacebookFragment;
 import com.cutprice.eomsbd.fragment.VideoFragment;
+import com.cutprice.eomsbd.helpers.BottomNavigationBehavior;
 import com.cutprice.eomsbd.helpers.SpacesItemDecoration;
 import com.cutprice.eomsbd.model.products_model.Datum;
 import com.cutprice.eomsbd.model.products_model.Products;
 import com.cutprice.eomsbd.web_api.IClientServer;
 import com.cutprice.eomsbd.web_api.RetrofitService;
-import com.cutprice.eomsbd.R;
 
 
 import java.util.ArrayList;
@@ -39,7 +44,7 @@ public class ShoppingActivity extends AppCompatActivity  {
 
     private static final String TAG = ShoppingActivity.class.getSimpleName();
 
-
+   LinearLayout linearLayout;
     IClientServer iClientServer;
     ProgressDialog progressDialog;
     public static int index = 1;
@@ -65,10 +70,17 @@ public class ShoppingActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping);
 
-        //progressbar Code
-        progressDialog = new ProgressDialog(ShoppingActivity.this);
-        progressDialog.setMessage("Loading..");
-        progressDialog.show();
+
+
+        linearLayout = findViewById(R.id.LinearLayout1);
+
+
+        progressDialog=new ProgressDialog(this);
+
+       progressDialog.setMessage("Loading..");
+       progressDialog.show();
+
+
     /*    tabLayout = findViewById(R.id.tab_layout);
         tabItem1 = findViewById(R.id.tabItem1);
         tabItem2 = findViewById(R.id.tabItem2);
@@ -151,12 +163,12 @@ public class ShoppingActivity extends AppCompatActivity  {
 
         //Bottom Navigation //
 
-        /*  BottomNavigationView navigation = findViewById(R.id.navigation);
+          BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // attaching bottom sheet behaviour - hide / show on scroll
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
-        layoutParams.setBehavior(new BottomNavigationBehavior());*/
+        layoutParams.setBehavior(new BottomNavigationBehavior());
 
         // load the store fragment by default
         //toolbar.setTitle("Shop");
@@ -164,41 +176,47 @@ public class ShoppingActivity extends AppCompatActivity  {
     }
 ///
 
-  /*  private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+   private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    toolbar.setTitle("Home");
-                    fragment = new HomeFragment();
-                    break;
+                /* */
                 case R.id.navigation_category:
                     toolbar.setTitle("Category");
                     fragment = new CategoryFragment();
-
+                    linearLayout.setVisibility(View.GONE);
                     break;
                 case R.id.navigation_cart:
                     toolbar.setTitle("Cart");
                     fragment = new CartFragment();
+                    linearLayout.setVisibility(View.GONE);
                     break;
 
                 case R.id.navigation_video:
                     toolbar.setTitle("Video");
                     fragment = new VideoFragment();
+                    linearLayout.setVisibility(View.GONE);
                     break;
 
                 case R.id.navigation_account:
                     toolbar.setTitle("Account");
                     fragment = new AccountFragment();
+                    linearLayout.setVisibility(View.GONE);
+                    break;
+
+                case R.id.navigation_facebook:
+                    toolbar.setTitle("Facebook");
+                    fragment = new FacebookFragment();
+                    linearLayout.setVisibility(View.GONE);
                     break;
             }
 
             return loadFragment(fragment);
         }
-    };*/
+    };
 
     /**
      * loading fragment into FrameLayout
@@ -212,7 +230,7 @@ public class ShoppingActivity extends AppCompatActivity  {
                     .beginTransaction()
                     .replace(R.id.frame_container, fragment)
                     .commit();
-            coordinatorLayout.setVisibility(View.GONE);
+           // coordinatorLayout.setVisibility(View.GONE);
 
             return true;
         }
@@ -256,8 +274,8 @@ public class ShoppingActivity extends AppCompatActivity  {
     private void tellFragments() {
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
         for (Fragment f : fragments) {
-            if (f != null && f instanceof HomeFragment) {
-                ((HomeFragment) f).onBackPressed();
+            if (f != null && f instanceof FacebookFragment) {
+                ((FacebookFragment) f).onBackPressed();
             } else if (f != null && f instanceof CategoryFragment) {
                 ((CategoryFragment) f).onBackPressed();
             } else if (f != null && f instanceof CartFragment) {
