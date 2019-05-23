@@ -47,7 +47,6 @@
 
     //XML preference string
     <string name="summary_faq">View frequently asked questions</string>
-    <string name="url_faq">https://www.androidhive.info/privacy-policy/</string>
     <string name="privacy_policy">Delivery Method</string>
     <string name="url_privacy">http://cutpricebd.com/old22-04-19/page/delivery_method</string>
     <string name="title_terms">Courier &amp; Service Link</string>

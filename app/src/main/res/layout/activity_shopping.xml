@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/colayout"
-    tools:context="com.cutprice.eomsbd.ShoppingActivity">
+    tools:context="com.eomsbd.cutprice.ShoppingActivity">
+
 
     <FrameLayout
         android:id="@+id/frame_container"
@@ -115,12 +116,24 @@
 
     //TabLayout-code_End//
 
-
-    <LinearLayout
-        android:id="@+id/LinearLayout1"
+    <!--<LinearLayout
+        android:id="@+id/activity_controller"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+    </LinearLayout>-->
+
+<LinearLayout
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/product_list"
         android:layout_width="match_parent"
@@ -130,9 +143,9 @@
         android:nestedScrollingEnabled="true"
         android:paddingTop="5dp"
         android:scrollbars="none" />
-    <!--  app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+</LinearLayout>
 
-    </LinearLayout>
+    <!--  app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
 
 
     //Bottom_Navigation
