@@ -12,6 +12,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -304,10 +306,18 @@ public class ShoppingActivity extends AppCompatActivity  {
         shoppingRecyclerView.setHasFixedSize(true);
         shoppingRecyclerView.addItemDecoration(new SpacesItemDecoration(2, 12, false));
 
-
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(shoppingRecyclerView.getContext(),DividerItemDecoration.VERTICAL);
+        shoppingRecyclerView.addItemDecoration(dividerItemDecoration);
+        //Give animation
+        shoppingRecyclerView.setItemAnimator(new DefaultItemAnimator());
 //Set the Adapter to the RecyclerView//
         shoppingRecyclerView.setAdapter(shopAdapter);
         shopAdapter.notifyDataSetChanged();
+
+
+
+
+
     }
 
     @Override
