@@ -15,7 +15,7 @@ public interface IClientServer {
     @GET("products/getAllProducts")
     Call<Products> getALlProducts(@Query("api_key") String id);
 
-    @GET("menu/allMenus")
+    @GET("products/getCategory")
     Call<Category> getSubmenu();
 
     /*

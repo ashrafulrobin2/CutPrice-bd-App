@@ -1,4 +1,4 @@
-package com.cutprice.eomsbd.fragment;
+package com.eomsbd.cutprice.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,14 +11,16 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import com.cutprice.eomsbd.OnBackPressed;
-import com.cutprice.eomsbd.R;
-import com.cutprice.eomsbd.ShoppingActivity;
+
+import com.eomsbd.cutprice.OnBackPressed;
+import com.eomsbd.cutprice.R;
+import com.eomsbd.cutprice.ShoppingActivity;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FacebookFragment extends Fragment implements OnBackPressed{
+public class FacebookFragment extends Fragment implements OnBackPressed {
     ProgressDialog progressDialog;
 
     public WebView mWebView;
@@ -29,20 +31,20 @@ public class FacebookFragment extends Fragment implements OnBackPressed{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_facebook, container, false);
-        mWebView = (WebView) v.findViewById(R.id.webview);
+        mWebView = v.findViewById(R.id.webview);
 
 
-            if(mWebView == null){
+           /* if(mWebView){
             progressDialog=new ProgressDialog(getContext());
 
             progressDialog.setMessage("Loading..");
             progressDialog.show();
 
         }
-        else {
+        else {*/
 
             mWebView.loadUrl("https://www.facebook.com/cutpricebd");
-                progressDialog.dismiss();
+           // progressDialog.dismiss();
             // Enable Javascript
             WebSettings webSettings = mWebView.getSettings();
             webSettings.setJavaScriptEnabled(true);
@@ -50,7 +52,7 @@ public class FacebookFragment extends Fragment implements OnBackPressed{
             mWebView.setWebViewClient(new WebViewClient());
 
 
-        }
+      //  }
 
 
         return v;
@@ -62,4 +64,6 @@ public class FacebookFragment extends Fragment implements OnBackPressed{
     public void onBackPressed() {
         startActivity(new Intent(getActivity(), ShoppingActivity.class));
     }
+
+
 }

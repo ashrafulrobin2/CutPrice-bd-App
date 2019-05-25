@@ -53,9 +53,6 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
 
             holder.productName.setText(singleProduct.getProductName());
         }
-        int ii = getItemViewType(position);
-        final int index = holder.getAdapterPosition();
-
 
 
 

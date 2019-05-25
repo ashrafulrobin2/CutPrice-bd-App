@@ -4,6 +4,7 @@ package com.eomsbd.cutprice.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import com.eomsbd.cutprice.OnBackPressed;
 import com.eomsbd.cutprice.R;
 
 import com.eomsbd.cutprice.ShoppingActivity;
+import com.eomsbd.cutprice.adapters.CategoryRecyclerViewAdapter;
+import com.eomsbd.cutprice.helpers.SpacesItemDecoration;
 import com.eomsbd.cutprice.model.category_model.Category;
 import com.eomsbd.cutprice.web_api.IClientServer;
 import com.eomsbd.cutprice.web_api.RetrofitService;
@@ -29,6 +32,7 @@ public class CategoryFragment extends Fragment implements OnBackPressed {
 
     RecyclerView recyclerView;
     IClientServer iClientServer;
+    CategoryRecyclerViewAdapter categoryRecyclerViewAdapter;
 
 
     public CategoryFragment() {
@@ -41,7 +45,7 @@ public class CategoryFragment extends Fragment implements OnBackPressed {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category, container, false);
         iClientServer = RetrofitService.getRetrofitInstance().create(IClientServer.class);
-        getCategoryData();
+        getCategoryData(view);
         return view;
     }
 
@@ -51,15 +55,30 @@ public class CategoryFragment extends Fragment implements OnBackPressed {
     }
 
 
-    public void getCategoryData() {
+    public void getCategoryData(final View view) {
 
+        recyclerView = view.findViewById(R.id.category_list);
 
         Call<Category> categoryCall = iClientServer.getSubmenu();
         categoryCall.enqueue(new Callback<Category>() {
             @Override
             public void onResponse(Call<Category> call, Response<Category> response) {
                 Category category = response.body();
+                if (response.isSuccessful() && category!=null) {
+                    categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(getContext(), category.getData());
 
+                    //Use a LinearLayoutManager with default vertical orientation//
+                    GridLayoutManager mGrid = new GridLayoutManager(getContext(), 2);
+                    recyclerView.setLayoutManager(mGrid);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.addItemDecoration(new SpacesItemDecoration(2, 12, false));
+
+
+                   //Set the Adapter to the RecyclerView//
+                    recyclerView.setAdapter(categoryRecyclerViewAdapter);
+
+
+                }
 
             }
 
@@ -71,4 +90,6 @@ public class CategoryFragment extends Fragment implements OnBackPressed {
         });
 
     }
+
+
 }

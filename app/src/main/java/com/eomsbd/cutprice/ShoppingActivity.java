@@ -26,6 +26,7 @@ import com.eomsbd.cutprice.adapters.ShopRecyclerViewAdapter;
 import com.eomsbd.cutprice.fragment.AccountFragment;
 import com.eomsbd.cutprice.fragment.CartFragment;
 import com.eomsbd.cutprice.fragment.CategoryFragment;
+import com.eomsbd.cutprice.fragment.FacebookFragment;
 import com.eomsbd.cutprice.fragment.HomeFragment;
 import com.eomsbd.cutprice.fragment.VideoFragment;
 import com.eomsbd.cutprice.helpers.BottomNavigationBehavior;
@@ -183,11 +184,6 @@ public class ShoppingActivity extends AppCompatActivity  {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    toolbar.setTitle("Home");
-                    fragment = new HomeFragment();
-                    linearLayout.setVisibility(View.GONE);
-                    break;
                 case R.id.navigation_category:
                     toolbar.setTitle("Category");
                     fragment = new CategoryFragment();
@@ -208,6 +204,11 @@ public class ShoppingActivity extends AppCompatActivity  {
                 case R.id.navigation_account:
                     toolbar.setTitle("Account");
                     fragment = new AccountFragment();
+                    linearLayout.setVisibility(View.GONE);
+                    break;
+                    case R.id.navigation_facebook:
+                    toolbar.setTitle("Facabook");
+                    fragment = new FacebookFragment();
                     linearLayout.setVisibility(View.GONE);
                     break;
             }
