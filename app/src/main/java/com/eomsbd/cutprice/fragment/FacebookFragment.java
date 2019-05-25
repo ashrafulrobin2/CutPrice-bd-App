@@ -1,5 +1,4 @@
 package com.eomsbd.cutprice.fragment;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,20 +30,20 @@ public class FacebookFragment extends Fragment implements OnBackPressed {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_facebook, container, false);
-        mWebView = v.findViewById(R.id.webview);
+        mWebView = (WebView) v.findViewById(R.id.webview);
 
 
-           /* if(mWebView){
+            if(mWebView == null){
             progressDialog=new ProgressDialog(getContext());
 
             progressDialog.setMessage("Loading..");
             progressDialog.show();
 
         }
-        else {*/
+        else {
 
             mWebView.loadUrl("https://www.facebook.com/cutpricebd");
-           // progressDialog.dismiss();
+//  progressDialog.dismiss();
             // Enable Javascript
             WebSettings webSettings = mWebView.getSettings();
             webSettings.setJavaScriptEnabled(true);
@@ -52,7 +51,7 @@ public class FacebookFragment extends Fragment implements OnBackPressed {
             mWebView.setWebViewClient(new WebViewClient());
 
 
-      //  }
+        }
 
 
         return v;
@@ -64,6 +63,4 @@ public class FacebookFragment extends Fragment implements OnBackPressed {
     public void onBackPressed() {
         startActivity(new Intent(getActivity(), ShoppingActivity.class));
     }
-
-
 }

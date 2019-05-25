@@ -29,13 +29,11 @@ import com.eomsbd.cutprice.fragment.AccountFragment;
 import com.eomsbd.cutprice.fragment.CartFragment;
 import com.eomsbd.cutprice.fragment.CategoryFragment;
 import com.eomsbd.cutprice.fragment.FacebookFragment;
-import com.eomsbd.cutprice.fragment.HomeFragment;
 import com.eomsbd.cutprice.fragment.VideoFragment;
 import com.eomsbd.cutprice.helpers.BottomNavigationBehavior;
 import com.eomsbd.cutprice.helpers.SpacesItemDecoration;
 import com.eomsbd.cutprice.model.products_model.Datum;
 import com.eomsbd.cutprice.model.products_model.Products;
-import com.eomsbd.cutprice.R;
 import com.eomsbd.cutprice.web_api.IClientServer;
 import com.eomsbd.cutprice.web_api.RetrofitService;
 
@@ -186,16 +184,21 @@ public class ShoppingActivity extends AppCompatActivity  {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
             switch (item.getItemId()) {
+                case R.id.navigation_facebook:
+                    toolbar.setTitle("Facebook");
+                    fragment = new FacebookFragment();
+                    linearLayout.setVisibility(View.GONE);
+                    break;
                 case R.id.navigation_category:
                     toolbar.setTitle("Category");
                     fragment = new CategoryFragment();
                     linearLayout.setVisibility(View.GONE);
                     break;
-                case R.id.navigation_cart:
+                /*case R.id.navigation_cart:
                     toolbar.setTitle("Cart");
                     fragment = new CartFragment();
                     linearLayout.setVisibility(View.GONE);
-                    break;
+                    break;*/
 
                 case R.id.navigation_video:
                     toolbar.setTitle("Video");
@@ -206,11 +209,6 @@ public class ShoppingActivity extends AppCompatActivity  {
                 case R.id.navigation_account:
                     toolbar.setTitle("Account");
                     fragment = new AccountFragment();
-                    linearLayout.setVisibility(View.GONE);
-                    break;
-                    case R.id.navigation_facebook:
-                    toolbar.setTitle("Facabook");
-                    fragment = new FacebookFragment();
                     linearLayout.setVisibility(View.GONE);
                     break;
             }
@@ -274,8 +272,8 @@ public class ShoppingActivity extends AppCompatActivity  {
     private void tellFragments() {
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
         for (Fragment f : fragments) {
-            if (f != null && f instanceof HomeFragment) {
-                ((HomeFragment) f).onBackPressed();
+            if (f != null && f instanceof FacebookFragment) {
+                ((FacebookFragment) f).onBackPressed();
             } else if (f != null && f instanceof CategoryFragment) {
                 ((CategoryFragment) f).onBackPressed();
             } else if (f != null && f instanceof CartFragment) {

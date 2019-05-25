@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/category_fragment"
-    tools:context="com.eomsbd.cutprice.fragment.CategoryFragment">
+    android:background="@android:color/background_dark"
+    tools:context=".fragment.SubCategoryFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/category_list"
+        android:id="@+id/subCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:nestedScrollingEnabled="true"
         android:orientation="vertical"
+        android:nestedScrollingEnabled="true"
         android:paddingTop="5dp"
         android:scrollbars="none" />
 

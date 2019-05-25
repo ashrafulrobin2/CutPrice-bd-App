@@ -114,16 +114,16 @@ public class ProductActivity extends AppCompatActivity {
                 //increase product count
               /*  String productsFromCart = sharedPreference1.retrieveProductFromCart();
                 if(productsFromCart.equals("")){
-                    List<Datum> cartProductList = new ArrayList<Datum>();
+                    List<Datum2> cartProductList = new ArrayList<Datum2>();
                     cartProductList.add(datum);
                     String cartValue = gson.toJson(cartProductList);
                     sharedPreference1.addProductToTheCart(cartValue);
                     cartProductNumber = cartProductList.size();
                 }else{
                     String productsInCart = sharedPreference1.retrieveProductFromCart();
-                    Datum[] storedProducts = gson.fromJson(productsInCart, Datum[].class);
+                    Datum2[] storedProducts = gson.fromJson(productsInCart, Datum2[].class);
 
-                    List<Datum> allNewProduct = convertObjectArrayToListObject(storedProducts);
+                    List<Datum2> allNewProduct = convertObjectArrayToListObject(storedProducts);
                     allNewProduct.add(datum);
                     String addAndStoreNewProduct = gson.toJson(allNewProduct);
                     sharedPreference1.addProductToTheCart(addAndStoreNewProduct);

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.eomsbd.cutprice.Interface.DataPass;
 import com.eomsbd.cutprice.OnBackPressed;
 import com.eomsbd.cutprice.R;
 
@@ -28,12 +29,11 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CategoryFragment extends Fragment implements OnBackPressed {
+public class CategoryFragment extends Fragment implements OnBackPressed{
 
     RecyclerView recyclerView;
     IClientServer iClientServer;
     CategoryRecyclerViewAdapter categoryRecyclerViewAdapter;
-
 
     public CategoryFragment() {
         // Required empty public constructor

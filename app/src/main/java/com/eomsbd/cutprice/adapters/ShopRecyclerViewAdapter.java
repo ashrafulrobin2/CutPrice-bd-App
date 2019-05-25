@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerViewHolder> {
+public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerViewHolder>{
 
     private static final String TAG = ShopRecyclerViewAdapter.class.getSimpleName();
     boolean userClicked = false;
@@ -42,25 +42,33 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
     public void onBindViewHolder(ShopRecyclerViewHolder holder, int position) {
         String path = "http://cutpricebd.com/oms/product_image/thumbs/";
         final Datum singleProduct = allProducts.get(position);
+        String product_id = singleProduct.getProductId();
+        if (getItemViewType(position) == 0 && allProducts.size() >= 10) {
+            if ((path + singleProduct.getImg1()).length() <= 60) {
+                Picasso.get().load(path + singleProduct.getImg1()).into(holder.produceImage);
+            } else {
+                Picasso.get().load(singleProduct.getImg1()).into(holder.produceImage);
+            }
 
 
-        if ((path + singleProduct.getImg1()).length() <= 60) {
-            Picasso.get().load(path + singleProduct.getImg1()).into(holder.produceImage);
-        } else {
-            Picasso.get().load(singleProduct.getImg1()).into(holder.produceImage);
+            holder.productName.setText(singleProduct.getProductName());
         }
 
 
-        holder.productName.setText(singleProduct.getProductName());
+
+
 
         holder.produceImage.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 Intent productIntent = new Intent(context, ProductActivity.class);
+
                 GsonBuilder builder = new GsonBuilder();
                 Gson gson = builder.create();
-                String stringObjectRepresentation = gson.toJson(singleProduct);
+
+                              String stringObjectRepresentation = gson.toJson(singleProduct);
+
                 productIntent.putExtra("PRODUCT", stringObjectRepresentation);
                 context.startActivity(productIntent);
             }
