@@ -1,9 +1,11 @@
 package com.eomsbd.cutprice.web_api;
 
 import com.eomsbd.cutprice.model.category_model.Category;
+import com.eomsbd.cutprice.model.sub_category.CategoryId;
 import com.eomsbd.cutprice.model.product_order_model.ProductOrder;
 import com.eomsbd.cutprice.model.product_order_model.UserOrder;
 import com.eomsbd.cutprice.model.products_model.Products;
+import com.eomsbd.cutprice.model.sub_category.SubCategory;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -25,5 +27,8 @@ public interface IClientServer {
         */
     @POST("products/buy_now")
     Call<UserOrder> orderProduct(@Body ProductOrder productOrder);
+
+    @POST("products/getProductByCatId")
+   Call<SubCategory>getSubCategory(@Body CategoryId catId);
 
 }

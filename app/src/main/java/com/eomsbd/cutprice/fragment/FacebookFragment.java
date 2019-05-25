@@ -43,7 +43,7 @@ public class FacebookFragment extends Fragment implements OnBackPressed {
         else {
 
             mWebView.loadUrl("https://www.facebook.com/cutpricebd");
-                progressDialog.dismiss();
+//  progressDialog.dismiss();
             // Enable Javascript
             WebSettings webSettings = mWebView.getSettings();
             webSettings.setJavaScriptEnabled(true);

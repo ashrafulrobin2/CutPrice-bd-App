@@ -12,10 +12,10 @@
         android:icon="@drawable/category"
         android:title="@string/title_category" />
 
-    <item
+    <!--<item
         android:id="@+id/navigation_cart"
         android:icon="@drawable/cart"
-        android:title="@string/title_cart" />
+        android:title="@string/title_cart" />-->
 
     <item
         android:id="@+id/navigation_video"

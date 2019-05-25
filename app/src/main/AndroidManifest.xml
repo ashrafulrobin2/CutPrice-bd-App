@@ -11,6 +11,7 @@
         android:roundIcon="@drawable/cutpricelogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".SubCategoryActivity"></activity>
         <activity android:name=".Test_Activity" />
         <activity
             android:name=".SplashActivity"
@@ -21,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ShoppingActivity"></activity>
+        <activity android:name=".ShoppingActivity" />
         <activity
             android:name=".ProductActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -30,9 +31,8 @@
         <activity android:name=".PayPalCheckoutActivity" />
         <activity
             android:name=".OrderNowActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <activity android:name=".SettingsPrefActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SettingsPrefActivity" />
     </application>
 
 </manifest>
