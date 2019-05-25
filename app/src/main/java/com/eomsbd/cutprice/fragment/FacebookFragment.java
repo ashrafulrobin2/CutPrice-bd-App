@@ -1,5 +1,4 @@
-package com.cutprice.eomsbd.fragment;
-
+package com.eomsbd.cutprice.fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +14,7 @@ import android.webkit.WebViewClient;
 import com.eomsbd.cutprice.OnBackPressed;
 import com.eomsbd.cutprice.R;
 import com.eomsbd.cutprice.ShoppingActivity;
+
 
 /**
  * A simple {@link Fragment} subclass.

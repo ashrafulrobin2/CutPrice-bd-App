@@ -4,7 +4,7 @@ package com.eomsbd.cutprice.model.category_model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Submenu {
+public class Datum1 {
 
     @SerializedName("categories_id")
     @Expose

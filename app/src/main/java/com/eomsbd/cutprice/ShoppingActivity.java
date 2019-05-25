@@ -183,7 +183,11 @@ public class ShoppingActivity extends AppCompatActivity  {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
             switch (item.getItemId()) {
-
+                case R.id.navigation_facebook:
+                    toolbar.setTitle("Facebook");
+                    fragment = new HomeFragment();
+                    linearLayout.setVisibility(View.GONE);
+                    break;
                 case R.id.navigation_category:
                     toolbar.setTitle("Category");
                     fragment = new CategoryFragment();
@@ -204,12 +208,6 @@ public class ShoppingActivity extends AppCompatActivity  {
                 case R.id.navigation_account:
                     toolbar.setTitle("Account");
                     fragment = new AccountFragment();
-                    linearLayout.setVisibility(View.GONE);
-                    break;
-
-                case R.id.navigation_facebook:
-                    toolbar.setTitle("Facebook");
-                    fragment = new CartFragment();
                     linearLayout.setVisibility(View.GONE);
                     break;
             }
