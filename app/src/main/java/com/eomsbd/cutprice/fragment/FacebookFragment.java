@@ -11,14 +11,15 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import com.cutprice.eomsbd.OnBackPressed;
-import com.cutprice.eomsbd.R;
-import com.cutprice.eomsbd.ShoppingActivity;
+
+import com.eomsbd.cutprice.OnBackPressed;
+import com.eomsbd.cutprice.R;
+import com.eomsbd.cutprice.ShoppingActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FacebookFragment extends Fragment implements OnBackPressed{
+public class FacebookFragment extends Fragment implements OnBackPressed {
     ProgressDialog progressDialog;
 
     public WebView mWebView;
