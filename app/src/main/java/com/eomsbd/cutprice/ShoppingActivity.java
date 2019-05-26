@@ -206,11 +206,11 @@ public class ShoppingActivity extends AppCompatActivity  {
                    linearLayout.setVisibility(View.GONE);
                     break;
 
-                case R.id.navigation_account:
+               /* case R.id.navigation_account:
                     toolbar.setTitle("Account");
                     fragment = new AccountFragment();
                     linearLayout.setVisibility(View.GONE);
-                    break;
+                    break;*/
             }
 
             return loadFragment(fragment);
@@ -280,9 +280,9 @@ public class ShoppingActivity extends AppCompatActivity  {
                 ((CartFragment) f).onBackPressed();
             } else if (f != null && f instanceof VideoFragment) {
                 ((VideoFragment) f).onBackPressed();
-            } else if (f != null && f instanceof AccountFragment) {
+            } /*else if (f != null && f instanceof AccountFragment) {
                 ((AccountFragment) f).onBackPressed();
-            }
+            }*/
         }
     }
 

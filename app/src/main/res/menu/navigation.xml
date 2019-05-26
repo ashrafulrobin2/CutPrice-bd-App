@@ -3,10 +3,10 @@
 
 
 
-    <item
+    <!--<item
         android:id="@+id/navigation_account"
         android:icon="@drawable/account"
-        android:title="@string/title_account" />
+        android:title="@string/title_account" />-->
     <item
         android:id="@+id/navigation_category"
         android:icon="@drawable/category"

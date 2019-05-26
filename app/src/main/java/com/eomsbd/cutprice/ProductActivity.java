@@ -68,8 +68,11 @@ public class ProductActivity extends AppCompatActivity {
         if (datum != null) {
             setTitle(datum.getProductName());
             String path = "http://cutpricebd.com/oms/product_image/thumbs/";
-           Picasso.get().load(path + datum.getImg1()).into(productImage);
-
+            if ((path + datum.getImg1()).length() <= 60) {
+                Picasso.get().load(path + datum.getImg1()).into(productImage);
+            } else {
+                Picasso.get().load(datum.getImg1()).into(productImage);
+            }
 
             if (datum.getProductOldPrice() == null) {
                 productDiscount.setText(" " + "0 TK");
