@@ -12,7 +12,7 @@ import com.eomsbd.cutprice.OnBackPressed;
 import com.eomsbd.cutprice.R;
 
 
-import com.eomsbd.cutprice.ShoppingActivity;
+import com.eomsbd.cutprice.activity.ShoppingActivity;
 
 /**
  * A simple {@link Fragment} subclass.

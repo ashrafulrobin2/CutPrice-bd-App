@@ -10,28 +10,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.eomsbd.cutprice.OnBackPressed;
 import com.eomsbd.cutprice.R;
 
-import com.eomsbd.cutprice.ShoppingActivity;
+import com.eomsbd.cutprice.activity.ShoppingActivity;
 import com.eomsbd.cutprice.adapters.YoutubeAdapter;
 import com.eomsbd.cutprice.model.DataSetList;
-import com.eomsbd.cutprice.model.products_model.Datum;
-import com.eomsbd.cutprice.model.products_model.Products;
-import com.eomsbd.cutprice.web_api.IClientServer;
-import com.eomsbd.cutprice.web_api.RetrofitService;
-import com.google.android.youtube.player.YouTubePlayer;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
 
 import es.dmoral.toasty.Toasty;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.

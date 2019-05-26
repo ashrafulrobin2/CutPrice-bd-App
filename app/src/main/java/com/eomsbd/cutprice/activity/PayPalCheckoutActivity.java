@@ -1,4 +1,4 @@
-package com.eomsbd.cutprice;
+package com.eomsbd.cutprice.activity;
 
 import android.app.Activity;
 import android.content.Intent;

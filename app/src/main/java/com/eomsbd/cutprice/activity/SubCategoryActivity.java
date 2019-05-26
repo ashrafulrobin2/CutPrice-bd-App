@@ -1,10 +1,6 @@
-package com.eomsbd.cutprice;
+package com.eomsbd.cutprice.activity;
 
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,13 +8,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.eomsbd.cutprice.adapters.ShopRecyclerViewAdapter;
+import com.eomsbd.cutprice.R;
 import com.eomsbd.cutprice.adapters.SubCategoryRecyclerViewAdapter;
-import com.eomsbd.cutprice.fragment.CategoryFragment;
-import com.eomsbd.cutprice.fragment.SubCategoryFragment;
 import com.eomsbd.cutprice.helpers.SpacesItemDecoration;
-import com.eomsbd.cutprice.model.category_model.Category;
-import com.eomsbd.cutprice.model.products_model.Products;
 import com.eomsbd.cutprice.model.sub_category.CategoryId;
 import com.eomsbd.cutprice.model.sub_category.Datum2;
 import com.eomsbd.cutprice.model.sub_category.SubCategory;
@@ -27,7 +19,6 @@ import com.eomsbd.cutprice.web_api.RetrofitService;
 
 import java.util.List;
 
-import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

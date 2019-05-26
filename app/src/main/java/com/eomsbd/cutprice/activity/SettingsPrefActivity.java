@@ -1,4 +1,4 @@
-package com.eomsbd.cutprice;
+package com.eomsbd.cutprice.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatDelegate;
 import android.view.MenuItem;
 
 import com.eomsbd.cutprice.R;
-import com.eomsbd.cutprice.AppCompatPreferenceActivity;
+import com.eomsbd.cutprice.activity.AppCompatPreferenceActivity;
 
 public class SettingsPrefActivity extends AppCompatPreferenceActivity {
 

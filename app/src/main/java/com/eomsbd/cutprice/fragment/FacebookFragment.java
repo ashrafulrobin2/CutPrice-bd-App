@@ -2,7 +2,6 @@ package com.eomsbd.cutprice.fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.webkit.WebViewClient;
 
 import com.eomsbd.cutprice.OnBackPressed;
 import com.eomsbd.cutprice.R;
-import com.eomsbd.cutprice.ShoppingActivity;
+import com.eomsbd.cutprice.activity.ShoppingActivity;
 
 
 /**
