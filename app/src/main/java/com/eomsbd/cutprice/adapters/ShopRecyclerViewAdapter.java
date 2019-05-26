@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerViewHolder> {
+public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerViewHolder>{
 
     private static final String TAG = ShopRecyclerViewAdapter.class.getSimpleName();
     boolean userClicked = false;
@@ -55,6 +55,9 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
         }
 
 
+
+
+
         holder.produceImage.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -64,7 +67,7 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
                 GsonBuilder builder = new GsonBuilder();
                 Gson gson = builder.create();
 
-                String stringObjectRepresentation = gson.toJson(singleProduct);
+                              String stringObjectRepresentation = gson.toJson(singleProduct);
 
                 productIntent.putExtra("PRODUCT", stringObjectRepresentation);
                 context.startActivity(productIntent);

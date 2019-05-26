@@ -1,5 +1,6 @@
 package com.eomsbd.cutprice.activity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -69,27 +70,23 @@ public class SubCategoryActivity extends AppCompatActivity {
 //Get a reference to the RecyclerView//
         if (data1 != null) {
             adapter = new SubCategoryRecyclerViewAdapter(SubCategoryActivity.this, data1);
-
-
-//Use a LinearLayoutManager with default vertical orientation//
-
+            //Use a LinearLayoutManager with default vertical orientation//
             GridLayoutManager mGrid = new GridLayoutManager(SubCategoryActivity.this, 2);
             subCategoryRecyclerView.setLayoutManager(mGrid);
             subCategoryRecyclerView.setHasFixedSize(true);
             subCategoryRecyclerView.addItemDecoration(new SpacesItemDecoration(2, 12, false));
 
-
-//Set the Adapter to the RecyclerView//
+         //Set the Adapter to the RecyclerView//
             subCategoryRecyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         } else {
-
             dialogBox();
         }
 
 
     }
 
+    @SuppressLint("ResourceType")
     public void dialogBox() {
         alertDialogBuilder = new AlertDialog.Builder(SubCategoryActivity.this);
 
@@ -98,29 +95,16 @@ public class SubCategoryActivity extends AppCompatActivity {
         alertDialogBuilder.setTitle(R.string.title_text2);
 
         //for setting message
-        alertDialogBuilder.setMessage(R.string.message_text2);
         //fot setting Icon
-        alertDialogBuilder.setIcon(R.mipmap.success);
+        alertDialogBuilder.setIcon(R.drawable.error);
 
-        alertDialogBuilder.setPositiveButton(" হ্যাঁ", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
                 //exit
                 finish();
             }
         });
-
-
-
-        alertDialogBuilder.setNegativeButton("না", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                dialog.cancel();
-            }
-        });
-
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }

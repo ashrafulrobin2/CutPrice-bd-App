@@ -2,14 +2,22 @@ package com.eomsbd.cutprice.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.eomsbd.cutprice.Interface.DataPass;
+import com.eomsbd.cutprice.ProductActivity;
 import com.eomsbd.cutprice.R;
-import com.eomsbd.cutprice.activity.SubCategoryActivity;
+import com.eomsbd.cutprice.SubCategoryActivity;
+import com.eomsbd.cutprice.fragment.SubCategoryFragment;
 import com.eomsbd.cutprice.model.sub_category.CategoryId;
 import com.eomsbd.cutprice.model.category_model.Datum1;
 import com.eomsbd.cutprice.model.sub_category.SubCategory;
