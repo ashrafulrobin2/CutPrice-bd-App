@@ -78,10 +78,10 @@
     <string name="title_text">আপনার  অর্ডার নেয়া হয়েছে</string>
     <string name="message_text">আপনি কি বের হতে চান ?</string>
     <string name="title_text2">এইখানে কোন প্রোডাক্ট নেই</string>
-    <string name="message_text2"></string>
+    <string name="message_text2">No Internet Connection</string>
     <string name="yes">ফিরে যান</string>
 
-
+<string name="no">না</string>
     <string name="Home"> হোম</string>
 
 

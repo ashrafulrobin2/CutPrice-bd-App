@@ -1,6 +1,7 @@
 package com.eomsbd.cutprice.activity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -20,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -46,7 +49,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ShoppingActivity extends AppCompatActivity  {
+public class ShoppingActivity extends AppCompatActivity {
 
     private static final String TAG = ShoppingActivity.class.getSimpleName();
   IClientServer iClientServer;
@@ -59,7 +62,7 @@ public class ShoppingActivity extends AppCompatActivity  {
     FrameLayout coordinatorLayout;
 
     LinearLayout linearLayout;
-
+    AlertDialog.Builder alertDialogBuilder;
     //TablayOut
 
     TabLayout tabLayout;
@@ -77,10 +80,11 @@ public class ShoppingActivity extends AppCompatActivity  {
 
         //progressbar Code
         progressDialog = new ProgressDialog(ShoppingActivity.this);
-        progressDialog.setMessage("Loading..");
+        progressDialog.setMessage("please wait for a minute.....");
+        progressDialog.setCancelable(false);
         progressDialog.show();
 
-        linearLayout=findViewById(R.id.LinearLayout1);
+        linearLayout = findViewById(R.id.LinearLayout1);
     /*    tabLayout = findViewById(R.id.tab_layout);
         tabItem1 = findViewById(R.id.tabItem1);
         tabItem2 = findViewById(R.id.tabItem2);
@@ -163,7 +167,7 @@ public class ShoppingActivity extends AppCompatActivity  {
 
         //Bottom Navigation //
 
-          BottomNavigationView navigation = findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // attaching bottom sheet behaviour - hide / show on scroll
@@ -176,7 +180,7 @@ public class ShoppingActivity extends AppCompatActivity  {
     }
 ///
 
-   private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -202,7 +206,7 @@ public class ShoppingActivity extends AppCompatActivity  {
                 case R.id.navigation_video:
                     toolbar.setTitle("Video");
                     fragment = new VideoFragment();
-                   linearLayout.setVisibility(View.GONE);
+                    linearLayout.setVisibility(View.GONE);
                     break;
 
                 case R.id.navigation_account:
@@ -235,6 +239,7 @@ public class ShoppingActivity extends AppCompatActivity  {
         }
         return false;
     }
+
     ////  Get Data From Api
     public void getProductsFromApi() {
         String id = "Cutprice@987";
@@ -252,7 +257,30 @@ public class ShoppingActivity extends AppCompatActivity  {
 
             @Override
             public void onFailure(Call<Products> call, Throwable t) {
-                Toast.makeText(ShoppingActivity.this, "Unable to load users " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            alertDialogBuilder = new AlertDialog.Builder(ShoppingActivity.this);
+
+                //For Setting Title
+
+                //for setting message
+                //fot setting Icon
+                alertDialogBuilder.setIcon(R.drawable.wifi);
+                alertDialogBuilder.setMessage(R.string.message_text2);
+
+                alertDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //exit
+                        progressDialog.dismiss();
+                    }
+                });
+                alertDialogBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
     }
@@ -265,6 +293,11 @@ public class ShoppingActivity extends AppCompatActivity  {
 
         tellFragments();
         super.onBackPressed();
+        Intent setIntent = new Intent(Intent.ACTION_MAIN);
+        setIntent.addCategory(Intent.CATEGORY_HOME);
+        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(setIntent);
+
     }
 
     //
@@ -303,7 +336,7 @@ public class ShoppingActivity extends AppCompatActivity  {
         shoppingRecyclerView.setHasFixedSize(true);
         shoppingRecyclerView.addItemDecoration(new SpacesItemDecoration(2, 12, false));
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(shoppingRecyclerView.getContext(),DividerItemDecoration.VERTICAL);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(shoppingRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
         shoppingRecyclerView.addItemDecoration(dividerItemDecoration);
         //Give animation
         shoppingRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -312,26 +345,24 @@ public class ShoppingActivity extends AppCompatActivity  {
         shopAdapter.notifyDataSetChanged();
 
 
-
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.settings_menu, menu);
-        return true;    }
+        return true;
+    }
 
 
-        public boolean onOptionsItemSelected(MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.action_settings:
-                    startActivity(new Intent(this, SettingsPrefActivity.class));
-                    return true;
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                startActivity(new Intent(this, SettingsPrefActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
         //respond to menu item selection
 
     }
@@ -392,7 +423,9 @@ public class ShoppingActivity extends AppCompatActivity  {
     }
 */
 
-
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        progressDialog.dismiss();
+    }
 }

@@ -10,7 +10,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@color/colorPrimaryLight"
-    tools:context="com.eomsbd.cutprice.com.cutprice.eomsbd.PayPalCheckoutActivity">
+    tools:context="com.eomsbd.cutprice.PayPalCheckoutActivity">
 
     <Button
         android:id="@+id/pay_pal_button"

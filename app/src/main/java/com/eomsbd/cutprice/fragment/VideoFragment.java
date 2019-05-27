@@ -15,8 +15,7 @@ import android.widget.Toast;
 import com.eomsbd.cutprice.OnBackPressed;
 import com.eomsbd.cutprice.R;
 
-
-import com.eomsbd.cutprice.activity.ShoppingActivity;
+import com.eomsbd.cutprice.ShoppingActivity;
 import com.eomsbd.cutprice.adapters.YoutubeAdapter;
 import com.eomsbd.cutprice.model.DataSetList;
 import com.eomsbd.cutprice.model.products_model.Datum;
@@ -87,8 +86,12 @@ public class VideoFragment extends Fragment implements OnBackPressed {
 
         return view;
     }
+
+
     @Override
     public void onBackPressed() {
         startActivity(new Intent(getActivity(), ShoppingActivity.class));
     }
+
+
 }

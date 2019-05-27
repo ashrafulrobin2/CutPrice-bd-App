@@ -1,9 +1,11 @@
 package com.eomsbd.cutprice.fragment;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,11 +30,12 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CategoryFragment extends Fragment implements OnBackPressed{
+public class CategoryFragment extends Fragment implements OnBackPressed {
 
     RecyclerView recyclerView;
     IClientServer iClientServer;
     CategoryRecyclerViewAdapter categoryRecyclerViewAdapter;
+    AlertDialog.Builder alertDialogBuilder;
 
     public CategoryFragment() {
         // Required empty public constructor
@@ -63,7 +66,7 @@ public class CategoryFragment extends Fragment implements OnBackPressed{
             @Override
             public void onResponse(Call<Category> call, Response<Category> response) {
                 Category category = response.body();
-                if (response.isSuccessful() && category!=null) {
+                if (response.isSuccessful() && category != null) {
                     categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(getContext(), category.getData());
 
                     //Use a LinearLayoutManager with default vertical orientation//
@@ -73,7 +76,7 @@ public class CategoryFragment extends Fragment implements OnBackPressed{
                     recyclerView.addItemDecoration(new SpacesItemDecoration(2, 12, false));
 
 
-                   //Set the Adapter to the RecyclerView//
+                    //Set the Adapter to the RecyclerView//
                     recyclerView.setAdapter(categoryRecyclerViewAdapter);
 
 
@@ -84,11 +87,25 @@ public class CategoryFragment extends Fragment implements OnBackPressed{
 
             @Override
             public void onFailure(Call<Category> call, Throwable t) {
-                Toasty.error(getContext(), "Errrooooor" + t.getMessage(), Toasty.LENGTH_LONG).show();
+                final android.support.v7.app.AlertDialog.Builder alertDialog = new android.support.v7.app.AlertDialog.Builder(getActivity());
+                alertDialog.setIcon(R.drawable.wifi);
+                alertDialog.setMessage(R.string.message_text2)
+                        .setCancelable(true).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //your custom toast
+                    }
+                }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                }).create().show();
+
+
             }
+
         });
-
     }
-
-
 }
+
