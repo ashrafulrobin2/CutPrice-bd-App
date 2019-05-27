@@ -3,7 +3,7 @@ package com.eomsbd.cutprice.helpers;
 import android.support.v4.app.FragmentManager;
 
 import com.eomsbd.cutprice.Interface.NavigationManager;
-import com.eomsbd.cutprice.ShoppingActivity;
+import com.eomsbd.cutprice.activity.ShoppingActivity;
 
 public class FragmentNavigationManager implements NavigationManager {
     private static FragmentNavigationManager mInstance;

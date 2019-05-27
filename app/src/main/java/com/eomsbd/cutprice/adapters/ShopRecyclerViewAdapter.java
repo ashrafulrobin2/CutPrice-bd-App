@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.eomsbd.cutprice.ProductActivity;
+import com.eomsbd.cutprice.activity.ProductActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.eomsbd.cutprice.R;

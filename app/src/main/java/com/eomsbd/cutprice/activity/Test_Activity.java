@@ -1,4 +1,4 @@
-package com.eomsbd.cutprice;
+package com.eomsbd.cutprice.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

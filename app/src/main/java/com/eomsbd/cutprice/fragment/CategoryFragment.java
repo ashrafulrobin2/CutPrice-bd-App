@@ -12,11 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.eomsbd.cutprice.Interface.DataPass;
 import com.eomsbd.cutprice.OnBackPressed;
 import com.eomsbd.cutprice.R;
 
-import com.eomsbd.cutprice.ShoppingActivity;
+import com.eomsbd.cutprice.activity.ShoppingActivity;
 import com.eomsbd.cutprice.adapters.CategoryRecyclerViewAdapter;
 import com.eomsbd.cutprice.helpers.SpacesItemDecoration;
 import com.eomsbd.cutprice.model.category_model.Category;

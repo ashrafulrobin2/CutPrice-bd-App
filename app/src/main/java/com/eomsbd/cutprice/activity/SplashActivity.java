@@ -1,4 +1,4 @@
-package com.eomsbd.cutprice;
+package com.eomsbd.cutprice.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 
 import com.eomsbd.cutprice.R;
-
 import com.eomsbd.cutprice.util.AllSettingsManager;
 import com.eomsbd.cutprice.util.AppUtil;
 import com.eomsbd.cutprice.util.BaseUpdateListener;

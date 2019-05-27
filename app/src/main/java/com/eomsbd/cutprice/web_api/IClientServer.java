@@ -1,6 +1,8 @@
 package com.eomsbd.cutprice.web_api;
 
 import com.eomsbd.cutprice.model.category_model.Category;
+import com.eomsbd.cutprice.model.login_model.LoginResponse;
+import com.eomsbd.cutprice.model.login_model.UserLogin;
 import com.eomsbd.cutprice.model.sub_category.CategoryId;
 import com.eomsbd.cutprice.model.product_order_model.ProductOrder;
 import com.eomsbd.cutprice.model.product_order_model.UserOrder;
@@ -30,5 +32,8 @@ public interface IClientServer {
 
     @POST("products/getProductByCatId")
    Call<SubCategory>getSubCategory(@Body CategoryId catId);
+
+    @POST("login")
+    Call<LoginResponse>loginInfo(@Body UserLogin userLogin);
 
 }

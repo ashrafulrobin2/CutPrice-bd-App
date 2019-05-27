@@ -1,4 +1,4 @@
-package com.eomsbd.cutprice;
+package com.eomsbd.cutprice.activity;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -27,6 +27,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.eomsbd.cutprice.R;
 import com.eomsbd.cutprice.adapters.ShopRecyclerViewAdapter;
 import com.eomsbd.cutprice.fragment.AccountFragment;
 import com.eomsbd.cutprice.fragment.CartFragment;
@@ -51,9 +52,7 @@ import retrofit2.Response;
 public class ShoppingActivity extends AppCompatActivity {
 
     private static final String TAG = ShoppingActivity.class.getSimpleName();
-
-
-    IClientServer iClientServer;
+  IClientServer iClientServer;
     ProgressDialog progressDialog;
     public static int index = 1;
 
