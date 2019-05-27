@@ -6,8 +6,9 @@ android {
         applicationId "com.eomsbd.cutprice"
         minSdkVersion 20
         targetSdkVersion 28
+        apply plugin: 'announce'
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
     }
     buildTypes {
         release {
@@ -17,6 +18,7 @@ android {
                 abortOnError false
             }
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

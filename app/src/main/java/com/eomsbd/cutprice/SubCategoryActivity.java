@@ -70,7 +70,26 @@ public class SubCategoryActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SubCategory> call, Throwable t) {
-                Toast.makeText(SubCategoryActivity.this, "Unable to load users " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                alertDialogBuilder = new AlertDialog.Builder(SubCategoryActivity.this);
+
+                //For Setting Title
+
+
+
+                //for setting message
+                //fot setting Icon
+                alertDialogBuilder.setIcon(R.drawable.wifi);
+                alertDialogBuilder.setMessage(R.string.message_text2);
+
+                alertDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //exit
+                        finish();
+                    }
+                });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
     }

@@ -51,7 +51,7 @@ public class VideoFragment extends Fragment implements OnBackPressed {
     MediaController controller;
     private final int COUNT = 3;
     private int index = 1;
-    private VideoView myVideo1;
+    private VideoView myVideo1,myVideo2,myVideo3,myVideo4;
 
     public VideoFragment() {
         // Required empty public constructor
@@ -64,25 +64,27 @@ public class VideoFragment extends Fragment implements OnBackPressed {
 
         View view = inflater.inflate(R.layout.fragment_video, container, false);
 
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+
 
         myVideo1 = view.findViewById(R.id.videoView1);
-        String uri1 = "android.resource://" + getContext().getPackageName() + "/" + R.raw.video1;
-        Uri uri = Uri.parse(uri1);
+        String value1 = "android.resource://" + getContext().getPackageName() + "/" + R.raw.video1;
+        Uri uri = Uri.parse(value1);
         MediaController mc = new MediaController(getContext());
         myVideo1.setMediaController(mc);
         myVideo1.setVideoURI(uri);
         myVideo1.start();
+        myVideo1.requestFocus();
+        myVideo1.setKeepScreenOn(true);
+
+
+
+
+
+
         recyclerView = view.findViewById(R.id.recyclerview);
-
-
         dataSetLists = new Vector<DataSetList>();
 
-
         if (dataSetLists != null) {
-            progressDialog.dismiss();
             recyclerView = view.findViewById(R.id.recyclerview);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setHasFixedSize(true);
@@ -110,10 +112,6 @@ public class VideoFragment extends Fragment implements OnBackPressed {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(getActivity(), ShoppingActivity.class));
-    }
-
-    private Uri getPath(int id) {
-        return Uri.parse("android.resource://" + getContext().getPackageName() + "/raw/video" + id);
     }
 
 }
