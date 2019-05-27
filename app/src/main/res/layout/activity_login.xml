@@ -105,7 +105,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:elevation="5dp"
-                android:text="I don't have any account || registration Now"
+                android:text="Do Not Have Account ? Create"
                 android:textSize="14sp" />
 
             //FaceBook Button

@@ -45,6 +45,8 @@ public class ProductListItemAdapter extends RecyclerView.Adapter<ProductRecycler
             holder.title.setText(headerName);
 
         }
+
+
         if (getItemViewType(i) == 1) {
             ArrayList singleSectionItems = (ArrayList) itemsList.get(1).getData();
             String headerName = itemsList.get(1).getData().get(1).getProductName();
@@ -56,6 +58,7 @@ public class ProductListItemAdapter extends RecyclerView.Adapter<ProductRecycler
             holder.title.setText(headerName);
 
         }
+
         if (getItemViewType(i) == 2) {
             ArrayList singleSectionItems = (ArrayList) itemsList.get(2).getData();
             String headerName = itemsList.get(0).getData().get(2).getProductName();
@@ -68,6 +71,8 @@ public class ProductListItemAdapter extends RecyclerView.Adapter<ProductRecycler
 
         }
     }
+
+
 
     @Override
     public int getItemCount() {

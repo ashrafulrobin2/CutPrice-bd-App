@@ -205,11 +205,11 @@ public class ShoppingActivity extends AppCompatActivity  {
                    linearLayout.setVisibility(View.GONE);
                     break;
 
-               /* case R.id.navigation_account:
+                case R.id.navigation_account:
                     toolbar.setTitle("Account");
                     fragment = new AccountFragment();
                     linearLayout.setVisibility(View.GONE);
-                    break;*/
+                    break;
             }
 
             return loadFragment(fragment);
