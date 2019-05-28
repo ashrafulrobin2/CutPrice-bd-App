@@ -1,8 +1,10 @@
 package com.eomsbd.cutprice.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -36,6 +38,7 @@ import com.eomsbd.cutprice.fragment.FacebookFragment;
 import com.eomsbd.cutprice.fragment.VideoFragment;
 import com.eomsbd.cutprice.helpers.BottomNavigationBehavior;
 import com.eomsbd.cutprice.helpers.SpacesItemDecoration;
+import com.eomsbd.cutprice.model.login_model.LoginResponse;
 import com.eomsbd.cutprice.model.products_model.Datum;
 import com.eomsbd.cutprice.model.products_model.Products;
 import com.eomsbd.cutprice.web_api.IClientServer;
@@ -79,10 +82,7 @@ public class ShoppingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shopping);
 
         //progressbar Code
-        progressDialog = new ProgressDialog(ShoppingActivity.this);
-        progressDialog.setMessage("please wait for a minute.....");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+
 
         linearLayout = findViewById(R.id.LinearLayout1);
     /*    tabLayout = findViewById(R.id.tab_layout);
@@ -155,6 +155,10 @@ public class ShoppingActivity extends AppCompatActivity {
         coordinatorLayout = findViewById(R.id.frame_container);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         iClientServer = RetrofitService.getRetrofitInstance().create(IClientServer.class);
+        progressDialog = new ProgressDialog(ShoppingActivity.this);
+        progressDialog.setMessage("please wait for a minute.....");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         getProductsFromApi();
         toolbar = getSupportActionBar();
         ////-0---
@@ -191,11 +195,9 @@ public class ShoppingActivity extends AppCompatActivity {
                     fragment = new CategoryFragment();
                     linearLayout.setVisibility(View.GONE);
                     break;
-                /*case R.id.navigation_cart:
-                    toolbar.setTitle("Cart");
-                    fragment = new CartFragment();
-                    linearLayout.setVisibility(View.GONE);
-                    break;*/
+                case R.id.navigation_home:
+                    startActivity(new Intent(ShoppingActivity.this,ShoppingActivity.class));
+                    break;
 
                 case R.id.navigation_video:
                     toolbar.setTitle("Video");
@@ -203,11 +205,11 @@ public class ShoppingActivity extends AppCompatActivity {
                     linearLayout.setVisibility(View.GONE);
                     break;
 
-               /* case R.id.navigation_account:
-                    toolbar.setTitle("Account");
+                case R.id.navigation_profile:
+                    toolbar.setTitle("Profile");
                     fragment = new AccountFragment();
                     linearLayout.setVisibility(View.GONE);
-                    break;*/
+                    break;
             }
 
             return loadFragment(fragment);
@@ -243,9 +245,7 @@ public class ShoppingActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Products> call, Response<Products> response) {
                 Products products = response.body();
-
                 progressDialog.dismiss();
-
                 loadDataList(products.getData());
             }
 
@@ -317,7 +317,6 @@ public class ShoppingActivity extends AppCompatActivity {
     private void loadDataList(List<Datum> usersList) {
 
 //Get a reference to the RecyclerView//
-
         shoppingRecyclerView = findViewById(R.id.product_list);
 
         shopAdapter = new ShopRecyclerViewAdapter(ShoppingActivity.this, usersList);
@@ -366,45 +365,49 @@ public class ShoppingActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout);
     }*/
 
-   /* public class PageAdapter extends FragmentPagerAdapter {
-        private int numOfTabs;
-        PageAdapter(FragmentManager fm, int numOfTabs) {
-            super(fm);
-            this.numOfTabs = numOfTabs;
-        }
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return new Tab1Fragment();
-                case 1:
-                    return new Tab2Fragment();
-                case 2:
-                    return new Tab3Fragment();
-                case 3:
-                    return new Tab4Fragment();
-                case 4:
-                    return new Tab5Fragment();
-                case 5:
-                    return new Tab6Fragment();
-                case 6:
-                    return new Tab7Fragment();
-                case 7:
-                    return new Tab8Fragment();
-                case 8:
-                    return new Tab9Fragment();
-                case 10:
-                    return new Tab11Fragment();
-                default:
-                    return null;
-            }
-        }
-        @Override
-        public int getCount() {
-            return numOfTabs;
-        }
-    }
-*/
+    /* public class PageAdapter extends FragmentPagerAdapter {
+         private int numOfTabs;
+         PageAdapter(FragmentManager fm, int numOfTabs) {
+             super(fm);
+             this.numOfTabs = numOfTabs;
+         }
+         @Override
+         public Fragment getItem(int position) {
+             switch (position) {
+                 case 0:
+                     return new Tab1Fragment();
+                 case 1:
+                     return new Tab2Fragment();
+                 case 2:
+                     return new Tab3Fragment();
+                 case 3:
+                     return new Tab4Fragment();
+                 case 4:
+                     return new Tab5Fragment();
+                 case 5:
+                     return new Tab6Fragment();
+                 case 6:
+                     return new Tab7Fragment();
+                 case 7:
+                     return new Tab8Fragment();
+                 case 8:
+                     return new Tab9Fragment();
+                 case 10:
+                     return new Tab11Fragment();
+                 default:
+                     return null;
+             }
+         }
+         @Override
+         public int getCount() {
+             return numOfTabs;
+         }
+     }
+ */
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+    }
 
 }

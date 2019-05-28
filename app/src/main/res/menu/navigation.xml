@@ -2,20 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
 
-   <!-- <item
-        android:id="@+id/navigation_account"
-        android:icon="@drawable/account"
-        android:title="@string/title_account" />-->
+
     <item
         android:id="@+id/navigation_category"
         android:icon="@drawable/category"
         android:title="@string/title_category" />
 
-    <!--<item
-        android:id="@+id/navigation_cart"
-        android:icon="@drawable/cart"
-        android:title="@string/title_cart" />-->
 
     <item
         android:id="@+id/navigation_video"
@@ -26,5 +23,8 @@
         android:id="@+id/navigation_facebook"
         android:icon="@drawable/facebook"
         android:title="@string/title_facebook" />
-
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/account"
+        android:title="@string/title_profile" />
 </menu>

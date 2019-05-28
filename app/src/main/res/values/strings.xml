@@ -23,9 +23,9 @@
 
     <string name="title_video">Video</string>
     <string name="title_category">Category</string>
-    <string name="title_cart">Cart</string>
+    <string name="title_home">Home</string>
     <string name="title_facebook">Facebook</string>
-    <string name="title_account">Account</string>
+    <string name="title_profile">Profile</string>
 
     <string name="tab1">ভ্যালেন্টাইন কার্নিভাল</string>
     <string name="tab2">মেয়েদের শপিং </string>

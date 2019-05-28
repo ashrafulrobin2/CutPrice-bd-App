@@ -1,23 +1,16 @@
 package com.eomsbd.cutprice.fragment;
 
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.MediaController;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.eomsbd.cutprice.OnBackPressed;
 import com.eomsbd.cutprice.R;
@@ -48,10 +41,6 @@ public class VideoFragment extends Fragment implements OnBackPressed {
     ArrayList<DataSetList> arrayList;
     Vector<DataSetList> dataSetLists;
     ProgressDialog progressDialog;
-    MediaController controller;
-    private final int COUNT = 3;
-    private int index = 1;
-    private VideoView myVideo1,myVideo2,myVideo3,myVideo4;
 
     public VideoFragment() {
         // Required empty public constructor
@@ -64,27 +53,17 @@ public class VideoFragment extends Fragment implements OnBackPressed {
 
         View view = inflater.inflate(R.layout.fragment_video, container, false);
 
-
-
-        myVideo1 = view.findViewById(R.id.videoView1);
-        String value1 = "android.resource://" + getContext().getPackageName() + "/" + R.raw.video1;
-        Uri uri = Uri.parse(value1);
-        MediaController mc = new MediaController(getContext());
-        myVideo1.setMediaController(mc);
-        myVideo1.setVideoURI(uri);
-        myVideo1.start();
-        myVideo1.requestFocus();
-        myVideo1.setKeepScreenOn(true);
-
-
-
-
-
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
 
         recyclerView = view.findViewById(R.id.recyclerview);
         dataSetLists = new Vector<DataSetList>();
 
+
+
         if (dataSetLists != null) {
+            progressDialog.dismiss();
             recyclerView = view.findViewById(R.id.recyclerview);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setHasFixedSize(true);
@@ -113,5 +92,6 @@ public class VideoFragment extends Fragment implements OnBackPressed {
     public void onBackPressed() {
         startActivity(new Intent(getActivity(), ShoppingActivity.class));
     }
+
 
 }

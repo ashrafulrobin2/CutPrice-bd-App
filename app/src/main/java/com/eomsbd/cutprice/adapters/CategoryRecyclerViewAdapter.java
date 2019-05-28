@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.eomsbd.cutprice.Interface.DataPass;
-import com.eomsbd.cutprice.R;
 
+import com.eomsbd.cutprice.R;
 import com.eomsbd.cutprice.activity.SubCategoryActivity;
 import com.eomsbd.cutprice.fragment.SubCategoryFragment;
 import com.eomsbd.cutprice.model.sub_category.CategoryId;

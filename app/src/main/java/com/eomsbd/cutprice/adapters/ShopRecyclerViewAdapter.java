@@ -77,12 +77,12 @@ public class ShopRecyclerViewAdapter extends RecyclerView.Adapter<ShopRecyclerVi
 
     @Override
     public int getItemCount() {
-       /* if (userClicked)
+        if (userClicked)
             return allProducts.size();
         else
-            return allProducts.size() > 12 ? 12 : allProducts.size();*/
+            return allProducts.size() > 10 ? 10 : allProducts.size();
 
-        return (null != allProducts ? allProducts.size() : 10);
+      //  return (null != allProducts ? allProducts.size() : 10);
     }
 
 
