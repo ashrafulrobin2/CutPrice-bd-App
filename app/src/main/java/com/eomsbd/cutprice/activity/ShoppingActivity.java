@@ -52,7 +52,7 @@ import retrofit2.Response;
 public class ShoppingActivity extends AppCompatActivity {
 
     private static final String TAG = ShoppingActivity.class.getSimpleName();
-  IClientServer iClientServer;
+    IClientServer iClientServer;
     ProgressDialog progressDialog;
     public static int index = 1;
 
@@ -144,19 +144,13 @@ public class ShoppingActivity extends AppCompatActivity {
                     Toast.makeText(ShoppingActivity.this, "no Data available", Toast.LENGTH_LONG).show();
                 }
             }
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
-
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
-
-
 */
         coordinatorLayout = findViewById(R.id.frame_container);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -257,7 +251,7 @@ public class ShoppingActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Products> call, Throwable t) {
-            alertDialogBuilder = new AlertDialog.Builder(ShoppingActivity.this);
+                alertDialogBuilder = new AlertDialog.Builder(ShoppingActivity.this);
 
                 //For Setting Title
 
@@ -373,14 +367,11 @@ public class ShoppingActivity extends AppCompatActivity {
     }*/
 
    /* public class PageAdapter extends FragmentPagerAdapter {
-
         private int numOfTabs;
-
         PageAdapter(FragmentManager fm, int numOfTabs) {
             super(fm);
             this.numOfTabs = numOfTabs;
         }
-
         @Override
         public Fragment getItem(int position) {
             switch (position) {
@@ -390,32 +381,24 @@ public class ShoppingActivity extends AppCompatActivity {
                     return new Tab2Fragment();
                 case 2:
                     return new Tab3Fragment();
-
                 case 3:
                     return new Tab4Fragment();
-
                 case 4:
                     return new Tab5Fragment();
-
                 case 5:
                     return new Tab6Fragment();
-
                 case 6:
                     return new Tab7Fragment();
-
                 case 7:
                     return new Tab8Fragment();
-
                 case 8:
                     return new Tab9Fragment();
-
                 case 10:
                     return new Tab11Fragment();
                 default:
                     return null;
             }
         }
-
         @Override
         public int getCount() {
             return numOfTabs;
@@ -423,9 +406,5 @@ public class ShoppingActivity extends AppCompatActivity {
     }
 */
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        progressDialog.dismiss();
-    }
+
 }
