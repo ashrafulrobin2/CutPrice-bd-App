@@ -44,6 +44,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         regConfirmPassword = findViewById(R.id.regConfirmPassId);
 
         findViewById(R.id.registerBtnId).setOnClickListener(this);
+        findViewById(R.id.login_textViewId).setOnClickListener(this);
 
     }
 
@@ -89,8 +90,9 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
     //validation End
+
     //Retrofit Code
-    private void getUserRegistration(){
+    private void getUserRegistration(){ //baseUrl+stringUrl
 
         iClientServer = RetrofitService.getRetrofitInstance().create(IClientServer.class);
         String apiKey = "Cutprice@987";
@@ -119,7 +121,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 RegistrationResponse registrationResponse = response.body();
 
                 if (response.isSuccessful() && registrationResponse !=null ){
-
+                    Intent intent = new Intent(RegistrationActivity.this, ShoppingActivity.class);
+                    startActivity(intent);
                     Toasty.success(RegistrationActivity.this,""+registrationResponse.getSuccess(),Toasty.LENGTH_LONG).show();
 
 
@@ -135,13 +138,21 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        if (checkValidity()){
+       /* */
 
-        }else {
-            Intent intent = new Intent(RegistrationActivity.this,ShoppingActivity.class);
-            startActivity(intent);
-            getUserRegistration();
+        switch (v.getId()) {
+            case R.id.registerBtnId:
+                if (checkValidity()){
+
+                }else  {
+                    getUserRegistration();
+                }
+                break;
+            case R.id.login_textViewId:
+                Intent intent1 = new Intent(RegistrationActivity.this, LoginActivity.class);
+                startActivity(intent1);
+                break;
+
         }
-
     }
 }
