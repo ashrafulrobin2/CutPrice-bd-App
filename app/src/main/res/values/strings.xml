@@ -20,12 +20,15 @@
     <string name="successful_payment">Payment successfully uploaded</string>
     <string name="pay_with_paypal">Pay with PayPal</string>
 
+    //Bottom navigation
 
     <string name="title_video">Video</string>
     <string name="title_category">Category</string>
-    <string name="title_cart">Cart</string>
+    <string name="title_home">Home</string>
     <string name="title_facebook">Facebook</string>
-    <string name="title_account">Account</string>
+    <string name="title_profile">account_Profile</string>
+
+    //Category
 
     <string name="tab1">ভ্যালেন্টাইন কার্নিভাল</string>
     <string name="tab2">মেয়েদের শপিং </string>
@@ -89,5 +92,8 @@
     <string name="facebook_app_id">337975806850967</string>
     <string name="fb_login_protocol_scheme">fb337975806850967</string>
 
+    //Message Text
+
+    <string name="message_text3">Registration Successful</string>
 
 </resources>

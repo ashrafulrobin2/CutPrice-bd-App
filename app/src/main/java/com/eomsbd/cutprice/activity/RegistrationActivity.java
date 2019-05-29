@@ -123,10 +123,10 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 if (response.isSuccessful() && registrationResponse !=null ){
                     Intent intent = new Intent(RegistrationActivity.this, ShoppingActivity.class);
                     startActivity(intent);
-                    Toasty.success(RegistrationActivity.this,""+registrationResponse.getSuccess(),Toasty.LENGTH_LONG).show();
 
+                    Toasty.normal(RegistrationActivity.this,R.string.message_text3, getResources().getDrawable(R.drawable.success2)).show();
 
-                }
+  }
             }
 
             @Override

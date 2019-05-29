@@ -148,7 +148,7 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:textAllCaps="false"
-                android:background="@drawable/bg_ui"
+
                 android:textColor="#ffffff"
                 android:textSize="22sp" />
 
