@@ -85,7 +85,7 @@ public class ShoppingActivity extends AppCompatActivity {
 
 
         linearLayout = findViewById(R.id.LinearLayout1);
-    /*    tabLayout = findViewById(R.id.tab_layout);
+    /*  tabLayout = findViewById(R.id.tab_layout);
         tabItem1 = findViewById(R.id.tabItem1);
         tabItem2 = findViewById(R.id.tabItem2);
         tabItem3 = findViewById(R.id.tabItem3);*/
@@ -256,7 +256,7 @@ public class ShoppingActivity extends AppCompatActivity {
                 //For Setting Title
 
                 //for setting message
-                //fot setting Icon
+                //for setting Icon
                 alertDialogBuilder.setIcon(R.drawable.wifi);
                 alertDialogBuilder.setMessage(R.string.message_text2);
 
@@ -353,6 +353,8 @@ public class ShoppingActivity extends AppCompatActivity {
             case R.id.action_settings:
                 startActivity(new Intent(this, SettingsPrefActivity.class));
                 return true;
+            case R.id.action_logout:
+                startActivity(new Intent(this,LoginActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }

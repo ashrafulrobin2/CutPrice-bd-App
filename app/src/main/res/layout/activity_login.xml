@@ -4,8 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:ignore="VectorDrawableCompat">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/bgHeader"
+        android:layout_width="401dp"
+        android:layout_height="68dp"
+        android:background="@drawable/header_register"
+        android:elevation="5dp"
+        android:theme="@style/ToolbarTheme" />
+
+    <TextView
+        android:id="@+id/tvSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:elevation="10dp"
+        android:transitionName="tvLogin"
+        android:text="Login"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        android:textStyle="bold" />
     <ScrollView
         android:id="@+id/sv"
         android:layout_width="match_parent"
@@ -41,6 +61,7 @@
 
                     <EditText
                         android:id="@+id/email_Id"
+                        android:hint="Enter Your Email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -58,6 +79,7 @@
 
                     <EditText
                         android:id="@+id/passwordId"
+                        android:hint="Enter Your Password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -98,7 +120,7 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/textViewRegister"
+                android:id="@+id/Register_textView_Id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cv"
@@ -106,24 +128,31 @@
                 android:layout_marginTop="10dp"
                 android:elevation="5dp"
                 android:text="Do Not Have Account ? Create"
-                android:textSize="14sp" />
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"/>
 
             //FaceBook Button
-            <!--  <Button
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_below="@+id/tvForgot"
-                  android:layout_alignLeft="@+id/cv"
-                  android:layout_alignRight="@+id/cv"
-                  android:layout_marginLeft="20dp"
-                  android:layout_marginTop="20dp"
-                  android:layout_marginRight="20dp"
-                  android:background="@drawable/bt_uifb"
-                  android:drawableLeft="@drawable/logofacebook"
-                  android:paddingLeft="20dp"
-                  android:paddingRight="20dp"
-                  android:text="LOGIN WITH FACEBOOK"
-                  android:textColor="@color/colorPurple" />-->
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="259dp"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/cv"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="61dp"
+                android:layout_marginTop="315dp"
+                android:layout_marginRight="71dp"
+                android:layout_marginBottom="0dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_ui"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+
         </RelativeLayout>
     </ScrollView>
 

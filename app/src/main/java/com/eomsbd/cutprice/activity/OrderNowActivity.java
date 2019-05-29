@@ -42,22 +42,7 @@ public class OrderNowActivity extends AppCompatActivity{
         setContentView(R.layout.activity_order_now);
 
 
-      /* Toolbar toolbar = findViewById(R.id.bgHeader);
-       setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        rlayout = findViewById(R.id.rlayout);
-        rlayout.setAnimation(animation);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home :
-                onBackPressed();
-                       return true;
-        }
-        return super.onOptionsItemSelected(item);
-        */
+
 
         fullname = findViewById(R.id.fullname_editTextId);
         email = findViewById(R.id.email_editTextId);
@@ -88,18 +73,8 @@ public class OrderNowActivity extends AppCompatActivity{
         CharSequence t=text.getText().toString();
         return TextUtils.isEmpty( t );
     }
-    private boolean isValidEmail(CharSequence email) {
-        if (!TextUtils.isEmpty(email)) {
-            return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-        }
-        return false;
-    }
-    private boolean isValidPhoneNumber(CharSequence phoneNumber) {
-        if (!TextUtils.isEmpty(phoneNumber)) {
-            return Patterns.PHONE.matcher(phoneNumber).matches();
-        }
-        return false;
-    }
+
+
     public boolean checkValidity() {
         View focusView = null;
         boolean cancel = false;
