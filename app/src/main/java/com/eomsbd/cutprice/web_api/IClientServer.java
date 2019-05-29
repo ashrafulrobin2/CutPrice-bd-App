@@ -14,10 +14,12 @@ import com.eomsbd.cutprice.model.sub_category.SubCategory;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface IClientServer {
+    @Headers({"Cache-Control: max-age=640000", "User-Agent: Cut Price BD"})
     @GET("products/getAllProducts")
     Call<Products> getALlProducts(@Query("api_key") String id);
 

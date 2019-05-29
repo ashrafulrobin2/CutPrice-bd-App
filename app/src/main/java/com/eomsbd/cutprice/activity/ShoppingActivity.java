@@ -1,11 +1,15 @@
 package com.eomsbd.cutprice.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -17,14 +21,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -38,29 +40,34 @@ import com.eomsbd.cutprice.fragment.FacebookFragment;
 import com.eomsbd.cutprice.fragment.VideoFragment;
 import com.eomsbd.cutprice.helpers.BottomNavigationBehavior;
 import com.eomsbd.cutprice.helpers.SpacesItemDecoration;
-import com.eomsbd.cutprice.model.login_model.LoginResponse;
 import com.eomsbd.cutprice.model.products_model.Datum;
 import com.eomsbd.cutprice.model.products_model.Products;
 import com.eomsbd.cutprice.web_api.IClientServer;
-import com.eomsbd.cutprice.web_api.RetrofitService;
 
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cache;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ShoppingActivity extends AppCompatActivity {
 
     private static final String TAG = ShoppingActivity.class.getSimpleName();
+public  static final String API_KEY="Cutprice@987";
     IClientServer iClientServer;
     ProgressDialog progressDialog;
     public static int index = 1;
-
     private RecyclerView shoppingRecyclerView;
-
+    int cacheSize = 10 * 1024 * 1024; // 10 MiB
     private ActionBar toolbar;
     FrameLayout coordinatorLayout;
 
@@ -154,7 +161,6 @@ public class ShoppingActivity extends AppCompatActivity {
 */
         coordinatorLayout = findViewById(R.id.frame_container);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        iClientServer = RetrofitService.getRetrofitInstance().create(IClientServer.class);
         progressDialog = new ProgressDialog(ShoppingActivity.this);
         progressDialog.setMessage("please wait for a minute.....");
         progressDialog.setCancelable(false);
@@ -216,11 +222,17 @@ public class ShoppingActivity extends AppCompatActivity {
         }
     };
 
-    /**
-     * loading fragment into FrameLayout
-     *
-     * @param fragment
-     */
+    public Activity getActivity(){
+        Context context = this;
+        while (context instanceof ContextWrapper){
+            if (context instanceof Activity){
+                return (Activity) context;
+            }
+            context = ((ContextWrapper) context).getBaseContext();
+        }
+        return null;
+
+    }
     private boolean loadFragment(Fragment fragment) {
         /*FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
@@ -235,62 +247,89 @@ public class ShoppingActivity extends AppCompatActivity {
         }
         return false;
     }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
     ////  Get Data From Api
     public void getProductsFromApi() {
-        String id = "Cutprice@987";
-        final Call<Products> productsCall = iClientServer.getALlProducts(id);
-
-        productsCall.enqueue(new Callback<Products>() {
-            @Override
-            public void onResponse(Call<Products> call, Response<Products> response) {
-                Products products = response.body();
+        try {
+            if (API_KEY.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "Please obtain API Key firstly from themoviedb.org", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
-                loadDataList(products.getData());
+                return;
             }
+            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .connectTimeout(1, TimeUnit.MINUTES)
+                    .readTimeout(30, TimeUnit.SECONDS)
+                    .writeTimeout(15, TimeUnit.SECONDS)
+                    .build();
 
-            @Override
-            public void onFailure(Call<Products> call, Throwable t) {
-                alertDialogBuilder = new AlertDialog.Builder(ShoppingActivity.this);
+            Retrofit.Builder builder = new Retrofit.Builder()
+                    .baseUrl("http://cutpricebd.com/oms/api/")
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create());
 
-                //For Setting Title
+            Retrofit retrofit = builder.build();
+            iClientServer = retrofit.create(IClientServer.class);
 
-                //for setting message
-                //for setting Icon
-                alertDialogBuilder.setIcon(R.drawable.wifi);
-                alertDialogBuilder.setMessage(R.string.message_text2);
 
-                alertDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //exit
-                        progressDialog.dismiss();
-                    }
-                });
-                alertDialogBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
-            }
-        });
+
+            final Call<Products> productsCall = iClientServer.getALlProducts(API_KEY);
+
+            productsCall.enqueue(new Callback<Products>() {
+                @Override
+                public void onResponse(Call<Products> call, Response<Products> response) {
+                    Products products = response.body();
+                    progressDialog.dismiss();
+                    loadDataList(products.getData());
+                }
+
+                @Override
+                public void onFailure(Call<Products> call, Throwable t) {
+                    alertDialogBuilder = new AlertDialog.Builder(ShoppingActivity.this);
+
+                    //For Setting Title
+
+                    //for setting message
+                    //for setting Icon
+                    alertDialogBuilder.setIcon(R.drawable.wifi);
+                    alertDialogBuilder.setMessage(R.string.message_text2);
+
+                    alertDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //exit
+                            progressDialog.dismiss();
+                        }
+                    });
+                    alertDialogBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                }
+            });
+        }catch (Exception e){
+
+        }
     }
-
 
     //
 
     @Override
     public void onBackPressed() {
-
         tellFragments();
-        super.onBackPressed();
-        Intent setIntent = new Intent(Intent.ACTION_MAIN);
-        setIntent.addCategory(Intent.CATEGORY_HOME);
-        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(setIntent);
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
 
     }
 
@@ -324,17 +363,24 @@ public class ShoppingActivity extends AppCompatActivity {
 
 //Use a LinearLayoutManager with default vertical orientation//
 
-        GridLayoutManager mGrid = new GridLayoutManager(ShoppingActivity.this, 2);
-        shoppingRecyclerView.setLayoutManager(mGrid);
-        shoppingRecyclerView.setHasFixedSize(true);
-        shoppingRecyclerView.addItemDecoration(new SpacesItemDecoration(2, 12, false));
+      //  GridLayoutManager mGrid = new GridLayoutManager(ShoppingActivity.this, 2);
+        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            shoppingRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+            shoppingRecyclerView.addItemDecoration(new SpacesItemDecoration(2, 12, false));
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(shoppingRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
-        shoppingRecyclerView.addItemDecoration(dividerItemDecoration);
+        } else {
+            shoppingRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+            shoppingRecyclerView.addItemDecoration(new SpacesItemDecoration(4, 6, false));
+        }
+
+        //shoppingRecyclerView.setLayoutManager(mGrid);
+        shoppingRecyclerView.setHasFixedSize(true);
+
         //Give animation
         shoppingRecyclerView.setItemAnimator(new DefaultItemAnimator());
 //Set the Adapter to the RecyclerView//
         shoppingRecyclerView.setAdapter(shopAdapter);
+        shoppingRecyclerView.smoothScrollToPosition(0);
         shopAdapter.notifyDataSetChanged();
 
 

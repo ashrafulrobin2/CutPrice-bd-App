@@ -119,7 +119,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 RegistrationResponse registrationResponse = response.body();
 
                 if (response.isSuccessful() && registrationResponse !=null ){
-
                     Toasty.success(RegistrationActivity.this,""+registrationResponse.getSuccess(),Toasty.LENGTH_LONG).show();
 
 
@@ -136,10 +135,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         if (checkValidity()){
-
         }else {
-            Intent intent = new Intent(RegistrationActivity.this,ShoppingActivity.class);
-            startActivity(intent);
             getUserRegistration();
         }
 
