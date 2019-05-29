@@ -64,7 +64,7 @@ TextView client_name,client_id,client_email,client_order,client_address,client_p
         client_id.setText("Client Id : "+" "+clientId);
         client_address.setText("Address : "+clientAddress);
         client_email.setText("Email : "+clientEmail);
-        client_phone.setText("Phone : "+88016);
+        client_phone.setText("Phone : "+880167);
 
         if (numberofOrders==null){
             client_order.setText("Number of Orders : "+" 0 ");
@@ -72,11 +72,8 @@ TextView client_name,client_id,client_email,client_order,client_address,client_p
             client_order.setText("Number of Orders : "+ numberofOrders);
         }
 
-
-
-     //   Toasty.success(getContext(),"Client id = "+clientId+" client name = "+clientName,Toasty.LENGTH_LONG).show();
+        //   Toasty.success(getContext(),"Client id = "+clientId+" client name = "+clientName,Toasty.LENGTH_LONG).show();
         return view;
-
     }
 
     @Override

@@ -63,6 +63,7 @@ public class ShoppingActivity extends AppCompatActivity {
 
     LinearLayout linearLayout;
     AlertDialog.Builder alertDialogBuilder;
+
     //TablayOut
 
     TabLayout tabLayout;
