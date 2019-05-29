@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.eomsbd.cutprice.OnBackPressed;
 import com.eomsbd.cutprice.R;
 
-
 import com.eomsbd.cutprice.activity.ShoppingActivity;
 import com.eomsbd.cutprice.adapters.YoutubeAdapter;
 import com.eomsbd.cutprice.model.DataSetList;

@@ -40,7 +40,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         regAddress = findViewById(R.id.regAddressId);
         regEmail = findViewById(R.id.regEmailId);
         regPhoneNumber = findViewById(R.id.regPhoneId);
-        regPassword = findViewById(R.id.regPasswordId);
+        regPassword = findViewById(R.id.regPhoneId);
         regConfirmPassword = findViewById(R.id.regConfirmPassId);
 
         findViewById(R.id.registerBtnId).setOnClickListener(this);
@@ -49,11 +49,10 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
     //Validation Code
-    public boolean isEmpty(EditText text) {
-        CharSequence t = text.getText().toString();
-        return TextUtils.isEmpty(t);
+    public boolean isEmpty(EditText text){
+        CharSequence t=text.getText().toString();
+        return TextUtils.isEmpty( t );
     }
-
     public boolean checkValidity() {
         View focusView = null;
         boolean cancel = false;
@@ -80,7 +79,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         if (isEmpty(regPassword)) {
             // focusView = pass;
             cancel = true;
-            regPassword.setError("Enter a valid password");
+           regPassword.setError("Enter a valid password");
         }
         if (isEmpty(regConfirmPassword)) {
             // focusView = pass;
@@ -93,16 +92,16 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     //validation End
 
     //Retrofit Code
-    private void getUserRegistration() { //baseUrl+stringUrl
+    private void getUserRegistration(){ //baseUrl+stringUrl
 
         iClientServer = RetrofitService.getRetrofitInstance().create(IClientServer.class);
         String apiKey = "Cutprice@987";
         String name = regName.getText().toString().trim();
-        String address = regAddress.getText().toString().trim();
-        String email = regEmail.getText().toString().trim();
-        String number = regPhoneNumber.getText().toString().trim();
-        String password = regPassword.getText().toString().trim();
-        String confirmPassword = regConfirmPassword.getText().toString().trim();
+        String address=regAddress.getText().toString().trim();
+        String email=regEmail.getText().toString().trim();
+        String number=regPhoneNumber.getText().toString().trim();
+        String password=regPassword.getText().toString().trim();
+        String confirmPassword=regConfirmPassword.getText().toString().trim();
 
         final UserRegistration userRegistration = new UserRegistration();
 
@@ -114,17 +113,17 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         userRegistration.setPassword(password);
 
 
-        Call<RegistrationResponse> call = iClientServer.registrationInfo(userRegistration);
+        Call<RegistrationResponse>call=iClientServer.registrationInfo(userRegistration);
         call.enqueue(new Callback<RegistrationResponse>() {
             @Override
             public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
 
                 RegistrationResponse registrationResponse = response.body();
 
-                if (response.isSuccessful() && registrationResponse != null) {
+                if (response.isSuccessful() && registrationResponse !=null ){
                     Intent intent = new Intent(RegistrationActivity.this, ShoppingActivity.class);
                     startActivity(intent);
-                    Toasty.success(RegistrationActivity.this, "" + registrationResponse.getSuccess(), Toasty.LENGTH_LONG).show();
+                    Toasty.success(RegistrationActivity.this,""+registrationResponse.getSuccess(),Toasty.LENGTH_LONG).show();
 
 
                 }
@@ -139,13 +138,13 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        /* */
+       /* */
 
         switch (v.getId()) {
             case R.id.registerBtnId:
-                if (checkValidity()) {
+                if (checkValidity()){
 
-                } else {
+                }else  {
                     getUserRegistration();
                 }
                 break;

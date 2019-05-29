@@ -20,5 +20,6 @@
     <color name="dividerColor">#80CBC4</color>
     <color name="list_item_title">#AAAAAA</color>
     <color name="list_group_title">#808080</color>
+    <color name="colorTextHint">#51d8c7</color>
 </resources>
 

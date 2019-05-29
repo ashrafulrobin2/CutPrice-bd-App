@@ -67,7 +67,7 @@ public class ProductActivity extends AppCompatActivity {
 
         if (datum != null) {
             setTitle(datum.getProductName());
-            String path = "http://cutpricebd.com/oms/product_image/thumbs/";
+            String path = "http://cutpricebd.com/oms/product_image/";
             if ((path + datum.getImg1()).length() <= 60) {
                 Picasso.get().load(path + datum.getImg1()).into(productImage);
             } else {
