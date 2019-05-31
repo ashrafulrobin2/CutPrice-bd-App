@@ -21,5 +21,6 @@
     <color name="list_item_title">#AAAAAA</color>
     <color name="list_group_title">#808080</color>
     <color name="colorTextHint">#51d8c7</color>
+    <color name="border_color">#DEDEDE</color>
 </resources>
 

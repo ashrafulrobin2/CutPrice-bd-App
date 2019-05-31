@@ -21,7 +21,7 @@ import retrofit2.http.Query;
 public interface IClientServer {
     @Headers({"Cache-Control: max-age=640000", "User-Agent: Cut Price BD"})
     @GET("products/getAllProducts")
-    Call<Products> getALlProducts(@Query("api_key") String id);
+    Call<Products> getALlProducts(@Query("api_key") String id,@Query("start") int start,@Query("limit") int limit);
 
     @GET("products/getCategory")
     Call<Category> getSubmenu();

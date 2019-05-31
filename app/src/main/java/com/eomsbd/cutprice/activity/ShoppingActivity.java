@@ -32,6 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.eomsbd.cutprice.R;
+import com.eomsbd.cutprice.UserLoginInfo;
 import com.eomsbd.cutprice.adapters.ShopRecyclerViewAdapter;
 import com.eomsbd.cutprice.fragment.AccountFragment;
 import com.eomsbd.cutprice.fragment.CartFragment;
@@ -279,7 +280,7 @@ public  static final String API_KEY="Cutprice@987";
 
 
 
-            final Call<Products> productsCall = iClientServer.getALlProducts(API_KEY);
+            final Call<Products> productsCall = iClientServer.getALlProducts(API_KEY,0,200 );
 
             productsCall.enqueue(new Callback<Products>() {
                 @Override
@@ -396,12 +397,16 @@ public  static final String API_KEY="Cutprice@987";
 
 
     public boolean onOptionsItemSelected(MenuItem item) {
+
+
         switch (item.getItemId()) {
             case R.id.action_settings:
                 startActivity(new Intent(this, SettingsPrefActivity.class));
                 return true;
             case R.id.action_logout:
+                new UserLoginInfo(ShoppingActivity.this).removeUser();
                 startActivity(new Intent(this,LoginActivity.class));
+                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }

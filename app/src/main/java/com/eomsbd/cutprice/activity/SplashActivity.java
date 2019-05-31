@@ -1,5 +1,6 @@
 package com.eomsbd.cutprice.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 
 import com.eomsbd.cutprice.R;
+import com.eomsbd.cutprice.UserLoginInfo;
 import com.eomsbd.cutprice.util.AllSettingsManager;
 import com.eomsbd.cutprice.util.AppUtil;
 import com.eomsbd.cutprice.util.BaseUpdateListener;
@@ -25,13 +27,17 @@ public class SplashActivity extends AppCompatActivity {
     private TextView tvAppVersion;
     private ImageView ivAppLogo, ivAppLogoFlavor;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+
         initActivityViews();
         initActivityViewsData();
+        UserLoginInfo userLoginInfo = new UserLoginInfo(SplashActivity.this);
     }
 
 
@@ -51,7 +57,7 @@ public class SplashActivity extends AppCompatActivity {
         //Set flavor icon
 
         //Rotate app logo
-        AppUtil.makeRotateAnimation(ivAppLogo, 3, new BaseUpdateListener() {
+        AppUtil.makeRotateAnimation(ivAppLogo, 1, new BaseUpdateListener() {
             @Override
             public void onUpdate(Object update) {
                 if ((boolean) update) {
@@ -62,10 +68,34 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
+
+
     private void navigateNextScreen() {
+
         Intent intentAppDriver = new Intent(SplashActivity.this, LoginActivity.class);
         startActivity(intentAppDriver);
         finish();
+
+
+        //
+       /* if(new userLoginInfo.getEmail() != ""){
+
+            Intent intentAppDriver = new Intent(SplashActivity.this, ShoppingActivity.class);
+            startActivity(intentAppDriver);
+            finish();
+        }else
+        {
+
+            Intent intentAppDriver = new Intent(SplashActivity.this, LoginActivity.class);
+            startActivity(intentAppDriver);
+            finish();
+        }*/
+
+
+
     }
+
+
+
 
 }

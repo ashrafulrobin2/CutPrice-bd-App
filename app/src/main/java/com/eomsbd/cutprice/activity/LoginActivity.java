@@ -1,5 +1,6 @@
 package com.eomsbd.cutprice.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +8,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Handler;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.eomsbd.cutprice.R;
+import com.eomsbd.cutprice.UserLoginInfo;
 import com.eomsbd.cutprice.fragment.AccountFragment;
 import com.eomsbd.cutprice.model.login_model.LoginResponse;
 import com.eomsbd.cutprice.model.login_model.UserLogin;
@@ -34,8 +37,8 @@ import static com.eomsbd.cutprice.activity.ProductActivity.mypreference;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText editTextEmail;
-    private EditText editTextpassword;
+    private TextInputEditText editTextEmail;
+    private TextInputEditText editTextpassword;
 
 
     public static final String mypreference = "mypref";
@@ -56,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        editTextEmail = findViewById(R.id.email_Id);
+        editTextEmail = findViewById(R.id.email_id);
         editTextpassword = findViewById(R.id.passwordId);
 
         findViewById(R.id.buttonLogin).setOnClickListener(this);
@@ -110,7 +113,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void getUserLogin() { //baseUrl+stringUrl
         iClientServer = RetrofitService.getRetrofitInstance().create(IClientServer.class);
         String apiKey = "Cutprice@987";
-        String email = editTextEmail.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
         String password = editTextpassword.getText().toString().trim();
 
         final UserLogin userLogin = new UserLogin();
@@ -133,6 +136,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     } else {
                         startActivity(new Intent(LoginActivity.this, ShoppingActivity.class));
                         Toasty.success(LoginActivity.this, "Login Successful", Toasty.LENGTH_LONG).show();
+
+                        UserLoginInfo userLoginInfo =new UserLoginInfo(LoginActivity.this);
+                        userLoginInfo.setEmail(email);
+
                         client_id = loginResponse.getData().getClientId();
                         client_name = loginResponse.getData().getClientName();
 
@@ -180,7 +187,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     getUserLogin();
                 }
                 break;
-            case R.id.Register_textView_Id:
+                case R.id.Register_textView_Id:
                 Intent intent1 = new Intent(LoginActivity.this, RegistrationActivity.class);
                 startActivity(intent1);
                 break;
