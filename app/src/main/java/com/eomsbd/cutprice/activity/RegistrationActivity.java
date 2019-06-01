@@ -29,8 +29,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     IClientServer iClientServer;
 
-
-    @Override
+ @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
