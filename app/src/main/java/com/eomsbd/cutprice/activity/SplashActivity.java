@@ -51,7 +51,7 @@ public class SplashActivity extends AppCompatActivity {
         //Set flavor icon
 
         //Rotate app logo
-        AppUtil.makeRotateAnimation(ivAppLogo, 3, new BaseUpdateListener() {
+        AppUtil.makeRotateAnimation(ivAppLogo, 1, new BaseUpdateListener() {
             @Override
             public void onUpdate(Object update) {
                 if ((boolean) update) {

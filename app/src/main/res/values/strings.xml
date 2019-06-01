@@ -26,7 +26,7 @@
     <string name="title_category">Category</string>
     <string name="title_home">Home</string>
     <string name="title_facebook">Facebook</string>
-    <string name="title_profile">account_Profile</string>
+    <string name="title_profile">Profile</string>
 
     //Category
 
@@ -43,7 +43,6 @@
     <string name="tab11">বেবী অ্যান্ড কিডস</string>
 
     <string name="your_api_key_id" translatable="false">Cutprice@987</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="discount">Discount:</string>
 
@@ -100,5 +99,6 @@
     <string name="login">Login</string>
     <string name="don_t_have_an_account">Don\'t have an Account?</string>
     <string name="sign_up">Sign Up</string>
+    <string name="skip">Skip</string>
 
 </resources>

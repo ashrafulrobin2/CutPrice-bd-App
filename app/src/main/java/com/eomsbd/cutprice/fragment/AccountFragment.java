@@ -46,7 +46,7 @@ TextView client_name,client_id,client_email,client_order,client_address,client_p
         client_address=view.findViewById(R.id.profile_addressId);
         client_email=view.findViewById(R.id.profile_gmailId);
         client_order=view.findViewById(R.id.profile_orderId);
-        client_phone=view.findViewById(R.id.profile_phoneId);
+
 
 
 
@@ -64,7 +64,6 @@ TextView client_name,client_id,client_email,client_order,client_address,client_p
         client_id.setText("Client Id : "+" "+clientId);
         client_address.setText("Address : "+clientAddress);
         client_email.setText("Email : "+clientEmail);
-        client_phone.setText("Phone : "+880167);
 
         if (numberofOrders==null){
             client_order.setText("Number of Orders : "+" 0 ");

@@ -21,10 +21,7 @@
     <color name="list_item_title">#AAAAAA</color>
     <color name="list_group_title">#808080</color>
     <color name="colorTextHint">#51d8c7</color>
-    <color name="textColorPrimary">#FFFFFF</color>
-    <color name="windowBackground">#FFFFFF</color>
-    <color name="navigationBarColor">#000000</color>
-    <color name="colorAccent1">#c8e8ff</color>
+
     <color name="border_color">#DEDEDE</color>
 
 </resources>

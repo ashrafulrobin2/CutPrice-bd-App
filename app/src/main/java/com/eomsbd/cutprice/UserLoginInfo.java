@@ -12,11 +12,7 @@ public class UserLoginInfo {
 
         sharedPreferences.edit().clear().commit();
     }
-
-
-
-
-    public String getEmail() {
+  public String getEmail() {
         email=sharedPreferences.getString("userdata","");
         return email;
     }

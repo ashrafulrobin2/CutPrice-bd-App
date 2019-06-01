@@ -81,6 +81,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.forget_passwordId).setOnClickListener(this);
         findViewById(R.id.buttonLogin).setOnClickListener(this);
         findViewById(R.id.Register_textView_Id).setOnClickListener(this);
+        findViewById(R.id.buttonSkip).setOnClickListener(this);
         printKeyHash();
 
     }
@@ -196,7 +197,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
 
             case R.id.buttonLogin:
-                if (checkValidity()) {
+                if (checkValidity())
+
+                {
                     } else {
                         getUserLogin();
                         setTitle("Logout");
@@ -204,9 +207,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
                 break;
+
+
             case R.id.Register_textView_Id:
                 Intent intent1 = new Intent(LoginActivity.this, RegistrationActivity.class);
                 startActivity(intent1);
+                break;
+
+            case R.id.buttonSkip:
+              Intent intent = new Intent(LoginActivity.this,ShoppingActivity.class);
+              startActivity(intent);
                 break;
 
             case R.id.forget_passwordId:
