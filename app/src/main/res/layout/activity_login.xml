@@ -45,17 +45,6 @@
             android:textSize="15sp"
             android:textStyle="bold" />-->
 
-        <ProgressBar
-            android:id="@+id/simpleProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-
-            android:layout_gravity="center"
-            android:visibility="invisible"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="181dp"
-            tools:layout_editor_absoluteY="159dp" />
     </LinearLayout>
 
 
@@ -98,7 +87,7 @@
                 android:layout_margin="15dp"
                 android:background="@drawable/my_border"
                 android:gravity="center"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword" />
 
             <TextView
@@ -106,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Forgot password?"
+                android:text="@string/forgot_password"
                 android:textColor="#7DCCED"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -117,8 +106,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="15dp"
-                android:background="@drawable/buttoon_pressed"
-                android:text="Login"
+                android:background="@drawable/button_pressed"
+                android:text="@string/login"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="25sp" />
@@ -126,29 +115,8 @@
             <View
                 android:layout_width="250dp"
                 android:layout_height="1dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:background="@android:color/darker_gray" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="250dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/facebook" />
-
-               <!-- <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/g_" />-->
-
-            </LinearLayout>
-
 
         </LinearLayout>
 
@@ -180,15 +148,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Don't have an Account?" />
+                android:text="@string/don_t_have_an_account" />
 
             <TextView
                 android:id="@+id/Register_textView_Id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:text="Sign Up"
+                android:layout_marginStart="10dp"
+                android:text="@string/sign_up"
                 android:textColor="#138BE1"
                 android:textSize="25sp"
                 tools:ignore="InvalidId" />

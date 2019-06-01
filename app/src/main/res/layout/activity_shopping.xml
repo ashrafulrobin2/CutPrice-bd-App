@@ -2,9 +2,9 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/colayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/colayout"
     tools:context="com.eomsbd.cutprice.activity.ShoppingActivity">
 
 
@@ -16,102 +16,110 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
 
-//TabLay Out//
+    //TabLay Out//
 
-    <!--
-    <android.support.design.widget.AppBarLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <!-- We need to set android:background="@color/blue" here or any space to the right of the TabLayout on large devices will be white. -->
+       <!-- <android.support.design.widget.AppBarLayout
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-       <android.support.design.widget.TabLayout
-           android:id="@+id/tab_layout"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
-           app:tabMode="scrollable"
-           app:tabGravity="fill">
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem1"
+            &lt;!&ndash; android:theme="@style/PrivacyBrowser.DarkAppBar" makes the text and icons in the AppBar white. &ndash;&gt;
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/about_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/tab1"
+                android:layout_height="wrap_content" />
 
-                />
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem2"
+            <android.support.design.widget.TabLayout
+                xmlns:android.support.design="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/about_tablayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/tab2" />
-
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/tab3" />
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/tab4" />
-
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/tab5" />
-
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem6"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab6" />
+                android.support.design:tabBackground="@color/infoColor"
+                android.support.design:tabMode="scrollable" />
+        </android.support.design.widget.AppBarLayout>-->
 
-           <android.support.design.widget.TabItem
-               android:id="@+id/tabItem7"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="@string/tab7" />
+        <!-- android:layout_weight="1" makes about_viewpager fill the rest of the screen. -->
 
-           <android.support.design.widget.TabItem
-               android:id="@+id/tabItem8"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="@string/tab8" />
+    </LinearLayout>
+    <!--            <android.support.design.widget.TabItem
+                    android:id="@+id/tabItem1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/tab1"
 
-           <android.support.design.widget.TabItem
-               android:id="@+id/tabItem9"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="@string/tab9" />
+                    />
 
-           <android.support.design.widget.TabItem
-               android:id="@+id/tabItem10"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="@string/tab10" />
-
-           <android.support.design.widget.TabItem
-               android:id="@+id/tabItem11"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="@string/tab11" />
+                <android.support.design.widget.TabItem
+                    android:id="@+id/tabItem2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/tab2" />
 
 
-        </android.support.design.widget.TabLayout>
+                <android.support.design.widget.TabItem
+                    android:id="@+id/tabItem3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/tab3" />
+
+                <android.support.design.widget.TabItem
+                    android:id="@+id/tabItem4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/tab4" />
 
 
-    </android.support.design.widget.AppBarLayout>
-    -->
+                <android.support.design.widget.TabItem
+                    android:id="@+id/tabItem5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/tab5" />
+
+
+                <android.support.design.widget.TabItem
+                    android:id="@+id/tabItem6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab6" />
+
+               <android.support.design.widget.TabItem
+                   android:id="@+id/tabItem7"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="@string/tab7" />
+
+               <android.support.design.widget.TabItem
+                   android:id="@+id/tabItem8"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="@string/tab8" />
+
+               <android.support.design.widget.TabItem
+                   android:id="@+id/tabItem9"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="@string/tab9" />
+
+               <android.support.design.widget.TabItem
+                   android:id="@+id/tabItem10"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="@string/tab10" />
+
+               <android.support.design.widget.TabItem
+                   android:id="@+id/tabItem11"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="@string/tab11" />-->
 
 
     //TabLayout-code_End//
@@ -130,33 +138,46 @@
         </FrameLayout>
     </LinearLayout>-->
 
-<LinearLayout
-    android:id="@+id/LinearLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/product_list"
+    <LinearLayout
+        android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        android:nestedScrollingEnabled="true"
-        android:paddingTop="5dp"
-        android:scrollbars="none" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/product_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="true"
+            android:orientation="vertical"
+            android:paddingTop="5dp"
+            android:scrollbars="none" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/product_list1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="true"
+            android:orientation="vertical"
+            android:paddingTop="5dp"
+            android:scrollbars="none" />
+    </LinearLayout>
 
     <!--  app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
 
 
     //Bottom_Navigation
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
-        app:itemBackground="@color/bgBottomNavigation"
         android:foreground="?attr/selectableItemBackground"
+        app:itemBackground="@color/bgBottomNavigation"
         app:itemIconTint="@android:color/white"
         app:itemTextColor="@android:color/white"
         app:menu="@menu/navigation" />

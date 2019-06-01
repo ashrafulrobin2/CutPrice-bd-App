@@ -63,9 +63,8 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void navigateNextScreen() {
-        Intent intentAppDriver = new Intent(SplashActivity.this, LoginActivity.class);
+        Intent intentAppDriver = new Intent(SplashActivity.this, ShoppingActivity.class);
         startActivity(intentAppDriver);
-        finish();
     }
 
 }

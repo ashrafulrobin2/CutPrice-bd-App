@@ -69,8 +69,9 @@ public class SubCategoryActivity extends AppCompatActivity {
 
                 //for setting message
                 //fot setting Icon
-                alertDialogBuilder.setIcon(R.drawable.wifi);
+                alertDialogBuilder.setIcon(getResources().getDrawable(R.drawable.wifi));
                 alertDialogBuilder.setMessage(R.string.message_text2);
+
 
                 alertDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
@@ -105,7 +106,6 @@ public class SubCategoryActivity extends AppCompatActivity {
 
     }
 
-    @SuppressLint("ResourceType")
     public void dialogBox() {
         alertDialogBuilder = new AlertDialog.Builder(SubCategoryActivity.this);
 
@@ -115,7 +115,7 @@ public class SubCategoryActivity extends AppCompatActivity {
 
         //for setting message
         //fot setting Icon
-        alertDialogBuilder.setIcon(R.drawable.error);
+        alertDialogBuilder.setIcon(getResources().getDrawable(R.drawable.error));
 
         alertDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override

@@ -1,5 +1,6 @@
 package com.eomsbd.cutprice.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +8,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Handler;
+import android.support.design.widget.TextInputEditText;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,9 +17,13 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eomsbd.cutprice.R;
 import com.eomsbd.cutprice.fragment.AccountFragment;
+import com.eomsbd.cutprice.fragment.UpdatePassword;
+import com.eomsbd.cutprice.helpers.SessionManager;
 import com.eomsbd.cutprice.model.login_model.LoginResponse;
 import com.eomsbd.cutprice.model.login_model.UserLogin;
 import com.eomsbd.cutprice.web_api.IClientServer;
@@ -34,12 +41,18 @@ import static com.eomsbd.cutprice.activity.ProductActivity.mypreference;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText editTextEmail;
-    private EditText editTextpassword;
+    private TextInputEditText editTextEmail;
+    private TextInputEditText editTextpassword;
 
+
+    public static final int index = 1;
 
     public static final String mypreference = "mypref";
     SharedPreferences sharedPreferences;
+
+
+    TextView textView;
+
 
     String client_id;
     String client_name;
@@ -51,20 +64,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     IClientServer iClientServer;
 
+    // Session Manager Class
+    SessionManager session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        editTextEmail = findViewById(R.id.email_Id);
+        // Session Manager
+        session = new SessionManager(getApplicationContext());
+        editTextEmail = findViewById(R.id.email_id);
         editTextpassword = findViewById(R.id.passwordId);
 
+
+        findViewById(R.id.forget_passwordId).setOnClickListener(this);
         findViewById(R.id.buttonLogin).setOnClickListener(this);
         findViewById(R.id.Register_textView_Id).setOnClickListener(this);
         printKeyHash();
 
     }
 
+    @SuppressLint("PackageManagerGetSignatures")
     private void printKeyHash() {
         try {
             PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
@@ -94,12 +115,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (isEmpty(editTextEmail)) {
             // focusView=userName;
             cancel = true;
-            editTextEmail.setError("Enter a valid name");
+            editTextEmail.setError("Enter a valid Email ");
         }
         if (isEmpty(editTextpassword)) {
             // focusView = pass;
             cancel = true;
-            editTextpassword.setError("Enter a valid email Email");
+            editTextpassword.setError("Enter a valid Password ");
         }
 
         return cancel;
@@ -129,14 +150,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if (loginResponse.getData() == null) {
                         Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
                         startActivity(intent);
-                        Toasty.error(LoginActivity.this, "Username or Password wrong", Toasty.LENGTH_LONG).show();
+                        Toasty.info(LoginActivity.this, "Username or Password wrong", Toasty.LENGTH_LONG).show();
                     } else {
-                        startActivity(new Intent(LoginActivity.this, ShoppingActivity.class));
+                        session.createLoginSession("Android Hive", "anroidhive@gmail.com");
+
+                        // Staring MainActivity
+                        Intent i = new Intent(getApplicationContext(), ShoppingActivity.class);
+                        startActivity(i);
+                        finish();
                         Toasty.success(LoginActivity.this, "Login Successful", Toasty.LENGTH_LONG).show();
                         client_id = loginResponse.getData().getClientId();
                         client_name = loginResponse.getData().getClientName();
-
-
                         client_address = loginResponse.getData().getClientAddress();
                         client_email = loginResponse.getData().getClientEmail();
                         client_password = loginResponse.getData().getPassword();
@@ -146,7 +170,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("client_Id", client_id);
                         editor.putString("client_name", client_name);
-
                         editor.putString("client_address", client_address);
                         editor.putString("client_email", client_email);
                         editor.putString("number_of_orders", number_of_orders);
@@ -160,7 +183,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toasty.error(LoginActivity.this, "Response Error" + t.getMessage(), Toasty.LENGTH_LONG).show();
+                Toasty.normal(LoginActivity.this, R.string.message_text2, getResources().getDrawable(R.drawable.wifi)).show();
             }
         });
 
@@ -173,19 +196,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
 
             case R.id.buttonLogin:
-
                 if (checkValidity()) {
+                    } else {
+                        getUserLogin();
+                        setTitle("Logout");
+                    }
 
-                } else {
-                    getUserLogin();
-                }
+
                 break;
             case R.id.Register_textView_Id:
                 Intent intent1 = new Intent(LoginActivity.this, RegistrationActivity.class);
                 startActivity(intent1);
                 break;
+
+            case R.id.forget_passwordId:
+                showSmsDialog();
+                break;
         }
     }
+
     @Override
     public void onBackPressed() {
         Intent a = new Intent(Intent.ACTION_MAIN);
@@ -195,5 +224,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-
+    private void showSmsDialog() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        UpdatePassword requestDialogFragment = new UpdatePassword();
+        requestDialogFragment.show(fragmentManager, "request_dialog");
+    }
 }

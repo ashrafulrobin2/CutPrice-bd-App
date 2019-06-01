@@ -23,6 +23,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.eomsbd.cutprice.helpers.MySharedPreference;
 import com.eomsbd.cutprice.model.products_model.Datum;
+import com.otaliastudios.zoom.ZoomImageView;
+import com.otaliastudios.zoom.ZoomLayout;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -58,6 +60,9 @@ public class ProductActivity extends AppCompatActivity {
         productDiscount = findViewById(R.id.product_color);
         productPrice = findViewById(R.id.product_price);
         productDescription = findViewById(R.id.product_description);
+
+
+
 
         GsonBuilder builder = new GsonBuilder();
         gson = builder.create();
