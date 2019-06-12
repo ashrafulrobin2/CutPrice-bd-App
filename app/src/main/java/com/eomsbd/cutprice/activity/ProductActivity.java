@@ -1,6 +1,7 @@
 package com.eomsbd.cutprice.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -9,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -113,32 +115,8 @@ public class ProductActivity extends AppCompatActivity {
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences =getSharedPreferences( MyPREFERENCES, MODE_PRIVATE );
-                String clientname=sharedPreferences.getString("client_name","");
-                String clientemail = sharedPreferences.getString( "client_email", "" );
-                String clientpassword = sharedPreferences.getString( "client_password", "" );
 
-                if(clientemail.equals("") && clientpassword.equals("")){
-                    SharedPreferences sharedPreferences1 = getSharedPreferences( MyPREFERENCES, MODE_PRIVATE );
-                    String productId = sharedPreferences1.getString( "productId", "" );
-                    String sellingPrice = sharedPreferences1.getString( "sellingPrice", "" );
-                    Intent intent = new Intent( context, OrderNowActivity.class );
-                    intent.putExtra( "productId", productId );
-                    intent.putExtra( "sellingPrice", sellingPrice );
-                    startActivity(intent);
-                }else{
-                    SharedPreferences sharedPreferences1 = getSharedPreferences( MyPREFERENCES, MODE_PRIVATE );
-                    String productId = sharedPreferences1.getString( "productId", "" );
-                    String sellingPrice = sharedPreferences1.getString( "sellingPrice", "" );
-                    Intent intent = new Intent( context, OrderNowActivity.class );
-                    intent.putExtra( "client_name", clientname );
-                    intent.putExtra( "client_email", clientemail );
-                    intent.putExtra( "client_password", clientpassword );
-                    intent.putExtra( "productId", productId );
-                    intent.putExtra( "sellingPrice", sellingPrice );
-                    startActivity(intent);
-                }
-
+                dialogueBox();
                 //increase product count
               /*  String productsFromCart = sharedPreference1.retrieveProductFromCart();
                 if(productsFromCart.equals("")){
@@ -220,5 +198,56 @@ public class ProductActivity extends AppCompatActivity {
     private void invalidateCart() {
         invalidateOptionsMenu();
     }
+private void dialogueBox(){
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
+    builder.setTitle("If you are not logged In!");
+    builder.setMessage("Please click login button");
+
+    builder.setPositiveButton("LogIn", new DialogInterface.OnClickListener() {
+
+        public void onClick(DialogInterface dialog, int which) {
+            // Do nothing but close the dialog
+            startActivity(new Intent(ProductActivity.this,LoginActivity.class));
+            finish();
+        }
+    });
+
+    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+
+            SharedPreferences sharedPreferences =getSharedPreferences( MyPREFERENCES, MODE_PRIVATE );
+            String clientname=sharedPreferences.getString("client_name","");
+            String clientemail = sharedPreferences.getString( "client_email", "" );
+            String clientpassword = sharedPreferences.getString( "client_password", "" );
+
+            if(clientemail.equals("") && clientpassword.equals("")){
+                SharedPreferences sharedPreferences1 = getSharedPreferences( MyPREFERENCES, MODE_PRIVATE );
+                String productId = sharedPreferences1.getString( "productId", "" );
+                String sellingPrice = sharedPreferences1.getString( "sellingPrice", "" );
+                Intent intent = new Intent( context, OrderNowActivity.class );
+                intent.putExtra( "productId", productId );
+                intent.putExtra( "sellingPrice", sellingPrice );
+                startActivity(intent);
+            }else{
+                SharedPreferences sharedPreferences1 = getSharedPreferences( MyPREFERENCES, MODE_PRIVATE );
+                String productId = sharedPreferences1.getString( "productId", "" );
+                String sellingPrice = sharedPreferences1.getString( "sellingPrice", "" );
+                Intent intent = new Intent( context, OrderNowActivity.class );
+                intent.putExtra( "client_name", clientname );
+                intent.putExtra( "client_email", clientemail );
+                intent.putExtra( "client_password", clientpassword );
+                intent.putExtra( "productId", productId );
+                intent.putExtra( "sellingPrice", sellingPrice );
+                startActivity(intent);
+            }
+
+        }
+    });
+
+    AlertDialog alert = builder.create();
+    alert.show();
+}
 }

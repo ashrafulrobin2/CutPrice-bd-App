@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
@@ -72,6 +73,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.eomsbd.cutprice.activity.RegistrationActivity.MyPREFERENCES;
 
 public class ShoppingActivity extends AppCompatActivity {
 
@@ -529,7 +532,8 @@ public class ShoppingActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SettingsPrefActivity.class));
                 return true;
             case R.id.action_logout:
-                User.saveSharedSetting(ShoppingActivity.this, "CaptainCode", "true");
+                SharedPreferences settings = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                settings.edit().clear().apply();
                 //And when you click on Logout button, You will set the value to True AGAIN
                 Intent LogOut = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(LogOut);
