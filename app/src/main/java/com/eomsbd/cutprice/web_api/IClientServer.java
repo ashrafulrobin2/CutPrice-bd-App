@@ -22,7 +22,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface IClientServer {
-    @Headers({"Cache-Control: max-age=640000", "User-Agent: Cut Price BD"})
+    @Headers({"Cache-Control: max-age=640000", "Session-Agent: Cut Price BD"})
     @GET("products/getAllProducts")
     Call<Products> getALlProducts(@Query("api_key") String id, @Query("start") int start,@Query("limit") int limit);
     Call<Products> getALlProducts1(@Query("api_key") String id, @Query("start") int start, @Query("limit") int limit);

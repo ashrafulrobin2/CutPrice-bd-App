@@ -20,7 +20,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -32,7 +31,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -46,11 +44,11 @@ import com.eomsbd.cutprice.fragment.CategoryFragment;
 import com.eomsbd.cutprice.fragment.FacebookFragment;
 import com.eomsbd.cutprice.fragment.VideoFragment;
 import com.eomsbd.cutprice.helpers.BottomNavigationBehavior;
-import com.eomsbd.cutprice.helpers.SessionManager;
+import com.eomsbd.cutprice.helpers.Session;
 import com.eomsbd.cutprice.helpers.SpacesItemDecoration;
+import com.eomsbd.cutprice.helpers.User;
 import com.eomsbd.cutprice.model.products_model.Datum;
 import com.eomsbd.cutprice.model.products_model.Products;
-import com.eomsbd.cutprice.tabLayoutFragment.Tab10Fragment;
 import com.eomsbd.cutprice.tabLayoutFragment.Tab11Fragment;
 import com.eomsbd.cutprice.tabLayoutFragment.Tab1Fragment;
 import com.eomsbd.cutprice.tabLayoutFragment.Tab2Fragment;
@@ -63,15 +61,12 @@ import com.eomsbd.cutprice.tabLayoutFragment.Tab8Fragment;
 import com.eomsbd.cutprice.tabLayoutFragment.Tab9Fragment;
 import com.eomsbd.cutprice.web_api.IClientServer;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Cache;
-import okhttp3.Interceptor;
+import es.dmoral.toasty.Toasty;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -82,6 +77,7 @@ public class ShoppingActivity extends AppCompatActivity {
 
     private static final String TAG = ShoppingActivity.class.getSimpleName();
     public static final String API_KEY = "Cutprice@987";
+    public static final int INDEX = 1;
     IClientServer iClientServer;
     ProgressDialog progressDialog;
     public static int index = 1;
@@ -94,7 +90,7 @@ public class ShoppingActivity extends AppCompatActivity {
     AlertDialog.Builder alertDialogBuilder;
 
     // Session Manager Class
-    SessionManager session;
+    Session session;
 
     //TablayOut
 
@@ -109,6 +105,7 @@ public class ShoppingActivity extends AppCompatActivity {
     PageAdapter pageAdapter;
     ViewPager viewPager;
 
+
     boolean isScrolling = false;
 
     @Override
@@ -117,8 +114,8 @@ public class ShoppingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shopping);
 
         //progressbar Code
-        session = new SessionManager(getApplicationContext());
-        session.checkLogin();
+      /*  session = new Session(getApplicationContext());
+        session.checkLogin();*/
         AppBarLayout appBarLayout = findViewById(R.id.info);
         linearLayout = findViewById(R.id.LinearLayout1);
       /*  tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
@@ -232,10 +229,12 @@ public class ShoppingActivity extends AppCompatActivity {
         // load the store fragment by default
         //toolbar.setTitle("Shop");
         // loadFragment(new HomeFragment());
+
     }
 ///
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -508,7 +507,7 @@ public class ShoppingActivity extends AppCompatActivity {
 
         //Give animation
         shoppingRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//Set the Adapter to the RecyclerView//
+        //Set the Adapter to the RecyclerView//
         shoppingRecyclerView.setAdapter(shopAdapter);
         shoppingRecyclerView.smoothScrollToPosition(0);
         shopAdapter.notifyDataSetChanged();
@@ -529,10 +528,14 @@ public class ShoppingActivity extends AppCompatActivity {
             case R.id.action_settings:
                 startActivity(new Intent(this, SettingsPrefActivity.class));
                 return true;
-            case R.id.action_login:
-                Intent intentAppDriver = new Intent(ShoppingActivity.this, LoginActivity.class);
-                startActivity(intentAppDriver);
+            case R.id.action_logout:
+                User.saveSharedSetting(ShoppingActivity.this, "CaptainCode", "true");
+                //And when you click on Logout button, You will set the value to True AGAIN
+                Intent LogOut = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(LogOut);
                 finish();
+
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -540,6 +543,19 @@ public class ShoppingActivity extends AppCompatActivity {
 
     }
 
+    public void CekSession(){
+
+        Boolean Check = Boolean.valueOf(User.readSharedSetting(ShoppingActivity.this, "CaptainCode", "true"));
+
+        Intent introIntent = new Intent(ShoppingActivity.this, LoginActivity.class);
+        introIntent.putExtra("CaptainCode", Check);
+
+        //The Value if you click on Login Activity and Set the value is FALSE and whe false the activity will be visible
+        if (Check) {
+            startActivity(introIntent);
+            finish();
+        } //If no the Main Activity not Do Anything
+    }
 
     /* public void tabInit() {
         tabLayout = findViewById(R.id.tab_layout);
@@ -548,12 +564,10 @@ public class ShoppingActivity extends AppCompatActivity {
     public class PageAdapter extends FragmentPagerAdapter {
         private int numOfTabs;
 
-     public  PageAdapter(FragmentManager fm) {
+        public PageAdapter(FragmentManager fm) {
             super(fm);
 
         }
-
-
 
 
         @Override

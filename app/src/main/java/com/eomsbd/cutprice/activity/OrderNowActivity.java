@@ -1,8 +1,10 @@
 package com.eomsbd.cutprice.activity;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +28,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.eomsbd.cutprice.activity.RegistrationActivity.MyPREFERENCES;
+
 public class OrderNowActivity extends AppCompatActivity{
 
     IClientServer iClientServer;
@@ -33,7 +37,7 @@ public class OrderNowActivity extends AppCompatActivity{
     private Animation animation;
     private EditText fullname, email, phone, quantity, password, address, note;
     private Button orderNow;
-
+    SharedPreferences sharedPreferences;
     private AlertDialog.Builder alertDialogBuilder;
 
     @Override
@@ -43,6 +47,7 @@ public class OrderNowActivity extends AppCompatActivity{
 
 
 
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
         fullname = findViewById(R.id.fullname_editTextId);
         email = findViewById(R.id.email_editTextId);
@@ -52,6 +57,27 @@ public class OrderNowActivity extends AppCompatActivity{
         address = findViewById(R.id.address_editTextId);
         note = findViewById(R.id.note_editTextId);
         orderNow = findViewById(R.id.submit_btn1);
+        //data from OrderNowActivity sharedprefrence
+        String clientName1 = sharedPreferences.getString( "client_name", "" );
+        String clientemail1 = sharedPreferences.getString( "client_email", "" );
+        String clientpassword1 = sharedPreferences.getString( "client_password", "" );
+
+       //data from login activity
+        String clientName = getIntent().getExtras().getString("client_name");
+        String clientemail = getIntent().getExtras().getString("client_email");
+        String clientpassword = getIntent().getExtras().getString("client_password");
+
+        if (clientemail1==null && clientName1==null && clientpassword1==null ){
+            fullname.setText(clientName);
+            email.setText(clientemail);
+            password.setText(clientpassword);
+        }else{
+            fullname.setText(clientName1);
+            email.setText(clientemail1);
+            password.setText(clientpassword1);
+        }
+
+
 
         iClientServer = RetrofitService.getRetrofitInstance().create(IClientServer.class);
         orderNow.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +153,8 @@ public class OrderNowActivity extends AppCompatActivity{
         String number = phone.getText().toString();
         String pass = password.getText().toString();
         String comment = note.getText().toString();
-        String quanSell=String.valueOf(quanti*Double.parseDouble(productSellingPrice));
+        double product=Double.parseDouble(productSellingPrice);
+        String quanSell=String.valueOf(quanti* product);
 
         ProductOrder paramProductOrder = new ProductOrder();
         paramProductOrder.setApiKey(api_key);
@@ -147,8 +174,13 @@ public class OrderNowActivity extends AppCompatActivity{
             public void onResponse(Call<UserOrder> call, Response<UserOrder> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     UserOrder order = response.body();
-
-                    Toast.makeText(OrderNowActivity.this, "Success :" + order.getSuccess(), Toast.LENGTH_LONG).show();
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("client_email",  email.getText().toString());
+                    editor.putString("client_name", fullname.getText().toString());
+                    editor.putString("client_password",password.getText().toString());
+                    editor.apply();
+                    editor.commit();
+                    Toast.makeText(OrderNowActivity.this, "Success : " + order.getSuccess(), Toast.LENGTH_LONG).show();
                 } else {
 
                     Toast.makeText(OrderNowActivity.this, "Not Success !", Toast.LENGTH_LONG).show();

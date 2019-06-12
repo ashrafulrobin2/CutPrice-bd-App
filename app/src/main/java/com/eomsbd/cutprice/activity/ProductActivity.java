@@ -31,11 +31,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
+import static com.eomsbd.cutprice.activity.RegistrationActivity.MyPREFERENCES;
+
 public class ProductActivity extends AppCompatActivity {
 
     private static final String TAG = ProductActivity.class.getSimpleName();
 
-    public static final String mypreference = "mypref";
 
     private ImageView productImage;
     SharedPreferences sharedPreference;
@@ -53,7 +56,7 @@ public class ProductActivity extends AppCompatActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        sharedPreference1 = new MySharedPreference(ProductActivity.this);
+     //   sharedPreference1 = new MySharedPreference(ProductActivity.this);
 
         productImage = findViewById(R.id.full_product_image);
         productId = findViewById(R.id.product_size);
@@ -93,7 +96,7 @@ public class ProductActivity extends AppCompatActivity {
             }
             String productId1 = datum.getProductId();
             String sellingPrice = datum.getProductSellingPrice();
-            sharedPreference = context.getSharedPreferences(mypreference, Context.MODE_PRIVATE);
+            sharedPreference = context.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreference.edit();
             editor.putString("productId", productId1);
             editor.putString("sellingPrice", sellingPrice);
@@ -110,15 +113,32 @@ public class ProductActivity extends AppCompatActivity {
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences sharedPreferences =getSharedPreferences( MyPREFERENCES, MODE_PRIVATE );
+                String clientname=sharedPreferences.getString("client_name","");
+                String clientemail = sharedPreferences.getString( "client_email", "" );
+                String clientpassword = sharedPreferences.getString( "client_password", "" );
 
+                if(clientemail.equals("") && clientpassword.equals("")){
+                    SharedPreferences sharedPreferences1 = getSharedPreferences( MyPREFERENCES, MODE_PRIVATE );
+                    String productId = sharedPreferences1.getString( "productId", "" );
+                    String sellingPrice = sharedPreferences1.getString( "sellingPrice", "" );
+                    Intent intent = new Intent( context, OrderNowActivity.class );
+                    intent.putExtra( "productId", productId );
+                    intent.putExtra( "sellingPrice", sellingPrice );
+                    startActivity(intent);
+                }else{
+                    SharedPreferences sharedPreferences1 = getSharedPreferences( MyPREFERENCES, MODE_PRIVATE );
+                    String productId = sharedPreferences1.getString( "productId", "" );
+                    String sellingPrice = sharedPreferences1.getString( "sellingPrice", "" );
+                    Intent intent = new Intent( context, OrderNowActivity.class );
+                    intent.putExtra( "client_name", clientname );
+                    intent.putExtra( "client_email", clientemail );
+                    intent.putExtra( "client_password", clientpassword );
+                    intent.putExtra( "productId", productId );
+                    intent.putExtra( "sellingPrice", sellingPrice );
+                    startActivity(intent);
+                }
 
-                SharedPreferences sharedPreferences = getSharedPreferences( mypreference, MODE_PRIVATE );
-                String productId = sharedPreferences.getString( "productId", "" );
-                String sellingPrice = sharedPreferences.getString( "sellingPrice", "" );
-                Intent intent = new Intent( context, OrderNowActivity.class );
-                intent.putExtra( "productId", productId );
-                intent.putExtra( "sellingPrice", sellingPrice );
-                startActivity(intent);
                 //increase product count
               /*  String productsFromCart = sharedPreference1.retrieveProductFromCart();
                 if(productsFromCart.equals("")){

@@ -55,12 +55,16 @@ IClientServer iClientServer;
     @Override
     public void onBindViewHolder(@NonNull CategoryRecyclerViewHolder holder, int i) {
         final Datum1 singleProduct = data.get(i);
-        String image = "https://www.rokomari.com/static/new/img/electronics/computer.png";
+
+        int block= Integer.parseInt(singleProduct.getBlock());
+
+
+           String image = "https://www.rokomari.com/static/new/img/electronics/computer.png";
         Picasso.get().load(image).into(holder.imageView);
         holder.textView.setText(singleProduct.getCategoriesName());
         iClientServer= RetrofitService.getRetrofitInstance().create(IClientServer.class);
-       final String catId = singleProduct.getCategoriesId();
-       final String name=singleProduct.getCategoriesName();
+        final String catId = singleProduct.getCategoriesId();
+        final String name=singleProduct.getCategoriesName();
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +76,8 @@ IClientServer iClientServer;
             }
         });
     }
+
+
 
     private void getValueFromApi(CategoryId catId, final View v) {
         final Call<SubCategory>subCategoryCall=  iClientServer.getSubCategory(catId);

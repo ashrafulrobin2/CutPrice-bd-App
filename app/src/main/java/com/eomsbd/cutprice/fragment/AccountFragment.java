@@ -1,6 +1,7 @@
 package com.eomsbd.cutprice.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,7 +20,8 @@ import com.eomsbd.cutprice.activity.ShoppingActivity;
 import es.dmoral.toasty.Toasty;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.eomsbd.cutprice.activity.ProductActivity.mypreference;
+import static com.eomsbd.cutprice.activity.RegistrationActivity.MyPREFERENCES;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +35,7 @@ TextView client_name,client_id,client_email,client_order,client_address,client_p
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ TextView client_name,client_id,client_email,client_order,client_address,client_p
 
 
 
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences( mypreference, MODE_PRIVATE );
+      SharedPreferences sharedPreferences = getContext().getSharedPreferences( MyPREFERENCES, MODE_PRIVATE );
         String clientId = sharedPreferences.getString( "client_Id", "" );
         String clientName = sharedPreferences.getString( "client_name", "" );
 

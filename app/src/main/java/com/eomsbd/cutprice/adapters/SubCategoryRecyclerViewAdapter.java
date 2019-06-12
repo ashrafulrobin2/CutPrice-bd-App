@@ -22,6 +22,7 @@ import es.dmoral.toasty.Toasty;
 public class SubCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SubCategoryRecyclerViewHolder> {
     private Context context;
     private List<Datum2> data1;
+    boolean userClicked = false;
 
     public SubCategoryRecyclerViewAdapter(Context context, List<Datum2> data1) {
         this.context = context;
@@ -40,6 +41,8 @@ public class SubCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SubCate
     public void onBindViewHolder(@NonNull SubCategoryRecyclerViewHolder holder, int position) {
         String path = "http://cutpricebd.com/oms/product_image/thumbs/";
         final Datum2 singleProduct = data1.get(position);
+
+
 
         if (singleProduct == null) {
 
@@ -82,8 +85,11 @@ public class SubCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SubCate
 
     @Override
     public int getItemCount() {
-
-        // return (null == data1 ? data1.size() : 10);
+       /* if (userClicked)
+            return data1.size();
+        else
+            return data1.size() > 6 ? 6 : data1.size();*/
+        //return (null == data1 ? data1.size() : 10);
         return data1.size();
     }
 }

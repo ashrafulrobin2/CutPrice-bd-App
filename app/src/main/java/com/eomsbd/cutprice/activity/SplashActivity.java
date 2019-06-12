@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 
 import com.eomsbd.cutprice.R;
+import com.eomsbd.cutprice.helpers.User;
 import com.eomsbd.cutprice.util.AllSettingsManager;
 import com.eomsbd.cutprice.util.AppUtil;
 import com.eomsbd.cutprice.util.BaseUpdateListener;
@@ -24,6 +25,10 @@ public class SplashActivity extends AppCompatActivity {
 
     private TextView tvAppVersion;
     private ImageView ivAppLogo, ivAppLogoFlavor;
+
+
+    User user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +68,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void navigateNextScreen() {
-        Intent intentAppDriver = new Intent(SplashActivity.this, ShoppingActivity.class);
+        Intent intentAppDriver = new Intent(SplashActivity.this, LoginActivity.class);
         startActivity(intentAppDriver);
     }
 

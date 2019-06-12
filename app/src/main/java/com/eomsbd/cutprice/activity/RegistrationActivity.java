@@ -1,6 +1,8 @@
 package com.eomsbd.cutprice.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.eomsbd.cutprice.R;
+import com.eomsbd.cutprice.helpers.User;
 import com.eomsbd.cutprice.model.registration_model.RegistrationResponse;
 import com.eomsbd.cutprice.model.registration_model.UserRegistration;
 import com.eomsbd.cutprice.web_api.IClientServer;
@@ -28,8 +31,11 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     private EditText regConfirmPassword;
 
     IClientServer iClientServer;
+    SharedPreferences sharedPreferences;
+    public static final String MyPREFERENCES = "MyPrefs" ;
 
- @Override
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
@@ -40,6 +46,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         regPhoneNumber = findViewById(R.id.regPhoneId);
         regPassword = findViewById(R.id.regPhoneId);
         regConfirmPassword = findViewById(R.id.regConfirmPassId);
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
         findViewById(R.id.registerBtnId).setOnClickListener(this);
         findViewById(R.id.login_textViewId).setOnClickListener(this);
@@ -119,6 +126,14 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 RegistrationResponse registrationResponse = response.body();
 
                 if (response.isSuccessful() && registrationResponse !=null ){
+                   /* User user=new User(RegistrationActivity.this);
+                    user.setEmail(regEmail.getText().toString().trim());*/
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("client_email", regEmail.getText().toString().trim());
+                    editor.putString("client_name", regName.getText().toString().trim());
+                    editor.putString("client_password", regPassword.getText().toString().trim());
+                    editor.apply();
+                    editor.commit();
                     Intent intent = new Intent(RegistrationActivity.this, ShoppingActivity.class);
                     startActivity(intent);
 

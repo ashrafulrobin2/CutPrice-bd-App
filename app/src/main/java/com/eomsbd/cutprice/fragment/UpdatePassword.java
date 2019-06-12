@@ -36,6 +36,8 @@ import com.eomsbd.cutprice.model.update_password.UpdateResponse;
 import com.eomsbd.cutprice.web_api.IClientServer;
 import com.eomsbd.cutprice.web_api.RetrofitService;
 
+import org.jetbrains.annotations.NotNull;
+
 import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -168,6 +170,7 @@ public class UpdatePassword extends DialogFragment {
     }
 
 
+    @NotNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
