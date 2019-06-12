@@ -213,7 +213,7 @@ private void dialogueBox(){
         }
     });
 
-    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+    builder.setNegativeButton("Order Now", new DialogInterface.OnClickListener() {
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
