@@ -1,6 +1,9 @@
 package com.eomsbd.cutprice.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -21,6 +24,8 @@ import com.eomsbd.cutprice.util.BaseUpdateListener;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import static com.eomsbd.cutprice.activity.RegistrationActivity.MyPREFERENCES;
+
 public class SplashActivity extends AppCompatActivity {
 
     private TextView tvAppVersion;
@@ -40,12 +45,12 @@ public class SplashActivity extends AppCompatActivity {
     }
 
 
-
     public void initActivityViews() {
         tvAppVersion = findViewById(R.id.tv_app_version);
         ivAppLogo = findViewById(R.id.iv_app_logo);
     }
 
+    @SuppressLint("SetTextI18n")
     public void initActivityViewsData() {
         //Set app version
         String appVersion = AppUtil.getAppVersion(SplashActivity.this);
@@ -68,8 +73,22 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void navigateNextScreen() {
-        Intent intentAppDriver = new Intent(SplashActivity.this, LoginActivity.class);
-        startActivity(intentAppDriver);
+        SharedPreferences sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        String clientemail = sharedPreferences.getString("client_email", "");
+        String clientpassword = sharedPreferences.getString("client_password", "");
+        assert clientemail != null;
+        assert clientpassword != null;
+        if (clientemail.equals("") && clientpassword.equals("")) {
+            Intent intentAppDriver = new Intent(SplashActivity.this, LoginActivity.class);
+            startActivity(intentAppDriver);
+            finish();
+        }else
+            {
+                Intent intentAppDriver = new Intent(SplashActivity.this, ShoppingActivity.class);
+                startActivity(intentAppDriver);
+                finish();
+            }
+
     }
 
 }

@@ -116,7 +116,28 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                dialogueBox();
+                SharedPreferences sharedPreferences =getSharedPreferences( MyPREFERENCES, MODE_PRIVATE );
+                String clientname=sharedPreferences.getString("client_name","");
+                String clientemail = sharedPreferences.getString( "client_email", "" );
+                String clientpassword = sharedPreferences.getString( "client_password", "" );
+
+                assert clientemail != null;
+                assert clientpassword != null;
+                if(clientemail.equals("") && clientpassword.equals("")){
+                    Intent intent = new Intent( context, LoginActivity.class );
+                    startActivity(intent);
+                }else{
+                    SharedPreferences sharedPreferences1 = getSharedPreferences( MyPREFERENCES, MODE_PRIVATE );
+                    String productId = sharedPreferences1.getString( "productId", "" );
+                    String sellingPrice = sharedPreferences1.getString( "sellingPrice", "" );
+                    Intent intent = new Intent( context, OrderNowActivity.class );
+                    intent.putExtra( "client_name", clientname );
+                    intent.putExtra( "client_email", clientemail );
+                    intent.putExtra( "client_password", clientpassword );
+                    intent.putExtra( "productId", productId );
+                    intent.putExtra( "sellingPrice", sellingPrice );
+                    startActivity(intent);
+                }
                 //increase product count
               /*  String productsFromCart = sharedPreference1.retrieveProductFromCart();
                 if(productsFromCart.equals("")){
@@ -213,36 +234,12 @@ private void dialogueBox(){
         }
     });
 
-    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Order Now", new DialogInterface.OnClickListener() {
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
 
-            SharedPreferences sharedPreferences =getSharedPreferences( MyPREFERENCES, MODE_PRIVATE );
-            String clientname=sharedPreferences.getString("client_name","");
-            String clientemail = sharedPreferences.getString( "client_email", "" );
-            String clientpassword = sharedPreferences.getString( "client_password", "" );
 
-            if(clientemail.equals("") && clientpassword.equals("")){
-                SharedPreferences sharedPreferences1 = getSharedPreferences( MyPREFERENCES, MODE_PRIVATE );
-                String productId = sharedPreferences1.getString( "productId", "" );
-                String sellingPrice = sharedPreferences1.getString( "sellingPrice", "" );
-                Intent intent = new Intent( context, OrderNowActivity.class );
-                intent.putExtra( "productId", productId );
-                intent.putExtra( "sellingPrice", sellingPrice );
-                startActivity(intent);
-            }else{
-                SharedPreferences sharedPreferences1 = getSharedPreferences( MyPREFERENCES, MODE_PRIVATE );
-                String productId = sharedPreferences1.getString( "productId", "" );
-                String sellingPrice = sharedPreferences1.getString( "sellingPrice", "" );
-                Intent intent = new Intent( context, OrderNowActivity.class );
-                intent.putExtra( "client_name", clientname );
-                intent.putExtra( "client_email", clientemail );
-                intent.putExtra( "client_password", clientpassword );
-                intent.putExtra( "productId", productId );
-                intent.putExtra( "sellingPrice", sellingPrice );
-                startActivity(intent);
-            }
 
         }
     });
