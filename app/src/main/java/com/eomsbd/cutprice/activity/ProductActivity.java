@@ -1,5 +1,6 @@
 package com.eomsbd.cutprice.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -190,6 +191,7 @@ public class ProductActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressLint("SetTextI18n")
     private Drawable buildCounterDrawable(int count, int backgroundImageId) {
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.shopping_layout, null);

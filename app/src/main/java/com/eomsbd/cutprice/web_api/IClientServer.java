@@ -10,6 +10,7 @@ import com.eomsbd.cutprice.model.product_order_model.ProductOrder;
 import com.eomsbd.cutprice.model.product_order_model.UserOrder;
 import com.eomsbd.cutprice.model.products_model.Products;
 import com.eomsbd.cutprice.model.sub_category.SubCategory;
+import com.eomsbd.cutprice.model.sub_category_menu_item.SubCategoryMenu;
 import com.eomsbd.cutprice.model.update_password.SuccessResponse;
 import com.eomsbd.cutprice.model.update_password.UpdateResponse;
 
@@ -29,6 +30,10 @@ public interface IClientServer {
 
     @GET("products/getCategory")
     Call<Category> getSubmenu();
+
+
+    @GET("menu/allMenus")
+    Call<SubCategoryMenu>getSubCategoryMenu();
 
 
     //post api

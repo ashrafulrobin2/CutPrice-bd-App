@@ -39,6 +39,7 @@ import android.widget.Toast;
 import com.eomsbd.cutprice.R;
 import com.eomsbd.cutprice.adapters.ShopRecyclerViewAdapter;
 import com.eomsbd.cutprice.adapters.ShopRecyclerViewAdapter1;
+import com.eomsbd.cutprice.adapters.SubCategoryPagerAdapter;
 import com.eomsbd.cutprice.fragment.AccountFragment;
 import com.eomsbd.cutprice.fragment.CartFragment;
 import com.eomsbd.cutprice.fragment.CategoryFragment;
@@ -50,7 +51,11 @@ import com.eomsbd.cutprice.helpers.SpacesItemDecoration;
 import com.eomsbd.cutprice.helpers.User;
 import com.eomsbd.cutprice.model.products_model.Datum;
 import com.eomsbd.cutprice.model.products_model.Products;
+import com.eomsbd.cutprice.model.sub_category_menu_item.Datum3;
+import com.eomsbd.cutprice.model.sub_category_menu_item.SubCategoryMenu;
+import com.eomsbd.cutprice.tabLayoutFragment.Tab10Fragment;
 import com.eomsbd.cutprice.tabLayoutFragment.Tab11Fragment;
+import com.eomsbd.cutprice.tabLayoutFragment.Tab12Fragment;
 import com.eomsbd.cutprice.tabLayoutFragment.Tab1Fragment;
 import com.eomsbd.cutprice.tabLayoutFragment.Tab2Fragment;
 import com.eomsbd.cutprice.tabLayoutFragment.Tab3Fragment;
@@ -61,6 +66,8 @@ import com.eomsbd.cutprice.tabLayoutFragment.Tab7Fragment;
 import com.eomsbd.cutprice.tabLayoutFragment.Tab8Fragment;
 import com.eomsbd.cutprice.tabLayoutFragment.Tab9Fragment;
 import com.eomsbd.cutprice.web_api.IClientServer;
+import com.eomsbd.cutprice.web_api.RetrofitService;
+import com.nshmura.recyclertablayout.RecyclerTabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,97 +123,11 @@ public class ShoppingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping);
 
-        //progressbar Code
-      /*  session = new Session(getApplicationContext());
-        session.checkLogin();*/
-        AppBarLayout appBarLayout = findViewById(R.id.info);
         linearLayout = findViewById(R.id.LinearLayout1);
-      /*  tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));*/
-        //tabLayout = findViewById(R.id.tab_layout);
-
-     /*   tabLayout.setLayoutParams(new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, 50));
-     //   appBarLayout.addView(tabLayout);
 
 
-        pageAdapter = new PageAdapter(getSupportFragmentManager());
-       // pageAdapter = new PageAdapter(getFragmentManager());
-     //   viewPager = (ViewPager) findViewById(R.id.viewPager);
-        viewPager.setAdapter(pageAdapter);
-
-        tabLayout.setupWithViewPager(viewPager);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-*/
-        /* tabItem1 = findViewById(R.id.tabItem1);
-
-        tabItem2 = findViewById(R.id.tabItem2);
-        tabItem3 = findViewById(R.id.tabItem3);*/
         data = new ArrayList<>();
 
-        /*tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                FragmentManager manager = getSupportFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                if (tab.getPosition() == 0) {
-                    index = 1;
-                    Tab1Fragment fragment = new Tab1Fragment();
-                    transaction.replace(R.id.frame_container, fragment).commit();
-                } else if (tab.getPosition() == 1) {
-                    index = 2;
-                    Tab2Fragment fragment = new Tab2Fragment();
-                    transaction.replace(R.id.frame_container, fragment).commit();
-                } else if (tab.getPosition() == 2) {
-                    index = 3;
-                    Tab3Fragment fragment = new Tab3Fragment();
-                    transaction.replace(R.id.frame_container, fragment).commit();
-                } else if (tab.getPosition() == 3) {
-                    index = 4;
-                    Tab4Fragment fragment = new Tab4Fragment();
-                    transaction.replace(R.id.frame_container, fragment).commit();
-                } else if (tab.getPosition() == 4) {
-                    index = 5;
-                    Tab5Fragment fragment = new Tab5Fragment();
-                    transaction.replace(R.id.frame_container, fragment).commit();
-                } else if (tab.getPosition() == 5) {
-                    index = 6;
-                    Tab6Fragment fragment = new Tab6Fragment();
-                    transaction.replace(R.id.frame_container, fragment).commit();
-                } else if (tab.getPosition() == 6) {
-                    index = 7;
-                    Tab7Fragment fragment = new Tab7Fragment();
-                    transaction.replace(R.id.frame_container, fragment).commit();
-                } else if (tab.getPosition() == 7) {
-                    index = 8;
-                    Tab8Fragment fragment = new Tab8Fragment();
-                    transaction.replace(R.id.frame_container, fragment).commit();
-                } else if (tab.getPosition() == 8) {
-                    index = 9;
-                    Tab9Fragment fragment = new Tab9Fragment();
-                    transaction.replace(R.id.frame_container, fragment).commit();
-                } else if (tab.getPosition() == 9) {
-                    index = 10;
-                    Tab10Fragment fragment = new Tab10Fragment();
-                    transaction.replace(R.id.frame_container, fragment).commit();
-                } else if (tab.getPosition() == 10) {
-                    index = 11;
-                    Tab11Fragment fragment = new Tab11Fragment();
-                    transaction.replace(R.id.frame_container, fragment).commit();
-                } else {
-                    Toast.makeText(ShoppingActivity.this, "no Data available", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });*/
 
         coordinatorLayout = findViewById(R.id.frame_container);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -215,7 +136,8 @@ public class ShoppingActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
         getProductsFromApi();
-
+//        getSubCategoryList();
+        loadSubcategry();
 
         toolbar = getSupportActionBar();
         ////-0---
@@ -229,9 +151,6 @@ public class ShoppingActivity extends AppCompatActivity {
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
         layoutParams.setBehavior(new BottomNavigationBehavior());
 
-        // load the store fragment by default
-        //toolbar.setTitle("Shop");
-        // loadFragment(new HomeFragment());
 
     }
 ///
@@ -547,26 +466,9 @@ public class ShoppingActivity extends AppCompatActivity {
 
     }
 
-    public void CekSession(){
-
-        Boolean Check = Boolean.valueOf(User.readSharedSetting(ShoppingActivity.this, "CaptainCode", "true"));
-
-        Intent introIntent = new Intent(ShoppingActivity.this, LoginActivity.class);
-        introIntent.putExtra("CaptainCode", Check);
-
-        //The Value if you click on Login Activity and Set the value is FALSE and whe false the activity will be visible
-        if (Check) {
-            startActivity(introIntent);
-            finish();
-        } //If no the Main Activity not Do Anything
-    }
-
-    /* public void tabInit() {
-        tabLayout = findViewById(R.id.tab_layout);
-    }*/
 
     public class PageAdapter extends FragmentPagerAdapter {
-        private int numOfTabs;
+        private int numOfTabs = 12;
 
         public PageAdapter(FragmentManager fm) {
             super(fm);
@@ -595,28 +497,93 @@ public class ShoppingActivity extends AppCompatActivity {
                     return new Tab8Fragment();
                 case 8:
                     return new Tab9Fragment();
+                case 9:
+                    return new Tab10Fragment();
                 case 10:
                     return new Tab11Fragment();
+                case 11:
+                    return new Tab12Fragment();
                 default:
                     return null;
             }
+
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return numOfTabs;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "First Tab";
+                    return "ছেলেদের শপিং";
                 case 1:
+                    return "মেয়েদের শপিং";
+                case 2:
+                    return "গৃহসজ্জা";
+                case 3:
+                    return "গৃহস্থালী সামগ্রী";
+                case 4:
+                    return "ইলেকট্রনিক পণ্য";
+                case 5:
+                    return "পাকিস্তানি পোষাক";
+                case 6:
+                    return "উপহার";
+                case 7:
+                    return "চকলেট";
+                case 8:
+                    return "ভ্যালেন্টাইন কার্নিভাল";
+                case 9:
+                    return "শিশুদের খাবার";
+                case 10:
+                    return "বেবী অ্যান্ড কিডস";
+                case 11:
+                    return "শিশুর আনুষাঙ্গিক";
                 default:
-                    return "Second Tab";
+                    return null;
             }
         }
+    }
+
+
+
+/*
+    public void getSubCategoryList(){
+        iClientServer = RetrofitService.getRetrofitInstance().create(IClientServer.class);
+        Call<SubCategoryMenu>categoryMenuCall=iClientServer.getSubCategoryMenu();
+
+        categoryMenuCall.enqueue(new Callback<SubCategoryMenu>() {
+            @Override
+            public void onResponse(Call<SubCategoryMenu> call, Response<SubCategoryMenu> response) {
+                SubCategoryMenu subCategoryMenu=response.body();
+                if (response.isSuccessful() && subCategoryMenu!=null){
+                    loadSubcategry(subCategoryMenu.getData());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SubCategoryMenu> call, Throwable t) {
+
+            }
+        });
+
+    }
+*/
+
+    private void loadSubcategry() {
+
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        PageAdapter adapter = new PageAdapter(fragmentManager);
+
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        viewPager.setAdapter(adapter);
+
+        RecyclerTabLayout recyclerTabLayout = findViewById(R.id.recycler_tab_layout);
+        recyclerTabLayout.setUpWithViewPager(viewPager);
     }
 
 

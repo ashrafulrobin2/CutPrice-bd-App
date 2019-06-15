@@ -7,7 +7,26 @@
     android:layout_height="match_parent"
     tools:context="com.eomsbd.cutprice.activity.ShoppingActivity">
 
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
+        <com.nshmura.recyclertablayout.RecyclerTabLayout
+            android:id="@+id/recycler_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/primary"
+            android:theme="@style/RecyclerTabLayoutTheme.Basic"
+            app:rtl_tabMaxWidth="300dp"
+            app:rtl_tabSelectedTextColor="@android:color/white"/>
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <FrameLayout
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
@@ -19,6 +38,7 @@
         app:layout_constraintTop_toTopOf="parent"></FrameLayout>
 
     //TabLay Out//
+
 
 
     <LinearLayout
@@ -149,20 +169,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
+            android:layout_marginTop="50dp"
             android:nestedScrollingEnabled="true"
             android:orientation="vertical"
             android:paddingTop="5dp"
             android:scrollbars="none" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/product_list1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:nestedScrollingEnabled="true"
-            android:orientation="vertical"
-            android:paddingTop="5dp"
-            android:scrollbars="none" />
+
     </LinearLayout>
 
     <!--  app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
